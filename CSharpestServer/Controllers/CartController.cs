@@ -39,7 +39,7 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpPost("AddItemToCart")]
-        public void AddItemToCart(Guid ItemID, int quantity)
+        public void AddItemToCart([FromForm] Guid ItemID, [FromForm] int quantity)
         {
             List<Item> items = inventoryLoader.loadInventory();
             //Has been modified to not concern itself with getting current user back from frontend

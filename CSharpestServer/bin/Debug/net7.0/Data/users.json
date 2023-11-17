@@ -7,6 +7,7 @@
     "Password": "password123",
     "Phone": "1234567890",
     "Address": "123 Main St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "c4f9f3c1-9aa1-4d72-8a4c-4e03549e5bc1",
       "Items": [
@@ -19,27 +20,16 @@
             "Stock": 488,
             "Bogo": false
           },
-          "Quantity": 3,
-          "TotalPrice": 0.93
-        },
-        {
-          "Item": {
-            "Name": "Cadbury Bar",
-            "Description": "Iconic dairy milk bar ",
-            "ItemId": "5ede7c7d-a06b-4c86-b2f4-83ac1531ebcc",
-            "Price": 1.07,
-            "Stock": 500,
-            "Bogo": true
-          },
-          "Quantity": 1,
-          "TotalPrice": 1.07
+          "Quantity": 11,
+          "TotalPrice": 3.41
         }
       ],
-      "Subtotal": 2.00,
+      "Subtotal": 3.41,
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Bob",
@@ -49,6 +39,7 @@
     "Password": "securePass",
     "Phone": "9876543210",
     "Address": "456 Elm St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "3c7f32ed-4a29-4e60-a390-81db8e2d662a",
       "Items": [],
@@ -56,7 +47,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Charlie",
@@ -66,6 +58,7 @@
     "Password": "test123",
     "Phone": null,
     "Address": "789 Oak St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "4dcb6bc3-7ebf-4e23-a12b-d8c7d21eef62",
       "Items": [],
@@ -73,7 +66,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "David",
@@ -83,6 +77,7 @@
     "Password": "davidPass",
     "Phone": "1357924680",
     "Address": "101 Pine St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "5e73b1f0-3d25-40d2-8c9e-3b07140dd1b5",
       "Items": [],
@@ -90,7 +85,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Eve",
@@ -100,6 +96,7 @@
     "Password": "evePassword",
     "Phone": null,
     "Address": "246 Birch St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "6f0e3d4a-88e6-4390-a8a1-7e2389a0f811",
       "Items": [],
@@ -107,7 +104,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Frank",
@@ -117,6 +115,7 @@
     "Password": "frank1234",
     "Phone": "9876123450",
     "Address": "369 Cedar St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "7f21ed2c-8d54-4816-9d26-1a37d84c5270",
       "Items": [],
@@ -124,7 +123,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Grace",
@@ -134,6 +134,7 @@
     "Password": "gracePass",
     "Phone": "1234509876",
     "Address": "482 Willow St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "8ab5b2f6-95e7-45a1-a0e8-3f9b238e7a0c",
       "Items": [],
@@ -141,7 +142,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Henry",
@@ -151,6 +153,7 @@
     "Password": "password456",
     "Phone": "6540321567",
     "Address": "555 Redwood St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "9bc6e3d1-8c7e-4d9b-a9b4-2d42c41d6109",
       "Items": [],
@@ -158,7 +161,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Ivy",
@@ -168,6 +172,7 @@
     "Password": "testPassword",
     "Phone": "7890432165",
     "Address": "654 Maple St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "ababaaac-2345-4abc-aaaa-4a44aabcdeab",
       "Items": [],
@@ -175,7 +180,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Jack",
@@ -185,6 +191,7 @@
     "Password": "jackPass",
     "Phone": null,
     "Address": "777 Chestnut St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "bc5d7a3b-9aa2-4123-8b8c-5e4a8d4a682e",
       "Items": [],
@@ -192,7 +199,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Katie",
@@ -202,6 +210,7 @@
     "Password": "password789",
     "Phone": "6542317890",
     "Address": "888 Spruce St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "cd123fa7-12bf-43e2-8dc7-1e2f3a45be3c",
       "Items": [],
@@ -209,7 +218,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Leo",
@@ -219,6 +229,7 @@
     "Password": "leoPassword",
     "Phone": null,
     "Address": "999 Fir St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "def8e9ad-ec42-4d37-aba1-8c1e4d2ac2ed",
       "Items": [],
@@ -226,7 +237,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Mia",
@@ -236,6 +248,7 @@
     "Password": "password101",
     "Phone": "1234897650",
     "Address": "123 Poplar St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "ef34d1cf-7bb9-4f2a-aae9-3cda8f8b6eb4",
       "Items": [],
@@ -243,7 +256,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Noah",
@@ -253,6 +267,7 @@
     "Password": "noahPass",
     "Phone": "9876321450",
     "Address": "234 Oak St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "f4c82e12-b37a-43e8-89d9-4f32c5f8d7e2",
       "Items": [],
@@ -260,7 +275,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Olivia",
@@ -270,6 +286,7 @@
     "Password": "olivia123",
     "Phone": null,
     "Address": "345 Maple St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "974e9cfa-132e-4aa8-bd84-3cdcdba1da6e",
       "Items": [],
@@ -277,7 +294,8 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   },
   {
     "FirstName": "Peter",
@@ -287,6 +305,7 @@
     "Password": "peterPass",
     "Phone": "7890543216",
     "Address": "456 Elm St",
+    "TransHistory": null,
     "Cart": {
       "CartID": "1806a6aa-8ed7-4721-9f85-3aab5268a112",
       "Items": [],
@@ -294,6 +313,7 @@
       "Discount": 0,
       "Taxes": 0,
       "Total": 0
-    }
+    },
+    "UserCards": null
   }
 ]
