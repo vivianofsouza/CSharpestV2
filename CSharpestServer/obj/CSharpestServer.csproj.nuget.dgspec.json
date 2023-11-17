@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vivia\\source\\repos\\CSharpestV2\\CSharpestServer\\CSharpestServer.csproj": {}
+    "C:\\Users\\vivia\\source\\repos\\CSharpestServer\\CSharpestServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vivia\\source\\repos\\CSharpestV2\\CSharpestServer\\CSharpestServer.csproj": {
+    "C:\\Users\\vivia\\source\\repos\\CSharpestServer\\CSharpestServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vivia\\source\\repos\\CSharpestV2\\CSharpestServer\\CSharpestServer.csproj",
+        "projectUniqueName": "C:\\Users\\vivia\\source\\repos\\CSharpestServer\\CSharpestServer.csproj",
         "projectName": "CSharpestServer",
-        "projectPath": "C:\\Users\\vivia\\source\\repos\\CSharpestV2\\CSharpestServer\\CSharpestServer.csproj",
+        "projectPath": "C:\\Users\\vivia\\source\\repos\\CSharpestServer\\CSharpestServer.csproj",
         "packagesPath": "C:\\Users\\vivia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vivia\\source\\repos\\CSharpestV2\\CSharpestServer\\obj\\",
+        "outputPath": "C:\\Users\\vivia\\source\\repos\\CSharpestServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vivia\\AppData\\Roaming\\NuGet\\NuGet.Config"
