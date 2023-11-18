@@ -90,6 +90,11 @@ function Checkout() {
         <input></input>
         <br></br>
 
+        <label>Billing Address</label>
+        <br></br>
+        <input></input>
+        <br></br>
+
         <button type="submit">Purchase</button>
       </form>
     </div>
