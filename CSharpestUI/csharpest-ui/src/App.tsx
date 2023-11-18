@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div>
-      <form id="form">
+      {/* <form id="form">
         <input
           name="ItemID"
           value="68df4339-7643-4365-9cf3-cd4e5f67419e"
@@ -50,7 +50,7 @@ function App() {
         <button type="submit" onClick={sendWithForm}>
           Add
         </button>
-      </form>
+      </form> */}
       {/* <form onSubmit={handleSubmit}>
         <label>
           Post Name:

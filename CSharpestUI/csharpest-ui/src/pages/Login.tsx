@@ -8,6 +8,17 @@ function Login() {
   return (
     <div>
       <h1>Login</h1>
+      <form id="form">
+        <label>Username</label>
+        <br></br>
+        <input></input>
+        <br></br>
+        <label>Password</label>
+        <br></br>
+        <input></input>
+        <br></br>
+        <button type="submit">Login </button>
+      </form>
     </div>
   );
 }
