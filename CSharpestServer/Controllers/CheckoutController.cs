@@ -58,6 +58,5 @@ namespace CSharpestServer.Controllers
         {
             _checkoutService.ClearCart(UserID);
         }
-
     }
 }

@@ -188,6 +188,5 @@ namespace CSharpestServer.Services
 
             userWriter.writeUser(user);
         }
-
     }
 }

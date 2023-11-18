@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "../App.css";
+import { UUID } from "crypto";
 
 function StoreHome() {
   const [itemList, setItemsList] = useState<any>([]);
@@ -26,8 +27,12 @@ function StoreHome() {
     });
 
     const formData = new FormData();
-    formData.append("ItemID", "68df4339-7643-4365-9cf3-cd4e5f67419e");
-    formData.append("Quantity", "6");
+    const itemID = (document.getElementById("ItemID") as HTMLInputElement)
+      .value;
+    const quantity = (document.getElementById("Quantity") as HTMLInputElement)
+      .value;
+    formData.append("ItemID", itemID);
+    formData.append("Quantity", quantity);
 
     axios
       .post("https://localhost:7150/Cart/AddItemToCart", formData)
@@ -43,6 +48,7 @@ function StoreHome() {
       <h1>Store Home</h1>
       {itemList.map(
         (item: {
+          itemId: UUID;
           bogo: boolean;
           stock: number;
           price: number;
@@ -57,8 +63,10 @@ function StoreHome() {
             <li>{item.bogo ? "BOGO" : ""}</li>
             <li>
               <form id="form">
-                <label>Quantity </label>
-                <input></input>
+                <label>Quantity</label>
+                <input id="Quantity"></input>
+                <input type="hidden" id="ItemID" value={item.itemId}></input>
+
                 <button type="submit" onClick={addToCart}>
                   Add to Cart
                 </button>
