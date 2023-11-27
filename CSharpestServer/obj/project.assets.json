@@ -513,19 +513,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vivia\\.nuget\\packages\\": {}
+    "C:\\Users\\Savannah\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vivia\\source\\repos\\CSharpestServer\\CSharpestServer.csproj",
+      "projectUniqueName": "C:\\Users\\Savannah\\Source\\Repos\\CSharpestV2\\CSharpestServer\\CSharpestServer.csproj",
       "projectName": "CSharpestServer",
-      "projectPath": "C:\\Users\\vivia\\source\\repos\\CSharpestServer\\CSharpestServer.csproj",
-      "packagesPath": "C:\\Users\\vivia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vivia\\source\\repos\\CSharpestServer\\obj\\",
+      "projectPath": "C:\\Users\\Savannah\\Source\\Repos\\CSharpestV2\\CSharpestServer\\CSharpestServer.csproj",
+      "packagesPath": "C:\\Users\\Savannah\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Savannah\\Source\\Repos\\CSharpestV2\\CSharpestServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\vivia\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Savannah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -582,7 +583,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
