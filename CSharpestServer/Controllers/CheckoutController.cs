@@ -2,6 +2,7 @@
 using CSharpestServer.Services;
 using CSharpestServer.Parameters;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace CSharpestServer.Controllers
 {
@@ -31,6 +32,20 @@ namespace CSharpestServer.Controllers
             return _checkoutService.ValidateCardDetails(card);
         }
 
+        // POST: <CheckoutController>/checkout/validateAddress
+        [HttpPost("validateAddress")]
+        public bool validateAddress(String address)
+        {
+            Regex regex = new Regex("^[0-9]+$");
+            string [] addrArray = address.Split(' ');
+
+            if (regex.IsMatch(addrArray[0])) {
+                return true;
+            }
+
+            return false;
+        }
+
         // Adding address functionality either if we have time or in phase 2
         /*// POST: <CheckoutController>/address
         [HttpPost("{address}")]
@@ -58,6 +73,5 @@ namespace CSharpestServer.Controllers
         {
             _checkoutService.ClearCart(UserID);
         }
-
     }
 }
