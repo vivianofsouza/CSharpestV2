@@ -7,7 +7,7 @@ namespace CSharpestServer.Models;
 //	Windows Prog 547
 //	Last Updated : 11/22/23
 
-public class OrderDetailModel : IComparable<OrderDetailModel>
+public class OrderDetail : IComparable<OrderDetail>
 {
     public Guid Id { get; set; } // primary key: orderDetailId
     public Guid OrderId { get; set; }
@@ -17,7 +17,7 @@ public class OrderDetailModel : IComparable<OrderDetailModel>
     public decimal Subtotal { get; set; }
 
 
-    public OrderDetailModel(OrderModel order, ItemModel item, BundleModel bundle, int quantity, decimal subtotal)
+    public OrderDetail(Order order, Item item, Bundle bundle, int quantity, decimal subtotal)
     {
         Id = Guid.NewGuid();
         OrderId = order.Id;
@@ -27,10 +27,10 @@ public class OrderDetailModel : IComparable<OrderDetailModel>
         Subtotal = subtotal; // leave this for now but this is where the bundle effect will be calculated.
     }
 
-    public OrderDetailModel() { }
+    public OrderDetail() { }
 
     // comparison method to allow item to be included in SortedSet
-    public int CompareTo(OrderDetailModel other)
+    public int CompareTo(OrderDetail other)
     {
         // checks if other item is null or not
         if (other != null)

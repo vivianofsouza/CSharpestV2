@@ -7,7 +7,7 @@ namespace CSharpestServer.Models;
 //	Windows Prog 547
 //	Last Updated : 11/20/23
 
-public class ItemModel : IComparable<ItemModel>
+public class Item : IComparable<Item>
 {
 
     // fields
@@ -16,10 +16,10 @@ public class ItemModel : IComparable<ItemModel>
     public string Description { get; set; }
     public decimal Price { get; set; }
     public int Stock { get; set; }
-    public BundleModel? bundle { get; set; }
+    public Bundle? bundle { get; set; }
 
     // for a new item being added to database
-    public ItemModel(string name, string description, decimal price, int stock, BundleModel? _bundle)
+    public Item(string name, string description, decimal price, int stock, Bundle? _bundle)
     {
         Name = name;
         Description = description;
@@ -29,10 +29,10 @@ public class ItemModel : IComparable<ItemModel>
         bundle = _bundle;
     }
 
-    public ItemModel() { }
+    public Item() { }
 
     // comparison method to allow Item to be included in SortedSet
-    public int CompareTo(ItemModel otherItem)
+    public int CompareTo(Item otherItem)
     {
         // checks if other item is null or not
         if (otherItem != null)

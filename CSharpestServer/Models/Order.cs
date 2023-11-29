@@ -7,7 +7,7 @@ namespace CSharpestServer.Models;
 //	Windows Prog 547
 //	Last Updated : 11/22/23
 
-public class OrderModel : IComparable<OrderModel>
+public class Order : IComparable<Order>
 {
     public Guid Id { get; set; } // primary key: orderDetailId
     public Guid UserId { get; set; }
@@ -18,7 +18,7 @@ public class OrderModel : IComparable<OrderModel>
     public decimal TotalCost { get; set; }
 
 
-    public OrderModel(CustomerModel user, CardModel card, string datetime, string address, decimal shipping)
+    public Order(Customer user, Card card, string datetime, string address, decimal shipping)
     {
         Id = Guid.NewGuid();
         UserId = user.Id;
@@ -32,10 +32,10 @@ public class OrderModel : IComparable<OrderModel>
         TotalCost = 0;
     }
 
-    public OrderModel() { }
+    public Order() { }
 
     // comparison method to allow item to be included in SortedSet
-    public int CompareTo(OrderModel other)
+    public int CompareTo(Order other)
     {
         // checks if other item is null or not
         if (other != null)

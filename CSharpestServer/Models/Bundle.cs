@@ -7,7 +7,7 @@ namespace CSharpestServer.Models;
 //	Windows Prog 547
 //	Last Updated : 11/21/23
 
-public class BundleModel : IComparable<BundleModel>
+public class Bundle : IComparable<Bundle>
 {
 
     // fields
@@ -15,16 +15,16 @@ public class BundleModel : IComparable<BundleModel>
     public string Name { get; set; }
 
     // for a new item being added to database
-    public BundleModel(string name)
+    public Bundle(string name)
     {
         Id = Guid.NewGuid(); 
         Name = name;
     }
 
-    public BundleModel() { }
+    public Bundle() { }
 
     // comparison method to allow Item to be included in SortedSet
-    public int CompareTo(BundleModel otherBundle)
+    public int CompareTo(Bundle otherBundle)
     {
         // checks if other item is null or not
         if (otherBundle != null)

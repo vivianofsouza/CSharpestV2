@@ -7,7 +7,7 @@ namespace CSharpestServer.Models;
 //	Windows Prog 547
 //	Last Updated : 11/22/23
 
-public class CardModel : IComparable<CardModel>
+public class Card : IComparable<Card>
 {
     public long Number { get; set; }
     public int Month { get; set; }
@@ -17,7 +17,7 @@ public class CardModel : IComparable<CardModel>
     public int ZipCode { get; set; }
 
 
-    public CardModel(long cardNo, int month, int year, string name, int cVV, int zip)
+    public Card(long cardNo, int month, int year, string name, int cVV, int zip)
     {
         Number = cardNo;
         Month = month;
@@ -27,10 +27,10 @@ public class CardModel : IComparable<CardModel>
         ZipCode = zip;
     }
 
-    public CardModel() { }
+    public Card() { }
 
     // comparison method to allow item to be included in SortedSet
-    public int CompareTo(CardModel other)
+    public int CompareTo(Card other)
     {
         // checks if other item is null or not
         if (other != null)

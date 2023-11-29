@@ -7,21 +7,21 @@ namespace CSharpestServer.Models;
 //	Windows Prog 547
 //	Last Updated : 11/20/23
 
-public class CartModel : IComparable<CartModel>
+public class Cart : IComparable<Cart>
 {
     public Guid Id { get; set; } // primary key: cartId
     public Guid userId { get; set; }
 
-    public CartModel(CustomerModel user)
+    public Cart(Customer user)
     {
         Id = user.CartId;
         userId = user.Id;
     }
 
-    public CartModel() { }
+    public Cart() { }
 
     // comparison method to allow Item to be included in SortedSet
-    public int CompareTo(CartModel other)
+    public int CompareTo(Cart other)
     {
         // checks if other item is null or not
         if (other != null)
