@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using CSharpestServer.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,8 @@ builder.Services.AddScoped<CartService, CartService>();
 builder.Services.AddScoped<CardService, CardService>();
 builder.Services.AddScoped<CheckoutService, CheckoutService>();
 
-
+//builder.Services.AddDbContext<StoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("StoreContext")));
+builder.Services.AddDbContext<StoreContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=candyDb;Integrated Security=True"));
 
 
 var app = builder.Build();
