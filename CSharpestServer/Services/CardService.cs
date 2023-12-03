@@ -79,7 +79,5 @@ namespace CSharpestServer.Services
             _storeContext.SaveChanges();
             return Task.CompletedTask;
         }
-        }
-
     }
 }

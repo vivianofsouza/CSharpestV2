@@ -41,7 +41,7 @@ namespace CSharpestServer.Services
         
         }
 
-        public Task ChangQuantityAsync(Guid itemId, int Quantity, string AddOrRemove)
+        public Task ChangeQuantityAsync(Guid itemId, int Quantity, string AddOrRemove)
         {
             CartItem? _item = _storeContext.cartItems.Find(itemId);
             if (_item == null)
@@ -83,7 +83,6 @@ namespace CSharpestServer.Services
             return Task.FromResult(_item);
 
         }
-
         public Task<IEnumerable<CartItem>> GetAllAsync()
         {
             return Task.FromResult(_storeContext.cartItems.AsEnumerable());

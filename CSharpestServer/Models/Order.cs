@@ -11,7 +11,7 @@ public class Order : IComparable<Order>
 {
     public Guid Id { get; set; } // primary key: orerId
     public Guid UserId { get; set; }
-    public long CardId { get; set; } // card number, fk
+    public string CardId { get; set; } // card number, fk (should this be string or long??)
     public string DateTime {  get; set; }
     public string Address { get; set; }
     public decimal ShippingCost { get; set; }

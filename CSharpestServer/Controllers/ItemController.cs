@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using CSharpestServer.Classes;
-using CSharpestServer.Services.phase1;
+using CSharpestServer.Models;
+//using CSharpestServer.Services.phase1;
+using CSharpestServer.Services;
+using CSharpestServer.Services.Interfaces;
 namespace CSharpestServer.Controllers
 {
 
@@ -8,21 +10,24 @@ namespace CSharpestServer.Controllers
     [ApiController]
     public class ItemController : Controller
     {
-        ItemService itemService;
-        InventoryLoader inventoryLoader = new InventoryLoader(@".\Data\inventory.json");
+        //ItemService itemService;
+        private readonly IItemService _itemService;
+
+        //InventoryLoader inventoryLoader = new InventoryLoader(@".\Data\inventory.json");
         SortedSet<Item> items;
 
-        public ItemController(ItemService _itemService)
+        public ItemController(ItemService itemService)
         {
-            itemService = _itemService;
-            //items = inventoryLoader.loadInventorySorted();
+            this._itemService = itemService;
         }
 
-        // GET: <ItemController>/GetAllItems
-        [HttpGet("GetAllItems")]
-        public SortedSet<Item> GetAllItems()
+        //GET: <ItemController>/GetAllItems
+       [HttpGet("GetAllItems")]
+        public async Task<IActionResult> GetAllItems()
         {
-            return itemService.GetAllItems();
+            var items = await _itemService.GetAllAsync();
+
+            return Ok(items);
         }
     }
 }
