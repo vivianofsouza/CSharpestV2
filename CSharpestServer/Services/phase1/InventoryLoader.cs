@@ -7,13 +7,14 @@ using CSharpestServer.Classes;
 //	Windows Prog 547
 //	Last Updated : 10/28/23
 
-namespace CSharpestServer.Services
+namespace CSharpestServer.Services.phase1
 {
     public class InventoryLoader
     {
         private readonly string _filepath;
 
-        public InventoryLoader(string filepath) {
+        public InventoryLoader(string filepath)
+        {
             _filepath = filepath;
         }
 

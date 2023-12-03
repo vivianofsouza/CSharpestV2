@@ -6,7 +6,7 @@ using CSharpestServer.Classes;
 //	Windows Prog 547
 //	Last Updated : 10/30/23
 
-namespace CSharpestServer.Services
+namespace CSharpestServer.Services.phase1
 {
     public class InventoryWriter
     {
@@ -26,7 +26,8 @@ namespace CSharpestServer.Services
             if (foundItem != null)
             {
                 currInventory[currInventory.IndexOf(foundItem)] = item;
-            } else
+            }
+            else
             {
                 currInventory.Add(item);
             }

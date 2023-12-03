@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using CSharpestServer.Classes;
-using CSharpestServer.Services;
+using CSharpestServer.Models;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using CSharpestServer.Services;
+using CSharpestServer.Services.Interfaces;
 
 //	Last modified by: Vivian D'Souza
 //	Windows Prog 547
@@ -13,18 +14,19 @@ namespace CSharpestServer.Controllers
     [ApiController]
     public class CardController : ControllerBase
     {
-        private readonly CardService _cardService;
+        private readonly ICardService _cardService;
 
         public CardController(CardService cardService)
         {
             _cardService = cardService;
         }
 
-        // GET: <CardsController>
+        //GET api/todos
+        [ProducesResponseType(200)]
         [HttpGet]
-        public String Get()
+        public Task<IEnumerable<Card>> GetCards()
         {
-            return _cardService.Get();
+            return _cardService.GetAllAsync();
         }
     }
 }

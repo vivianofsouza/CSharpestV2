@@ -9,7 +9,7 @@ namespace CSharpestServer.Models;
 
 public class Order : IComparable<Order>
 {
-    public Guid Id { get; set; } // primary key: orderDetailId
+    public Guid Id { get; set; } // primary key: orerId
     public Guid UserId { get; set; }
     public long CardId { get; set; } // card number, fk
     public string DateTime {  get; set; }
@@ -18,7 +18,7 @@ public class Order : IComparable<Order>
     public decimal TotalCost { get; set; }
 
 
-    public Order(Customer user, Card card, string datetime, string address, decimal shipping)
+    public Order(User user, Card card, string datetime, string address, decimal shipping)
     {
         Id = Guid.NewGuid();
         UserId = user.Id;

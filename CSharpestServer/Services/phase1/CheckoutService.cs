@@ -1,7 +1,7 @@
 ﻿using CSharpestServer.Classes;
 using CSharpestServer.Parameters;
 
-namespace CSharpestServer.Services
+namespace CSharpestServer.Services.phase1
 {
     public class CheckoutService
     {
@@ -23,7 +23,7 @@ namespace CSharpestServer.Services
             if (ValidateCardDetails(checkParams.Card))
             {
                 // if card validation successful, save to user's list of cards
-                if (!(checkParams.User.UserCards.Contains(checkParams.Card)))
+                if (!checkParams.User.UserCards.Contains(checkParams.Card))
                 {
                     checkParams.User.UserCards.Add(checkParams.Card);
                 }
@@ -145,7 +145,7 @@ namespace CSharpestServer.Services
                 {
                     if (cartItem.Quantity % 2 == 1)
                     {
-                        user.Cart.Total += cartItem.Item.Price + (cartItem.Item.Price * (cartItem.Quantity / 2));
+                        user.Cart.Total += cartItem.Item.Price + cartItem.Item.Price * (cartItem.Quantity / 2);
                     }
                     else
                     {
@@ -162,9 +162,9 @@ namespace CSharpestServer.Services
             user.Cart.Discount = user.Cart.Subtotal - user.Cart.Total;
 
             // adds tax to total; flat rate of 8% (for now)
-            user.Cart.Taxes = (user.Cart.Total * 0.08m);
+            user.Cart.Taxes = user.Cart.Total * 0.08m;
 
-            user.Cart.Total += (user.Cart.Taxes);
+            user.Cart.Total += user.Cart.Taxes;
 
             // calculate shipping; for now flat rate of 5.99
             user.Cart.Total += 5.99m;

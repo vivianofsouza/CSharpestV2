@@ -7,13 +7,14 @@ using CSharpestServer.Classes;
 //	Windows Prog 547
 //	Last Updated : 10/28/23
 
-namespace CSharpestServer.Services
+namespace CSharpestServer.Services.phase1
 {
     public class UserLoader
     {
         private readonly string _filepath;
 
-        public UserLoader(string filepath) {
+        public UserLoader(string filepath)
+        {
             _filepath = filepath;
         }
 

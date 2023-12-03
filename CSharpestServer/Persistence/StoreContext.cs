@@ -16,11 +16,11 @@ public class StoreContext : DbContext
     
     public DbSet<Cart> carts { get; set; }
     
-    public DbSet<Customer> customers { get; set; }
+    public DbSet<User> users { get; set; }
     
     public DbSet<Order> orders { get; set; }
     
-    public DbSet<OrderDetail> orderDetails { get; set; }
+    public DbSet<OrderItem> orderItems { get; set; }
     
     public DbSet<Card> cards { get; set; }
 
@@ -30,8 +30,8 @@ public class StoreContext : DbContext
         modelBuilder.Entity<Bundle>().HasKey(x => x.Id);
         modelBuilder.Entity<CartItem>().HasKey(x => x.Id);
         modelBuilder.Entity<Cart>().HasKey(x => x.Id);
-        modelBuilder.Entity<Customer>().HasKey(x => x.Id);
-        modelBuilder.Entity<OrderDetail>().HasKey(x => x.Id);
+        modelBuilder.Entity<User>().HasKey(x => x.Id);
+        modelBuilder.Entity<OrderItem>().HasKey(x => x.Id);
         modelBuilder.Entity<Order>().HasKey(x => x.Id);
         modelBuilder.Entity<Card>().HasKey(x => x.Number);
         // Other configurations...
