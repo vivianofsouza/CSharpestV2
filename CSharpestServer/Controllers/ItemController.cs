@@ -10,7 +10,7 @@ namespace CSharpestServer.Controllers
 
     [Route("[controller]")]
     [ApiController]
-    public class ItemController : Controller
+    public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
 

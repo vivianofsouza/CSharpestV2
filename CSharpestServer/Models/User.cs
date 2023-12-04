@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+/*using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace CSharpestServer.Models;
@@ -46,3 +46,4 @@ public class User : IComparable<User>
         return 1;
     }
 }
+*/
