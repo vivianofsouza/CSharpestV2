@@ -3,7 +3,9 @@ using CSharpestServer.Models;
 //using CSharpestServer.Services.phase1;
 using CSharpestServer.Services;
 using CSharpestServer.Services.Interfaces;
+using System.Linq;
 namespace CSharpestServer.Controllers
+
 {
 
     [Route("[controller]")]
@@ -27,7 +29,8 @@ namespace CSharpestServer.Controllers
         {
             var items = await _itemService.GetAllAsync();
 
-            return Ok(items);
+            List<Item> result = items.ToList();
+            return Ok(result);
         }
     }
 }
