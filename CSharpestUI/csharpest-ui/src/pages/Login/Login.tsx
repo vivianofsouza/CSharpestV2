@@ -4,6 +4,15 @@ import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "./Login.css";
 
+const validateUser = () => {
+  axios
+    .get("https://localhost:7150/Item/GetAllItemsStockSort")
+    .then((response) => {
+      //setItemsList(response.data);
+    })
+    .catch((error) => console.log(error));
+};
+
 function Login() {
   return (
     <div id="login_page">
@@ -20,47 +29,53 @@ function Login() {
           <br></br>
           <input id="password_input"></input>
           <br></br>
-          <button type="submit" id="login_submit_button">Login </button>
+          <button type="submit" id="login_submit_button">
+            Login{" "}
+          </button>
         </form>
       </div>
 
       <div id="signup_container">
         <h2 id="signup_header">Create an Account</h2>
         <form id="signup_form">
-
           <label id="select_account_type">Select Account Type</label>
           <br></br>
-
-          <input type="radio" id="shopper_input" name="user_type" value="shopper_input"></input>
-          <label id="shopper_label">Shopper</label>
-          <br></br>
-
-          <input type="radio" id="sm_input" name="user_type" value="sm_input"></input>
+          <input
+            type="radio"
+            id="shopper_input"
+            name="user_type"
+            value="shopper_input"
+          ></input>
+          ï¿½ <label id="shopper_label">Shopper</label>
+          <br></br>ï¿½{" "}
+          <input
+            type="radio"
+            id="sm_input"
+            name="user_type"
+            value="sm_input"
+          ></input>
           <label id="sm_label">Store Manager</label>
           <br></br>
           <br></br>
-
           <label id="username_label">Email</label>
           <br></br>
           <input id="username_input"></input>
           <br></br>
-
           <label id="first_name_label">First Name</label>
           <br></br>
           <input id="first_name_input"></input>
           <br></br>
-
           <label id="last_name_label">Last Name</label>
           <br></br>
           <input id="last_name_input"></input>
           <br></br>
-
           <label id="password_label">Password</label>
           <br></br>
           <input id="password_input"></input>
           <br></br>
-          
-          <button type="submit" id="signup_submit_button">Login</button>
+          <button type="submit" id="signup_submit_button">
+            Login
+          </button>
         </form>
       </div>
     </div>
