@@ -9,5 +9,6 @@ namespace CSharpestServer.Services.Interfaces
         Task<IEnumerable<User>> GetAllAsync();
         Task<User?> GetByIdAsync(Guid id);
         User? GetById(Guid id);
+        Task
     }
 }

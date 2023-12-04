@@ -12,7 +12,7 @@ function Login() {
       <div id="login_container">
         <h2 id="login_header">Login</h2>
         <form id="login_form">
-          <label id="username_label">Username</label>
+          <label id="username_label">Email</label>
           <br></br>
           <input id="username_input"></input>
           <br></br>
@@ -21,6 +21,46 @@ function Login() {
           <input id="password_input"></input>
           <br></br>
           <button type="submit" id="login_submit_button">Login </button>
+        </form>
+      </div>
+
+      <div id="signup_container">
+        <h2 id="signup_header">Create an Account</h2>
+        <form id="signup_form">
+
+          <label id="select_account_type">Select Account Type</label>
+          <br></br>
+
+          <input type="radio" id="shopper_input" name="user_type" value="shopper_input"></input>
+          <label id="shopper_label">Shopper</label>
+          <br></br>
+
+          <input type="radio" id="sm_input" name="user_type" value="sm_input"></input>
+          <label id="sm_label">Store Manager</label>
+          <br></br>
+          <br></br>
+
+          <label id="username_label">Email</label>
+          <br></br>
+          <input id="username_input"></input>
+          <br></br>
+
+          <label id="first_name_label">First Name</label>
+          <br></br>
+          <input id="first_name_input"></input>
+          <br></br>
+
+          <label id="last_name_label">Last Name</label>
+          <br></br>
+          <input id="last_name_input"></input>
+          <br></br>
+
+          <label id="password_label">Password</label>
+          <br></br>
+          <input id="password_input"></input>
+          <br></br>
+          
+          <button type="submit" id="signup_submit_button">Login</button>
         </form>
       </div>
     </div>
