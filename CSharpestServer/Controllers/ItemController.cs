@@ -19,14 +19,37 @@ namespace CSharpestServer.Controllers
             this._itemService = itemService;
         }
 
-        //GET: <ItemController>/GetAllItems
-       [HttpGet("GetAllItems")]
-        public async Task<IActionResult> GetAllItems()
+       [HttpGet("GetAllItemsPriceSort")]
+        public async Task<IActionResult> GetAllItemsByPrice()
         {
             var items = await _itemService.GetAllAsync();
 
             var sorted = from item in items
                          orderby item.Price
+                         select item;
+
+            return Ok(sorted);
+        }
+
+        [HttpGet("GetAllItemsAZSort")]
+        public async Task<IActionResult> GetAllItemsByAlphabet()
+        {
+            var items = await _itemService.GetAllAsync();
+
+            var sorted = from item in items
+                         orderby item.Name
+                         select item;
+
+            return Ok(sorted);
+        }
+
+        [HttpGet("GetAllItemsStockSort")]
+        public async Task<IActionResult> GetAllItemsByStock()
+        {
+            var items = await _itemService.GetAllAsync();
+
+            var sorted = from item in items
+                         orderby item.Stock
                          select item;
 
             return Ok(sorted);
