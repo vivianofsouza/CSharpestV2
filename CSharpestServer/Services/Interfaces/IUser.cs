@@ -1,4 +1,4 @@
-using CSharpestServer.Models;
+/*using CSharpestServer.Models;
 
 namespace CSharpestServer.Services.Interfaces
 {
@@ -11,4 +11,4 @@ namespace CSharpestServer.Services.Interfaces
         User? GetById(Guid id);
         Task
     }
-}
+}*/

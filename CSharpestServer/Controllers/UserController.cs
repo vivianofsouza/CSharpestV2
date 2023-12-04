@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*using Microsoft.AspNetCore.Mvc;
 using CSharpestServer.Models;
 using CSharpestServer.Services;
 using CSharpestServer.Services.Interfaces;
@@ -50,3 +50,4 @@ namespace CSharpestServer.Controllers
         }
     }
 }
+*/
