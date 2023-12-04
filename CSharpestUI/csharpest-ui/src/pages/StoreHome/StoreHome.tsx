@@ -11,7 +11,25 @@ function StoreHome() {
   // we're getting the list of all items here in this GET request. It's stored in a JavaScript array. Use developer tools to view what it looks like. You'll must likely need to map it into table to display it onto the screen.
   const getItems = () => {
     axios
-      .get("https://localhost:7150/Item/GetAllItems")
+      .get("https://localhost:7150/Item/GetAllItemsPriceSort")
+      .then((response) => {
+        setItemsList(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getItemsByAlphabet = () => {
+    axios
+      .get("https://localhost:7150/Item/GetAllItemsAZSort")
+      .then((response) => {
+        setItemsList(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getItemsByStock = () => {
+    axios
+      .get("https://localhost:7150/Item/GetAllItemsStockSort")
       .then((response) => {
         setItemsList(response.data);
       })
@@ -46,6 +64,16 @@ function StoreHome() {
   return (
     <div>
       <h1>Store Home</h1>
+      <button type="submit" onClick={getItems}>
+        Sort by Price
+      </button>
+      <button type="submit" onClick={getItemsByAlphabet}>
+        Sort by A-Z
+      </button>
+      <button type="submit" onClick={getItemsByStock}>
+        Sort by Stock remianing
+      </button>
+
       {itemList.map(
         (item: {
           itemId: UUID;
