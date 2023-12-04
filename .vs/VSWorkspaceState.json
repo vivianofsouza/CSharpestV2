@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CSharpestServer",
+    "\\CSharpestUI\\csharpest-ui",
+    "\\CSharpestUI\\csharpest-ui\\public",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages"
   ],
-  "SelectedNode": "\\CSharpestServer.sln",
+  "SelectedNode": "\\CSharpestServer\\CSharpestServer.sln",
   "PreviewInSolutionExplorer": false
 }
