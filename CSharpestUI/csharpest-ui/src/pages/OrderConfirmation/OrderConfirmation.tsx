@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
-import "../App.css";
+import "./OrderConfirmation.css";
 
-function Checkout() {
+function OrderConfirmation() {
   const [cartList, setCartList] = useState<any>([]);
   const [total, setTotal] = useState(0);
 
@@ -63,42 +63,8 @@ function Checkout() {
       <h4>Shipping</h4>
       <h4>Total</h4>
       <h4>{total}</h4>
-
-      <form id="form">
-        <label>Card number</label>
-        <br></br>
-        <input></input>
-        <br></br>
-
-        <label>Expiration Month</label>
-        <br></br>
-        <input></input>
-        <br></br>
-
-        <label>Expiration Year</label>
-        <br></br>
-        <input></input>
-        <br></br>
-
-        <label>CVV</label>
-        <br></br>
-        <input></input>
-        <br></br>
-
-        <label>Cardholder Name</label>
-        <br></br>
-        <input></input>
-        <br></br>
-
-        <label>Billing Address</label>
-        <br></br>
-        <input></input>
-        <br></br>
-
-        <button type="submit">Purchase</button>
-      </form>
     </div>
   );
 }
 
-export default Checkout;
+export default OrderConfirmation;
