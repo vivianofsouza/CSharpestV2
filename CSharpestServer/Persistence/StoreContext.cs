@@ -34,6 +34,17 @@ public class StoreContext : DbContext
         modelBuilder.Entity<OrderItem>().HasKey(x => x.Id);
         modelBuilder.Entity<Order>().HasKey(x => x.Id);
         modelBuilder.Entity<Card>().HasKey(x => x.Number);
+
+        modelBuilder.Entity<Item>().HasData(
+            new Item
+            {
+                Id = Guid.NewGuid(),
+                Name = "Jolly Ranchers",
+                Description = "candy",
+                Price = 0.18m,
+                Stock = 500,
+                ImageURL = "https://m.media-amazon.com/images/I/411ywWj2V+L._AC_UF1000,1000_QL80_.jpg"
+            });
         // Other configurations...
     }
 
