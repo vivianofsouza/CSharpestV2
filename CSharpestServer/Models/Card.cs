@@ -9,7 +9,7 @@ namespace CSharpestServer.Models;
 
 public class Card : IComparable<Card>
 {
-    public long Number { get; set; }
+    public string Number { get; set; }
     public int Month { get; set; }
     public int Year { get; set; }
     public string Name { get; set; }
@@ -17,7 +17,7 @@ public class Card : IComparable<Card>
     public int ZipCode { get; set; }
 
 
-    public Card(long cardNo, int month, int year, string name, int cVV, int zip)
+    public Card(string cardNo, int month, int year, string name, int cVV, int zip)
     {
         Number = cardNo;
         Month = month;

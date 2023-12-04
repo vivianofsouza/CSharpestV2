@@ -12,7 +12,7 @@ public class Cart : IComparable<Cart>
     public Guid Id { get; set; } // primary key: cartId
     public Guid userId { get; set; }
 
-    public Cart(Customer user)
+    public Cart(User user)
     {
         Id = user.CartId;
         userId = user.Id;

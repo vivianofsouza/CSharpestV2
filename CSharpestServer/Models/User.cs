@@ -7,21 +7,23 @@ namespace CSharpestServer.Models;
 //	Windows Prog 547
 //	Last Updated : 11/20/23
 
-public class Customer : IComparable<Customer>
+public class User : IComparable<User>
 {
     public Guid Id { get; set; } // primary key: cartId
     public Guid CartId { get; set; }
     public string Email { get; set; }
+    public bool IsAdmin { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Password { get; set; } //not addressing security
     public string? Phone { get; set; }
     public string? Address { get; set; }
 
-    public Customer(string email, string firstName, string lastName, string password, string? phone, string? address)
+    public User(string email, bool admin, string firstName, string lastName, string password, string? phone, string? address)
     {
         Id = Guid.NewGuid();
         CartId = Guid.NewGuid();
+        IsAdmin = admin;
         Email = email;
         FirstName = firstName;
         LastName = lastName;
@@ -30,10 +32,10 @@ public class Customer : IComparable<Customer>
         Address = address;
     }
 
-    public Customer() { }
+    public User() { }
 
     // comparison method to allow Item to be included in SortedSet
-    public int CompareTo(Customer other)
+    public int CompareTo(User other)
     {
         // checks if other item is null or not
         if (other != null)

@@ -6,7 +6,7 @@ using CSharpestServer.Classes;
 //	Windows Prog 547
 //	Last Updated : 10/30/23
 
-namespace CSharpestServer.Services
+namespace CSharpestServer.Services.phase1
 {
     public class UserWriter
     {
