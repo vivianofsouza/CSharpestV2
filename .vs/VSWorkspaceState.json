@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CSharpestUI",
+    "\\CSharpestUI\\csharpest-ui",
+    "\\CSharpestUI\\csharpest-ui\\src"
   ],
   "PreviewInSolutionExplorer": false
 }
