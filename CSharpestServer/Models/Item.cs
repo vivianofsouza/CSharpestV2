@@ -17,9 +17,11 @@ public class Item : IComparable<Item>
     public decimal Price { get; set; }
     public int Stock { get; set; }
     public Bundle? bundle { get; set; }
+    public string ImageURL { get; set; }
+
 
     // for a new item being added to database
-    public Item(string name, string description, decimal price, int stock, Bundle? _bundle)
+    public Item(string name, string description, decimal price, int stock, Bundle? _bundle, string imageURL)
     {
         Name = name;
         Description = description;
@@ -27,6 +29,7 @@ public class Item : IComparable<Item>
         Price = price;
         Stock = stock;
         bundle = _bundle;
+        ImageURL = imageURL;
     }
 
     public Item() { }

@@ -54,6 +54,7 @@ function StoreHome() {
           price: number;
           description: string;
           name: string;
+          imageURL: string;
         }) => (
           <>
             <li>{item.name}</li>
@@ -61,6 +62,9 @@ function StoreHome() {
             <li>{item.price}</li>
             <li>{item.stock}</li>
             <li>{item.bogo ? "BOGO" : ""}</li>
+            <li>
+              <img src={item.imageURL} width="200" height="200"></img>
+            </li>
             <li>
               <form id="form">
                 <label>Quantity</label>
