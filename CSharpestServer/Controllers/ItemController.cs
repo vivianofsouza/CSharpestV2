@@ -12,11 +12,7 @@ namespace CSharpestServer.Controllers
     [ApiController]
     public class ItemController : Controller
     {
-        //ItemService itemService;
         private readonly IItemService _itemService;
-
-        //InventoryLoader inventoryLoader = new InventoryLoader(@".\Data\inventory.json");
-        SortedSet<Item> items;
 
         public ItemController(ItemService itemService)
         {
@@ -29,8 +25,11 @@ namespace CSharpestServer.Controllers
         {
             var items = await _itemService.GetAllAsync();
 
-            List<Item> result = items.ToList();
-            return Ok(result);
+            var sorted = from item in items
+                         orderby item.Price
+                         select item;
+
+            return Ok(sorted);
         }
     }
 }
