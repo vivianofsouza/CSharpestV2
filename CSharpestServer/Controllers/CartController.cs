@@ -2,6 +2,7 @@
 using CSharpestServer.Classes;
 using CSharpestServer.Services;
 using CSharpestServer.Services.Interfaces;
+using CSharpestServer.Models;
 
 //	Last modified by: Vivian D'Souza
 //	Windows Prog 547
@@ -11,36 +12,51 @@ namespace CSharpestServer.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CartController : Controller
+    public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
-
-        //InventoryLoader inventoryLoader = new InventoryLoader(@".\data\inventory.json");
-        //UserLoader userLoader = new UserLoader(@".\data\users.json");
-        //UserWriter userWriter = new UserWriter(@".\data\users.json");
-        Guid currUserID = new Guid("c4f9f3c1-9aa1-4d72-8a4c-4e03549e5bc1");
-
-        public CartController(CartService cartService)
+        private readonly ICartItemService _cartItemService;
+        public CartController(CartService cartService, CartItemService cartItemService)
         {
             this._cartService = cartService;
+            this._cartItemService = cartItemService;
         }
 
         // GET: api/<CartController>
-        //[HttpGet("GetCartItems")]
-        //public List<CartItem> GetCartItems(Guid UserID)
-        //{
+        [HttpGet("GetCartItems")]
+        public async Task<IActionResult> GetCartItems(Guid UserID)
+        {
+            // gets a user's carts (as a list but really only one) + all Cart Items in DB
+            var carts = await _cartService.GetByUserAsync(UserID);
 
-        //    List<Shopper> users = userLoader.loadUsers();
-        //    Shopper user = users.Find(x => x.AccountID == currUserID);
+            // obtains cart instance for user
+            var userCart = carts.First();
 
-        //    if (user == null)
-        //    {
-        //        user = new Shopper("Example", "User", "exampleuser@email.com", "ExamplePW", "phone", "address", new Cart());
-        //    }
+            // gets all items belonging to this user's cart
+            var cartItems = await _cartItemService.GetByCartAsync(userCart.Id);
 
-        //    List<CartItem> cartItems = user.Cart.Items;
-        //    return cartItems;
-        //}
+
+            //var allCartItems = await _cartItemService.GetAllAsync();
+
+ 
+
+            // matches cartItems to those having user's cart's ID
+            //var getUserCartItems = from cartItem in allCartItems 
+            //                       where cartItem.CartId == userCart.Id
+            //                       select cartItem;
+
+
+            //List<Shopper> users = userLoader.loadUsers();
+            //Shopper user = users.Find(x => x.AccountID == currUserID);
+
+            //if (user == null)
+            //{
+            //    user = new Shopper("Example", "User", "exampleuser@email.com", "ExamplePW", "phone", "address", new Cart());
+            //}
+
+            //List<CartItem> cartItems = user.Cart.Items;
+            return Ok(cartItems);
+        }
 
         [HttpPost("AddItemToCart")]
         public void AddItemToCart([FromForm] Guid ItemID, [FromForm] int quantity)
