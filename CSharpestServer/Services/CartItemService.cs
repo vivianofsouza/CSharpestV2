@@ -20,9 +20,16 @@ namespace CSharpestServer.Services
             return item;
         }
 
-        public Task AddAsync(CartItem item)
+        public Task AddAsync(Guid itemId, Guid cartId, int quantity)
         {
-            item = GetInitialisedId(item);
+            var my_item = _storeContext.items.Find(itemId);
+            CartItem item = GetInitialisedId(new CartItem());
+            item.ItemId = itemId;
+            item.CartId = cartId;
+            item.Quantity = quantity;
+
+            item.TotalPrice = calculateTotal(quantity, my_item.Price, _storeContext.bundles.Find(itemId));
+
             _storeContext.cartItems.Add(item);
             _storeContext.SaveChanges();
 
@@ -38,19 +45,21 @@ namespace CSharpestServer.Services
             }
             _storeContext.SaveChanges();
             return Task.CompletedTask;
-        
+
         }
 
-        public Task ChangeQuantityAsync(Guid itemId, int Quantity, string AddOrRemove)
+        public Task ChangeQuantityAsync(Guid cartId, Guid itemId, int Quantity, bool Add)
         {
             CartItem? _item = _storeContext.cartItems.Find(itemId);
-            if (_item == null)
-            { 
-                throw new InvalidOperationException($"CartItem with ID {itemId} not found."); 
+
+            if (_item == null || _item.CartId != cartId)
+            {
+                throw new InvalidOperationException($"CartItem with ID {itemId} not found in cart.");
             }
             var unit_cost = _storeContext.items.Find(_item.ItemId).Price;
+            var bundle = _storeContext.bundles.Find(_storeContext.items.Find(_item.ItemId));
 
-            if (AddOrRemove == "add")//addOrRemove.Equals("add", StringComparison.OrdinalIgnoreCase))
+            if (Add)
             {
                 // find the stock
                 int stock = _storeContext.items.Find(_item.ItemId).Stock;
@@ -59,30 +68,31 @@ namespace CSharpestServer.Services
                 {
                     throw (new InvalidOperationException("There are not that many of this item in stock."));
                 }
-                else 
-                { 
+                else
+                {
                     _item.Quantity += Quantity;
-                    _item.TotalPrice = Quantity * unit_cost;
-                } 
+                    _item.TotalPrice = calculateTotal(Quantity, unit_cost, bundle);
+                }
             }
-            
-            if (AddOrRemove == "remove")
+
+            else
             {
                 if (Quantity > _item.Quantity)
                 {
                     // quantity will be zeroed which is the same as removing it
                     _storeContext.cartItems.Remove(_item);
                 }
-                else 
+                else
                 {
                     _item.Quantity -= Quantity;
-                    _item.TotalPrice = Quantity * unit_cost;
+                    _item.TotalPrice = calculateTotal(Quantity, unit_cost, bundle);
                 }
             }
             _storeContext.SaveChanges();
             return Task.FromResult(_item);
 
         }
+
         public Task<IEnumerable<CartItem>> GetAllAsync()
         {
             return Task.FromResult(_storeContext.cartItems.AsEnumerable());
@@ -105,16 +115,62 @@ namespace CSharpestServer.Services
             return Task.FromResult(item);
         }
 
-        public Task RemoveAsync(Guid id)
+        public Task ClearCartAsync(Guid cartId)
         {
-            var item = _storeContext?.cartItems.Find(id);
-
-            if (item != null)
+            try 
             {
-                _storeContext.cartItems.Remove(item);
+                var items = _storeContext.cartItems.Where(item => item.CartId == cartId);
+
+                foreach (CartItem item in items)
+                {
+                    if (item != null)
+                    {
+                        _storeContext.cartItems.Remove(item);
+                    }
+                }
                 _storeContext.SaveChanges();
+                return Task.FromResult(items);
             }
-            return Task.FromResult(item);
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+
+        public Task RemoveAsync(Guid id, Guid cartId)
+        {
+            try
+            {
+                CartItem item = _storeContext?.cartItems.FindAsync(cartId, id).Result;
+                //CartItem item = _storeContext?.cartItems
+                //    .Where(cartItem => cartItem.CartId == cartId && cartItem.Id == id)
+                //    .FirstOrDefaultAsync().Result;
+
+                if (item != null)
+                {
+                    _storeContext?.cartItems.Remove(item);
+                    _storeContext.SaveChanges();
+                }
+                return Task.FromResult(item);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        private decimal calculateTotal(int quantity, decimal unit_cost, Bundle bundle)
+        {
+            if (bundle != null)
+            {
+                if (bundle.Name == "bogo")
+                {
+                    return ((quantity % 2) * unit_cost) + (unit_cost * (quantity / 2));
+                }
+            }
+            return unit_cost * quantity;
         }
     }
 }

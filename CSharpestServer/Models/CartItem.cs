@@ -16,11 +16,11 @@ public class CartItem : IComparable<CartItem>
     public decimal TotalPrice { get; set; }
 
 
-    public CartItem(Item item, Cart cart, int quantity, decimal totalPrice)
+    public CartItem(Guid itemId, Guid cartId, int quantity, decimal totalPrice)
     {
         Id = Guid.NewGuid();
-        ItemId = item.Id;
-        CartId = cart.Id;
+        ItemId = itemId;
+        CartId = cartId;
         Quantity = quantity;
         TotalPrice = totalPrice;
     }

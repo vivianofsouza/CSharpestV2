@@ -13,10 +13,12 @@ namespace CSharpestServer.Controllers
     [ApiController]
     public class CartController : ControllerBase
     {
+        private readonly StoreContext _context;
         private readonly ICartService _cartService;
         private readonly ICartItemService _cartItemService;
-        public CartController(CartService cartService, CartItemService cartItemService)
+        public CartController(StoreContext context, CartService cartService, CartItemService cartItemService)
         {
+            this._context = context;
             this._cartService = cartService;
             this._cartItemService = cartItemService;
         }
@@ -34,92 +36,79 @@ namespace CSharpestServer.Controllers
             // gets all items belonging to this user's cart
             var cartItems = await _cartItemService.GetByCartAsync(userCart.Id);
 
-
-            //var allCartItems = await _cartItemService.GetAllAsync();
-
- 
-
-            // matches cartItems to those having user's cart's ID
-            //var getUserCartItems = from cartItem in allCartItems 
-            //                       where cartItem.CartId == userCart.Id
-            //                       select cartItem;
-
-
-            //List<Shopper> users = userLoader.loadUsers();
-            //Shopper user = users.Find(x => x.AccountID == currUserID);
-
-            //if (user == null)
-            //{
-            //    user = new Shopper("Example", "User", "exampleuser@email.com", "ExamplePW", "phone", "address", new Cart());
-            //}
-
-            //List<CartItem> cartItems = user.Cart.Items;
             return Ok(cartItems);
         }
 
         [HttpPost("AddItemToCart")]
-        public void AddItemToCart([FromForm] Guid ItemID, [FromForm] int quantity)
+        public async Task<IActionResult> AddItemToCart(Guid ItemId, Guid CartId, int quantity) //[FromForm] Guid ItemID, [FromForm] int quantity)
         {
-            //List<Item> items = inventoryLoader.loadInventory();
-            ////Has been modified to not concern itself with getting current user back from frontend
-            ////currUserID has been hard coded for phase 1
-            //List<Shopper> users = userLoader.loadUsers();
+            try
+            {
+                if (CartItemExists(ItemId))
+                {
+                    var cartItem = _context.cartItems?.FirstOrDefault(e => e.ItemId == ItemId);
+                    await _cartItemService.ChangeQuantityAsync(cartItem.Id, ItemId, quantity, true);
+                }
+                else
+                {
+                    await _cartItemService.AddAsync(ItemId, CartId, quantity);
+                }
 
-            //Shopper user = users.Find(x => x.AccountID == currUserID); // get user from database using id
-            ////ensure user was found
-            //if (user == null) { Environment.Exit(0); }
-
-            //Item item = items.Find(x => x.ItemId == ItemID); // get item from database using id
-            ////ensure item was found
-            //if (item == null) { Environment.Exit(0); }
-
-            ////Create totalPrice of product
-            //decimal totalPrice = item.Price * (decimal)quantity;
-
-            ////Adds x number of item y to cart
-            //if (user.Cart != null && quantity > 0 && item.Stock >= quantity)
-            //{
-
-            //    if (user.Cart.Items.Find(x => x.Item.ItemId == ItemID) == null)
-            //    {
-            //        //First instance of this item being in cart
-            //        //Create CartItem
-            //        CartItem cartItem = new CartItem(item, quantity, totalPrice);
-            //        user.Cart.Items.Add(cartItem);
-            //        user.Cart.Subtotal += cartItem.TotalPrice;
-            //        userWriter.writeUser(user);
-
-            //    }
-            //    else
-            //    {   // make sure user cannot add more than (stock minus what's already in cart)
-            //        if ((user.Cart.Items.Single(x => x.Item.ItemId == ItemID).Quantity + quantity) <= item.Stock)
-            //        {
-            //            //Customer is adding more of this item to cart
-            //            user.Cart.Items.Single(x => x.Item.ItemId == ItemID).Quantity += quantity;
-            //            user.Cart.Items.Single(x => x.Item.ItemId == ItemID).TotalPrice += totalPrice;
-            //            user.Cart.Subtotal += quantity * item.Price;
-            //            userWriter.writeUser(user);
-            //        }
-            //    }
-
-            //}
-            //else
-            //{
-
-            //    if (user.Cart == null) { Environment.Exit(0); } // User added nothing to cart
-
-            //    if (quantity < 0) { Environment.Exit(0); } // Should never happen but can't hurt
-
-            //    if (item.Stock < quantity) { Environment.Exit(0); } // Not enough in stock to purchase that amount
-            //}
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
         }
 
-        // Remove an item from the cart
-        //[HttpPost("RemoveItemFromCart")]
-        //public void RemoveItem(Guid UserID, Guid ItemID, int quantity)
+        [HttpPatch("ChangeStock")]
+        public async Task<IActionResult> ChangeQuantityAsync(Guid cartId, Guid itemId, int quantity, bool add)
+        {
+            try
+            {
+                await _cartItemService.ChangeQuantityAsync(cartId, itemId, quantity, add);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveItemFromCart(Guid itemId, Guid cartId)
+        {
+            try
+            {
+                await _cartItemService.RemoveAsync(itemId, cartId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
+        }
+
+        //[HttpDelete]
+        //public async Task<IActionResult> ClearCart(Guid cartId)
         //{
-        //    _cartService.RemoveItem(UserID, ItemID, quantity);
+        //    try
+        //    {
+        //        await _cartItemService.ClearCartAsync(cartId);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex);
+        //    }
+        //    return Ok();
         //}
+
+        private bool CartItemExists(Guid id)
+        {
+            // the itemId is recognisable
+            return (_context.cartItems?.Any(e => e.ItemId == id)).GetValueOrDefault();
+        }
 
     }
 }
