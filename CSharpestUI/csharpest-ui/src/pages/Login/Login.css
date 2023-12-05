@@ -21,14 +21,14 @@ body {
     background-color: #d3d3d3;
     border: 2px solid #385170;
     border-radius: 5px;
-    width: 50%;
+    width: 80%;
 }
 
 #create_account_card {
     background-color: #d3d3d3;
     border: 2px solid #385170;
     border-radius: 5px;
-    width: 50%;
+    width: 80%;
 }
 
 #login_card_header {
@@ -50,12 +50,12 @@ body {
 }
 
 #login_form {
-    width: 350px;
+    width: 90%;
     margin-left: 4%;
 }
 
 #create_account_form {
-    width: 350px;
+    width: 90%;
     margin-left: 4%;
 }
 
@@ -153,7 +153,21 @@ body {
     color: #385170;
 }
 
+#row {
+    display: flex;
+    justify-content: center;
+}
 
+#create_account_col {
+    width: 30%;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+#login_col {
+    width: 30%;
+    margin-top: 5%;
+}
 
 
 
