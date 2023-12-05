@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "./Checkout.css";
+import Card from 'react-bootstrap/Card';
 
 function Checkout() {
   const [cartList, setCartList] = useState<any>([]);
@@ -35,7 +36,7 @@ function Checkout() {
 
   return (
     <div>
-      <h1>Checkout</h1>
+      <h1 id="checkout_header">Checkout</h1>
 
       {cartList.map(
         (cartItem: {
@@ -57,46 +58,53 @@ function Checkout() {
           </>
         )
       )}
-      <h4>Subtotal</h4>
-      <h4>Discounts</h4>
-      <h4>Taxes</h4>
-      <h4>Shipping</h4>
-      <h4>Total</h4>
-      <h4>{total}</h4>
+      <h4>Subtotal: $</h4>
+      <h4>Discounts: $</h4>
+      <h4>Taxes: $</h4>
+      <h4>Shipping: $</h4>
+      <h4>Total: ${total}</h4>
 
-      <form id="form">
-        <label>Card number</label>
-        <br></br>
-        <input></input>
-        <br></br>
+      <Card id="payment_card">
+            <Card.Header id="payment_card_header">Enter Payment Details</Card.Header>
+            <Card.Body id="payment_card_body">
+              <Card.Text id="payment_card_text">
+                <form id="payment_form">
+                  <label id="label">Card number</label>
+                  <br></br>
+                  <input id="input"></input>
+                  <br></br>
 
-        <label>Expiration Month</label>
-        <br></br>
-        <input></input>
-        <br></br>
+                  <label id="label">Expiration Month</label>
+                  <br></br>
+                  <input id="input"></input>
+                  <br></br>
 
-        <label>Expiration Year</label>
-        <br></br>
-        <input></input>
-        <br></br>
+                  <label id="label">Expiration Year</label>
+                  <br></br>
+                  <input id="input"></input>
+                  <br></br>
 
-        <label>CVV</label>
-        <br></br>
-        <input></input>
-        <br></br>
+                  <label id="label">CVV</label>
+                  <br></br>
+                  <input id="input"></input>
+                  <br></br>
 
-        <label>Cardholder Name</label>
-        <br></br>
-        <input></input>
-        <br></br>
+                  <label id="label">Cardholder Name</label>
+                  <br></br>
+                  <input id="input"></input>
+                  <br></br>
 
-        <label>Billing Address</label>
-        <br></br>
-        <input></input>
-        <br></br>
+                  <label id="label">Billing Address</label>
+                  <br></br>
+                  <input id="input"></input>
+                  <br></br>
 
-        <button type="submit">Purchase</button>
-      </form>
+                  <button type="submit" id="confirm_payment_button">Purchase</button>
+                </form>        
+              </Card.Text>
+            </Card.Body>
+          </Card>
+
     </div>
   );
 }
