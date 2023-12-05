@@ -27,10 +27,13 @@ namespace CSharpestServer.Services
                 user.CartId = user.Id;
                 _storeContext.users.Add(user);
                 _storeContext.SaveChanges();
-
-                Cart cart = new Cart(user);
-                _storeContext.carts.Add(cart);
-                _storeContext.SaveChanges();
+                
+                if (!user.IsAdmin)
+                {
+                    Cart cart = new Cart(user);
+                    _storeContext.carts.Add(cart);
+                    _storeContext.SaveChanges();
+                }
 
             } catch (Exception ex)
             {

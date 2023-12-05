@@ -1,17 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-<<<<<<< HEAD
-    "\\CSharpestServer",
-    "\\CSharpestUI\\csharpest-ui",
-    "\\CSharpestUI\\csharpest-ui\\public",
-    "\\CSharpestUI\\csharpest-ui\\src\\pages"
-=======
     "\\CSharpestUI",
     "\\CSharpestUI\\csharpest-ui",
-    "\\CSharpestUI\\csharpest-ui\\src"
->>>>>>> 785a363327723c62c881f56f0dd266510f3d587a
+    "\\CSharpestUI\\csharpest-ui\\src",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages\\Cart",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages\\Login",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages\\StoreHome",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages\\StoreManager"
   ],
-  "SelectedNode": "\\CSharpestServer\\CSharpestServer.sln",
+  "SelectedNode": "\\CSharpestUI\\csharpest-ui\\src\\pages\\Login\\Login.css",
   "PreviewInSolutionExplorer": false
 }

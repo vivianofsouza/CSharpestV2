@@ -107,12 +107,13 @@ namespace CSharpestServer.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-          if (_context.users == null)
-          {
-              return Problem("Entity set 'StoreContext.users'  is null.");
-          }
-            _context.users.Add(user);
-            await _context.SaveChangesAsync();
+          try
+            {
+                await _usersService.AddAsync(user);
+            } catch
+            {
+                throw;
+            }
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
