@@ -24,7 +24,7 @@ function Cart() {
 
   return (
     <div>
-      <h1>Cart</h1>
+      <h1 id="cart_header">Cart</h1>
 
       {cartList.map(
         (cartItem: {
@@ -46,7 +46,7 @@ function Cart() {
           </>
         )
       )}
-      <h4>Subtotal</h4>
+      <h4 id="subtotal_header">Subtotal:</h4>
     </div>
   );
 }

@@ -36,6 +36,15 @@ function StoreHome() {
       .catch((error) => console.log(error));
   };
 
+  const getOnSale = () => {
+    axios
+      .get("https://localhost:7150/Item/GetAllItemsOnSale")
+      .then((response) => {
+        setItemsList(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   // add to Cart POST request, hardcoded values for now
   function addToCart() {
     const form = document.getElementById("form");
@@ -63,16 +72,26 @@ function StoreHome() {
   }, []);
   return (
     <div>
-      <h1>Store Home</h1>
-      <button type="submit" onClick={getItems}>
-        Sort by Price
-      </button>
-      <button type="submit" onClick={getItemsByAlphabet}>
-        Sort by A-Z
-      </button>
-      <button type="submit" onClick={getItemsByStock}>
-        Sort by Stock remianing
-      </button>
+      <h1 id="shop_header">Shop the CSharpest Store</h1>
+
+      <div id="sort_buttons">
+        <button id="sort_by_price" type="submit" onClick={getItems}>
+          Sort by Price
+        </button>
+        <button
+          id="sort_by_alphabet"
+          type="submit"
+          onClick={getItemsByAlphabet}
+        >
+          Sort by A-Z
+        </button>
+        <button id="sort_by_stock" type="submit" onClick={getItemsByStock}>
+          Sort by Stock Remaining
+        </button>
+        <button id="on_sale" type="submit" onClick={getOnSale}>
+          On Sale
+        </button>
+      </div>
 
       {itemList.map(
         (item: {

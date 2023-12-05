@@ -1,0 +1,49 @@
+#shop_header {
+    text-align: center;
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    line-height: 80%;
+    font-size: 250%;
+}
+
+#sort_buttons {
+    text-align: right;
+    margin-right: 10%;
+}
+
+#sort_by_price {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 12%;
+    margin-right: .5%;
+}
+
+#sort_by_alphabet {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 12%;
+    margin-right: .5%;
+}
+
+#sort_by_stock {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 12%;
+    margin-right: .5%;
+}
+
+#on_sale {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 12%;
+    margin-right: .5%;   
+}

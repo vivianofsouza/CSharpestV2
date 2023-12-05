@@ -69,6 +69,19 @@ namespace CSharpestServer.Controllers
             }
             return Ok();
         }
+        [HttpGet("GetAllItemsOnSale")]
+        public async Task<IActionResult> GetAllItemsOnSale()
+        {
+            var items = await _itemService.GetAllAsync();
+
+            var sorted = from item in items
+                         where item.bundleId != null
+                         orderby item.Name
+                         select item;
+
+            return Ok(sorted);
+        }
+
 
         [HttpPatch("ChangePrice")]
         public async Task<IActionResult> ChangePrice(Guid itemId, decimal price)

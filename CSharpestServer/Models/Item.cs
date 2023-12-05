@@ -16,12 +16,12 @@ public class Item : IComparable<Item>
     public string Description { get; set; }
     public decimal Price { get; set; }
     public int Stock { get; set; }
-    public Bundle? bundle { get; set; }
-    public string? ImageURL { get; set; }
+    public Guid? bundleId { get; set; }
+    public string ImageURL { get; set; }
 
 
     // for a new item being added to database
-    public Item(string name, string description, decimal price, int stock, Bundle? _bundle, string? imageURL)
+    public Item(string name, string description, decimal price, int stock, Guid? _bundleId, string imageURL)
     {
 
         Name = name;
@@ -29,7 +29,7 @@ public class Item : IComparable<Item>
         Id = Guid.NewGuid();
         Price = price;
         Stock = stock;
-        bundle = _bundle;
+        bundleId = _bundleId;
         ImageURL = imageURL;
     }
 
