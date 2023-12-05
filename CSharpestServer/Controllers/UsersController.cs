@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CSharpestServer.Models;
+using CSharpestServer.Services.Interfaces;
+using CSharpestServer.Services;
+using System.Web.Helpers;
 
 namespace CSharpestServer.Controllers
 {
@@ -14,24 +17,45 @@ namespace CSharpestServer.Controllers
     public class UsersController : ControllerBase
     {
         private readonly StoreContext _context;
+        private readonly IUsersService _usersService;
 
-        public UsersController(StoreContext context)
+        public UsersController(StoreContext storeContext, UsersService usersService)
         {
-            _context = context;
+            this._usersService = usersService;
+            this._context = storeContext;
         }
 
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> Getusers()
         {
-          if (_context.users == null)
-          {
-              return NotFound();
-          }
-            return await _context.users.ToListAsync();
+            try
+            {
+                await _usersService.GetAllAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
         }
 
-        // GET: api/Users/5
+        // GET /api/Users/Login
+        [HttpGet("Login")]
+        public async Task<ActionResult<Guid>> Login(string email, string password)
+        {
+            try
+            {
+                await _usersService.Login(email, password);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
+        }
+
+        // GET: api/Users/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(Guid id)
         {
@@ -49,7 +73,7 @@ namespace CSharpestServer.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Users/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(Guid id, User user)
         {
@@ -83,34 +107,28 @@ namespace CSharpestServer.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-          if (_context.users == null)
-          {
-              return Problem("Entity set 'StoreContext.users'  is null.");
-          }
-            _context.users.Add(user);
-            await _context.SaveChangesAsync();
+          try
+            {
+                await _usersService.AddAsync(user);
+            } catch
+            {
+                throw;
+            }
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Users/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            if (_context.users == null)
+            try
             {
-                return NotFound();
+                await _usersService.DeleteUser(id);
+                return NoContent();
+            } catch {
+                throw;
             }
-            var user = await _context.users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool UserExists(Guid id)

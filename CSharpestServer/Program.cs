@@ -20,7 +20,7 @@ builder.Services.AddScoped<CartItemService, CartItemService>();
 builder.Services.AddScoped<ItemService, ItemService>();
 builder.Services.AddScoped<OrderItemService, OrderItemService>();
 builder.Services.AddScoped<OrderService, OrderService>();
-builder.Services.AddScoped<UserService, UserService>();
+builder.Services.AddScoped<UsersService, UsersService>();
 //builder.Services.AddScoped<CheckoutService, CheckoutService>();
 
 //builder.Services.AddDbContext<StoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("StoreContext")));
