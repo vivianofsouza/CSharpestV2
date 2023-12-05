@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const validateUser = () => {
   axios
-    .get("https://localhost:7150/Item/GetAllItemsStockSort")
+    .get("https://localhost:7150/api/Users/Login")
     .then((response) => {
       //setItemsList(response.data);
     })

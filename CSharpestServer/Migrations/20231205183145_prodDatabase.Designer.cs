@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSharpestServer.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20231205193909_addingItems")]
-    partial class addingItems
+    [Migration("20231205183145_prodDatabase")]
+    partial class prodDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
