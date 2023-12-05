@@ -23,6 +23,7 @@ public class Item : IComparable<Item>
     // for a new item being added to database
     public Item(string name, string description, decimal price, int stock, Bundle? _bundle, string imageURL)
     {
+
         Name = name;
         Description = description;
         Id = Guid.NewGuid();

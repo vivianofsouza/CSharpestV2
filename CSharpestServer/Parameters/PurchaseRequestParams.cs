@@ -1,10 +1,10 @@
-﻿using CSharpestServer.Classes;
+﻿using CSharpestServer.Models;
 
 namespace CSharpestServer.Parameters
 {
     public class PurchaseRequestParams
     {
-        public Shopper User { get; set; }
+        public User User { get; set; }
         public Cart Cart { get; set; }
     }
 }

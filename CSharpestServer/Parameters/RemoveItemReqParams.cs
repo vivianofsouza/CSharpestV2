@@ -1,4 +1,4 @@
-﻿using CSharpestServer.Classes;
+﻿using CSharpestServer.Models;
 
 namespace CSharpestServer.Parameters
 {

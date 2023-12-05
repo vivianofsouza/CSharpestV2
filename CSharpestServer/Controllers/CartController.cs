@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using CSharpestServer.Classes;
 using CSharpestServer.Services;
 using CSharpestServer.Services.Interfaces;
 using CSharpestServer.Models;
