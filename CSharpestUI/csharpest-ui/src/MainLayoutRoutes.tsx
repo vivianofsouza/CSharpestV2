@@ -7,18 +7,19 @@ import Checkout from "./pages/Checkout/Checkout";
 import Login from "./pages/Login/Login";
 import { useState } from "react";
 import Navbar from "./Navigation";
-import MainLayoutRoutes from "./MainLayoutRoutes";
 
-export default function App() {
-  const [showNav, setShowNav] = useState(true);
-
+function MainLayoutRoutes() {
   return (
-    <BrowserRouter>
+    <>
+      <Navbar></Navbar>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="*" element={<MainLayoutRoutes />} />
+        {" "}
+        <Route path="storeHome" element={<StoreHome />} />{" "}
+        <Route path="cart" element={<Cart />} />{" "}
+        <Route path="checkout" element={<Checkout />} />{" "}
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
-ReactDOM.render(<App />, document.getElementById("root"));
+
+export default MainLayoutRoutes;
