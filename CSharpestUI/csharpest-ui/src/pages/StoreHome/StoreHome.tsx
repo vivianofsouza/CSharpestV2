@@ -67,6 +67,21 @@ function StoreHome() {
       .catch((err) => console.log(err));
   }
 
+  // const getUsers = async () => {
+  //   const params = {
+  //     page: 1,
+  //     limit: 10,
+  //     sort: 'name',
+  //   };
+  //   try {
+  //     const response = await axios.get(baseURL, { params });
+  //     const users = response.data;
+  //     console.log(users);
+  //   } catch (error) {
+  //     console.error('Error fetching users:', error);
+  //   }
+  // };
+
   useEffect(() => {
     getItems();
   }, []);

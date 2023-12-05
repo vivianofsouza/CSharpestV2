@@ -24,7 +24,60 @@ function Login() {
 
   // handles customer login
   function loginCustomer() {
-    navigate("/storeHome");
+    const form = document.getElementById("login_form");
+
+    form!.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
+    const formData = new FormData();
+    const email = (document.getElementById("Email") as HTMLInputElement).value;
+    const password = (document.getElementById("Password") as HTMLInputElement)
+      .value;
+    formData.append("Email", email);
+    formData.append("Password", password);
+
+    axios
+      .post("https://localhost:7150/api/Users/Login", formData)
+      .then((res) => {
+        if (res.status == 200) {
+          navigate("/storeHome");
+        } else {
+          alert(
+            "Invalid Username or Password. Please try again or Create an Account."
+          );
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  // handles manager login
+  function loginManager() {
+    const form = document.getElementById("login_form");
+
+    form!.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
+    const formData = new FormData();
+    const email = (document.getElementById("Email") as HTMLInputElement).value;
+    const password = (document.getElementById("Password") as HTMLInputElement)
+      .value;
+    formData.append("Email", email);
+    formData.append("Password", password);
+
+    axios
+      .post("https://localhost:7150/api/Users/Login", formData)
+      .then((res) => {
+        if (res.status == 200) {
+          navigate("/storeHome");
+        } else {
+          alert(
+            "Invalid Username or Password. Please try again or Create an Account."
+          );
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -90,11 +143,11 @@ function Login() {
                 <form id="login_form">
                   <label id="email_label">Email</label>
                   <br></br>
-                  <input id="email_input"></input>
+                  <input id="Email"></input>
                   <br></br>
                   <label id="password_label">Password</label>
                   <br></br>
-                  <input id="password_input"></input>
+                  <input id="Password"></input>
                   <br></br>
                   <button
                     type="submit"
