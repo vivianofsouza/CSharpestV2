@@ -18,17 +18,14 @@ public class Order : IComparable<Order>
     public decimal TotalCost { get; set; }
 
 
-    public Order(User user, Card card, string datetime, string address, decimal shipping)
+    public Order(Guid userId, Card card, string datetime, string address, decimal shipping)
     {
         Id = Guid.NewGuid();
-        UserId = user.Id;
+        UserId = userId;
         CardId = card.Number;
         DateTime = datetime;
         Address = address;
         ShippingCost = shipping;
-
-        // loop through all the OrderDetails corresponding to this order
-        // and add the shipping cost to that sum to get TotalCost. Idk how to though
         TotalCost = 0;
     }
 

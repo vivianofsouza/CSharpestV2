@@ -28,8 +28,22 @@ public class User : IComparable<User>
         FirstName = firstName;
         LastName = lastName;
         Password = password;
-        Phone = phone;
-        Address = address;
+        if (phone == null)
+        {
+            Phone = "XXX-XXX-XXXX";
+        } else
+        {
+            Phone = phone;
+        }
+        
+        if (address == null)
+        {
+            Address = "ADDRESS";
+        } else
+        {
+            Address = address;
+        }
+        
     }
 
     public User() { }

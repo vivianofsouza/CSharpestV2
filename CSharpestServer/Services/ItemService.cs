@@ -23,7 +23,7 @@ namespace CSharpestServer.Services
             return item;
         }
 
-        public Task ChangeStockAsync(Guid itemId, int quantity, bool addOrRemove)
+        public Task ChangeStock(Guid itemId, int quantity, bool addOrRemove)
         {
             Item? _item = _storeContext.items.Find(itemId);
             if (_item == null)

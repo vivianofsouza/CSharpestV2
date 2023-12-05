@@ -61,7 +61,7 @@ namespace CSharpestServer.Controllers
         public async Task<IActionResult> ChangeStock(Guid itemId, int quantity, bool add)
         {
             try {
-                await _itemService.ChangeStockAsync(itemId, quantity, add);
+                await _itemService.ChangeStock(itemId, quantity, add);
             }
             catch (Exception ex)
             {
