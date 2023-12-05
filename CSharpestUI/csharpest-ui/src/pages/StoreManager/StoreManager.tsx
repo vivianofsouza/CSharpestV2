@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
-import "./StoreHome.css";
+import "./StoreManager.css";
 import { UUID } from "crypto";
 
 function StoreHome() {
@@ -11,25 +11,7 @@ function StoreHome() {
   // we're getting the list of all items here in this GET request. It's stored in a JavaScript array. Use developer tools to view what it looks like. You'll must likely need to map it into table to display it onto the screen.
   const getItems = () => {
     axios
-      .get("https://localhost:7150/Item/GetAllItemsPriceSort")
-      .then((response) => {
-        setItemsList(response.data);
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const getItemsByAlphabet = () => {
-    axios
-      .get("https://localhost:7150/Item/GetAllItemsAZSort")
-      .then((response) => {
-        setItemsList(response.data);
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const getItemsByStock = () => {
-    axios
-      .get("https://localhost:7150/Item/GetAllItemsStockSort")
+      .get("https://localhost:7150/Item/GetAllItems")
       .then((response) => {
         setItemsList(response.data);
       })
@@ -64,16 +46,6 @@ function StoreHome() {
   return (
     <div>
       <h1>Store Home</h1>
-      <button type="submit" onClick={getItems}>
-        Sort by Price
-      </button>
-      <button type="submit" onClick={getItemsByAlphabet}>
-        Sort by A-Z
-      </button>
-      <button type="submit" onClick={getItemsByStock}>
-        Sort by Stock remianing
-      </button>
-
       {itemList.map(
         (item: {
           itemId: UUID;
@@ -82,7 +54,6 @@ function StoreHome() {
           price: number;
           description: string;
           name: string;
-          imageURL: string;
         }) => (
           <>
             <li>{item.name}</li>
@@ -90,9 +61,6 @@ function StoreHome() {
             <li>{item.price}</li>
             <li>{item.stock}</li>
             <li>{item.bogo ? "BOGO" : ""}</li>
-            <li>
-              <img src={item.imageURL} width="200" height="200"></img>
-            </li>
             <li>
               <form id="form">
                 <label>Quantity</label>

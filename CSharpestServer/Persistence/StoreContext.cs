@@ -33,7 +33,7 @@ public class StoreContext : DbContext
         modelBuilder.Entity<User>().HasKey(x => x.Id);
         modelBuilder.Entity<OrderItem>().HasKey(x => x.Id);
         modelBuilder.Entity<Order>().HasKey(x => x.Id);
-        modelBuilder.Entity<Card>().HasKey(x => x.Number);
+        modelBuilder.Entity<Card>().HasKey(x => x.Number);            
         // Other configurations...
     }
 

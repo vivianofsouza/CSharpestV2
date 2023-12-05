@@ -4,6 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c95afed7-f62a-40b6-8283-a0d3b9e96f9a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +15,7 @@
 
 	<PackageReference Include="jQuery" Version="3.7.1" />
 	<PackageReference Include="Microsoft.AspNet.Mvc" Version="4.5.1" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
 		<PrivateAssets>all</PrivateAssets>
 		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

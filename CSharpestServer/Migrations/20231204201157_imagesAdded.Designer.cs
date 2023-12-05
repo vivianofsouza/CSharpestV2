@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSharpestServer.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20231204201157_imagesAdded")]
+    partial class imagesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,6 +134,17 @@ namespace CSharpestServer.Migrations
                     b.HasIndex("bundleId");
 
                     b.ToTable("items");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("aae2d4b0-3e96-4b25-87c3-7ce65c33c949"),
+                            Description = "candy",
+                            ImageURL = "https://m.media-amazon.com/images/I/411ywWj2V+L._AC_UF1000,1000_QL80_.jpg",
+                            Name = "Jolly Ranchers",
+                            Price = 0.18m,
+                            Stock = 500
+                        });
                 });
 
             modelBuilder.Entity("CSharpestServer.Models.Order", b =>
