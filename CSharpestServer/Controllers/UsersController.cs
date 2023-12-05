@@ -46,8 +46,8 @@ namespace CSharpestServer.Controllers
         {
             try
             {
-                var userGuid = await _usersService.Login(email, password);
-                return Ok(userGuid);
+                var user = await _usersService.Login(email, password);
+                return Ok(user);
             }
             catch
             {
@@ -70,7 +70,7 @@ namespace CSharpestServer.Controllers
                 return NotFound();
             }
 
-            return user;
+            return Ok(User);
         }
 
         // PUT: api/Users/{id}

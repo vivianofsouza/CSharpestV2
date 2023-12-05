@@ -1,6 +1,7 @@
 ﻿using CSharpestServer.Models;
 using CSharpestServer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -22,17 +23,6 @@ namespace CSharpestServer.Services
             return item;
         }
 
-        public Task AddRangeAsync(IEnumerable<Item> items)
-        {
-            foreach (var i in items)
-            {
-                Item item = GetInitialisedId(i);
-                _storeContext.items.Add(item);
-            }
-            _storeContext.SaveChanges();
-            return Task.CompletedTask;
-        }
-
         public Task ChangeStockAsync(Guid itemId, int quantity, bool addOrRemove)
         {
             Item? _item = _storeContext.items.Find(itemId);
@@ -52,7 +42,7 @@ namespace CSharpestServer.Services
             }
 
             _storeContext.SaveChanges();
-            return Task.FromResult(_item);
+            return Task.CompletedTask;
         }
 
         public Task ChangePriceAsync(Guid itemId, decimal price)
@@ -66,9 +56,10 @@ namespace CSharpestServer.Services
             if (price >= 0)
             {
                 _item.Price = price;
+            } else
+            {
+                return Task.FromException(new InvalidOperationException("Cannot have negative price"));
             }
-
-            //CATCH FOR NEGATIVE PRICE: RETURN NOTE?
 
             _storeContext.SaveChanges();
             return Task.CompletedTask;
@@ -98,34 +89,23 @@ namespace CSharpestServer.Services
             return Task.FromResult(_storeContext.items.AsEnumerable());
         }
 
-        public Item? GetById(Guid id)
-        {
-            return _storeContext.items.Find(id);
-        }
-
-        public Task<Item?> GetByIdAsync(Guid id)
-        {
-            Item? item = _storeContext.items.Find(id);
-            return Task.FromResult(item);
-        }
-
         public Task RemoveItem(Guid id)
         {
-            var item = _storeContext.items.Find(id);
-
-            if (item == null)
-            {
-                return Task.FromException(new NullReferenceException());
-            }
-
             try
             {
+                var item = _storeContext.items.Find(id);
+
+                if (item == null)
+                {
+                    return Task.FromException(new NullReferenceException());
+                }
+
                 _storeContext.items.Remove(item);
                 _storeContext.SaveChanges();
 
-            }   catch (Exception e)
+            } catch
             {
-                return Task.FromException(e);
+                throw;
             }
 
             return Task.CompletedTask;

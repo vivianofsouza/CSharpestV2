@@ -91,16 +91,5 @@ namespace CSharpestServer.Services
                 return Task.FromResult(_storeContext.users.AsEnumerable());
         }
 
-        public Task<User?> GetByIdAsync(Guid id)
-        {
-            User? user = _storeContext.users.Find(id);
-            return Task.FromResult(user);
-        }
-
-        public User? GetById(Guid id)
-        {
-            return _storeContext.users.Find(id);
-        }
-
     }
 }

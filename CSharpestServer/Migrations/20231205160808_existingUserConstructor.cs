@@ -5,7 +5,7 @@
 namespace CSharpestServer.Migrations
 {
     /// <inheritdoc />
-    public partial class addingItems : Migration
+    public partial class existingUserConstructor : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
