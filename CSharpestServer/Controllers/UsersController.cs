@@ -42,17 +42,17 @@ namespace CSharpestServer.Controllers
 
         // GET /api/Users/Login
         [HttpGet("Login")]
-        public async Task<ActionResult<Guid>> Login(string email, string password)
+        public async Task<ActionResult<User>> Login(string email, string password)
         {
             try
             {
-                await _usersService.Login(email, password);
+                var userGuid = await _usersService.Login(email, password);
+                return Ok(userGuid);
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest(ex);
-            }
-            return Ok();
+                return NotFound();
+            } 
         }
 
         // GET: api/Users/{id}

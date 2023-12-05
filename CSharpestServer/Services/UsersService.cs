@@ -44,7 +44,7 @@ namespace CSharpestServer.Services
             return Task.CompletedTask;
         }
 
-        public Task Login(string email, string password)
+        public Task<User> Login(string email, string password)
         {
             var users = _storeContext.users.AsEnumerable();
             try
@@ -54,13 +54,13 @@ namespace CSharpestServer.Services
                             .Where(user => user.Email == email);
                 var user = found.FirstOrDefault();
 
-                if (user.Password == password)
+                if (user != null && user.Password == password)
                 {
                     return Task.FromResult(user);
                 } else
                 {
                     //wrong password
-                    return Task.FromException(new NullReferenceException());
+                    return Task.FromException<User>(new NullReferenceException());
                 }
             } catch (Exception ex)
             {
