@@ -122,6 +122,9 @@ namespace CSharpestServer.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
+                    b.Property<string?>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("bundleId")
                         .HasColumnType("uniqueidentifier");
 

@@ -35,6 +35,8 @@ public class StoreContext : DbContext
         modelBuilder.Entity<Order>().HasKey(x => x.Id);
         modelBuilder.Entity<Card>().HasKey(x => x.Number);            
         // Other configurations...
+
+
     }
 
 }
