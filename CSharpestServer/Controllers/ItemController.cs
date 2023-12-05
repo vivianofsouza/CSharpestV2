@@ -69,6 +69,7 @@ namespace CSharpestServer.Controllers
             }
             return Ok();
         }
+
         [HttpGet("GetAllItemsOnSale")]
         public async Task<IActionResult> GetAllItemsOnSale()
         {
