@@ -24,7 +24,23 @@ body {
     width: 50%;
 }
 
+#create_account_card {
+    background-color: #d3d3d3;
+    border: 2px solid #385170;
+    border-radius: 5px;
+    width: 50%;
+}
+
 #login_card_header {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 200%;
+    text-align:center;
+    color: #385170;
+    margin-bottom: 2%;
+}
+
+#create_account_card_header {
     font-family: Rockwell;
     font-variant: small-caps;
     font-size: 200%;
@@ -38,16 +54,22 @@ body {
     margin-left: 4%;
 }
 
-#username_label {
+#create_account_form {
+    width: 350px;
+    margin-left: 4%;
+}
+
+#email_label {
     font-family: Rockwell;
     font-variant: small-caps;
     font-size: 125%;
     color: #385170;
 }
 
-#username_input {
+#email_input {
     height: 18%;
     width: 100%;
+    margin-bottom: 2%;
 }
 
 #password_label {
@@ -60,17 +82,78 @@ body {
 #password_input {
     height: 18%;
     width: 100%;
+    margin-bottom: 2%;
+}
+
+#first_name_label {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 125%;
+    color: #385170;
+}
+
+#first_name_input {
+    height: 18%;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+#last_name_label {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 125%;
+    color: #385170;
+}
+
+#last_name_input {
+    height: 18%;
+    width: 100%;
+    margin-bottom: 2%;
 }
 
 #login_submit_button {
     margin-top: 4%;
-    margin-left: 75%;
+    margin-left: 74%;
     font-family: Rockwell;
     font-variant: small-caps;
     color: #385170;
     height: 28%;
     width: 28%;
 }
+
+#create_account_submit_button {
+    margin-top: 4%;
+    margin-left: 67%;
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 35%;
+}
+
+#select_account_type {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 125%;
+    color: #385170;
+    margin-bottom: 2%;
+}
+
+#shopper_label {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 100%;
+    color: #385170;
+}
+
+#sm_label {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 100%;
+    color: #385170;
+}
+
+
 
 
 
