@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSharpestServer.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20231204211558_delRanchersAgain")]
-    partial class delRanchersAgain
+    [Migration("20231205221354_firstCandyItemWithURL")]
+    partial class firstCandyItemWithURL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,20 +131,7 @@ namespace CSharpestServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("bundleId");
-
                     b.ToTable("items");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("72a5f674-8016-4787-9a8d-dbd5b0f23aa9"),
-                            Description = "candy",
-                            ImageURL = "https://m.media-amazon.com/images/I/411ywWj2V+L._AC_UF1000,1000_QL80_.jpg",
-                            Name = "Jolly Ranchers",
-                            Price = 0.18m,
-                            Stock = 500
-                        });
                 });
 
             modelBuilder.Entity("CSharpestServer.Models.Order", b =>
@@ -242,15 +229,6 @@ namespace CSharpestServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users");
-                });
-
-            modelBuilder.Entity("CSharpestServer.Models.Item", b =>
-                {
-                    b.HasOne("CSharpestServer.Models.Bundle", "bundle")
-                        .WithMany()
-                        .HasForeignKey("bundleId");
-
-                    b.Navigation("bundle");
                 });
 #pragma warning restore 612, 618
         }

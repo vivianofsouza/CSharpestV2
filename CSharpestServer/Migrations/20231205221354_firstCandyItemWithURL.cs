@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CSharpestServer.Migrations
 {
     /// <inheritdoc />
-    public partial class Changes : Migration
+    public partial class firstCandyItemWithURL : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,6 +67,23 @@ namespace CSharpestServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "items",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    bundleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_items", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "orderItems",
                 columns: table => new
                 {
@@ -117,38 +134,14 @@ namespace CSharpestServer.Migrations
                 {
                     table.PrimaryKey("PK_users", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "items",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false),
-                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bundleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_items", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_items_bundles_bundleId",
-                        column: x => x.bundleId,
-                        principalTable: "bundles",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_items_bundleId",
-                table: "items",
-                column: "bundleId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "bundles");
+
             migrationBuilder.DropTable(
                 name: "cards");
 
@@ -169,9 +162,6 @@ namespace CSharpestServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "users");
-
-            migrationBuilder.DropTable(
-                name: "bundles");
         }
     }
 }
