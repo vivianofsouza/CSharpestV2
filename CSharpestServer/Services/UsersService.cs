@@ -49,10 +49,14 @@ namespace CSharpestServer.Services
             var users = _storeContext.users.AsEnumerable();
             try
             {
-                User found = _storeContext.users.Find(email);
-                if (found.Password == password)
+                var found = users
+                            .Select(user =>  user)
+                            .Where(user => user.Email == email);
+                var user = found.FirstOrDefault();
+
+                if (user.Password == password)
                 {
-                    return Task.CompletedTask;
+                    return Task.FromResult(user);
                 } else
                 {
                     //wrong password
