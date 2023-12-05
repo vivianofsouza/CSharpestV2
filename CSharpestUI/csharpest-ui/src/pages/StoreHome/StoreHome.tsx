@@ -63,16 +63,19 @@ function StoreHome() {
   }, []);
   return (
     <div>
-      <h1>Store Home</h1>
-      <button type="submit" onClick={getItems}>
-        Sort by Price
-      </button>
-      <button type="submit" onClick={getItemsByAlphabet}>
-        Sort by A-Z
-      </button>
-      <button type="submit" onClick={getItemsByStock}>
-        Sort by Stock remianing
-      </button>
+      <h1 id="shop_header">Shop the CSharpest Store</h1>
+
+      <div id="sort_buttons">
+        <button id ="sort_by_price" type="submit" onClick={getItems}>
+          Sort by Price
+        </button>
+        <button id ="sort_by_alphabet" type="submit" onClick={getItemsByAlphabet}>
+          Sort by A-Z
+        </button>
+        <button id= "sort_by_stock" type="submit" onClick={getItemsByStock}>
+          Sort by Stock Remaining
+        </button>
+      </div>
 
       {itemList.map(
         (item: {
