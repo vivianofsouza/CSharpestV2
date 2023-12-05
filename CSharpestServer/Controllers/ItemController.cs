@@ -55,6 +55,19 @@ namespace CSharpestServer.Controllers
             return Ok(sorted);
         }
 
+        [HttpGet("GetAllItemsOnSale")]
+        public async Task<IActionResult> GetAllItemsOnSale()
+        {
+            var items = await _itemService.GetAllAsync();
+
+            var sorted = from item in items
+                         where item.bundleId != null
+                         orderby item.Name
+                         select item;
+
+            return Ok(sorted);
+        }
+
 
     }
 }
