@@ -2,12 +2,12 @@ import React from "react";
 import logo from "./logo.svg";
 import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import UserConstants from "../../UserConstants";
 
 const validateUser = () => {
   axios
@@ -41,6 +41,12 @@ function Login() {
       .post("https://localhost:7150/api/Users/Login", formData)
       .then((res) => {
         if (res.status == 200) {
+          console.log(res.data);
+          UserConstants.setCurrUser(res.data.id);
+          UserConstants.setCurrCart(res.data.cartId);
+          UserConstants.setIsAdmin(res.data.isAdmin);
+          UserConstants.setFirstName(res.data.firstName);
+          UserConstants.setLastName(res.data.lastName);
           navigate("/storeHome");
         } else {
           alert(
@@ -48,36 +54,12 @@ function Login() {
           );
         }
       })
-      .catch((err) => console.log(err));
-  }
-
-  // handles manager login
-  function loginManager() {
-    const form = document.getElementById("login_form");
-
-    form!.addEventListener("submit", (e) => {
-      e.preventDefault();
-    });
-
-    const formData = new FormData();
-    const email = (document.getElementById("Email") as HTMLInputElement).value;
-    const password = (document.getElementById("Password") as HTMLInputElement)
-      .value;
-    formData.append("Email", email);
-    formData.append("Password", password);
-
-    axios
-      .post("https://localhost:7150/api/Users/Login", formData)
-      .then((res) => {
-        if (res.status == 200) {
-          navigate("/storeHome");
-        } else {
-          alert(
-            "Invalid Username or Password. Please try again or Create an Account."
-          );
-        }
-      })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(
+          "Invalid Username or Password. Please try again or Create an Account."
+        );
+      });
   }
 
   return (

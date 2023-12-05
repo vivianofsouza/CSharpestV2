@@ -4,6 +4,7 @@ import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "./StoreHome.css";
 import { UUID } from "crypto";
+import UserConstants from "../../UserConstants";
 
 function StoreHome() {
   const [itemList, setItemsList] = useState<any>([]);
@@ -87,6 +88,7 @@ function StoreHome() {
   }, []);
   return (
     <div>
+      <h1 id="shop_header">Welcome, {UserConstants.getFirstName()}</h1>
       <h1 id="shop_header">Shop the CSharpest Store</h1>
 
       <div id="sort_buttons">

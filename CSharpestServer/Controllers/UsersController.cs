@@ -40,9 +40,9 @@ namespace CSharpestServer.Controllers
             return Ok();
         }
 
-        // GET /api/Users/Login
-        [HttpGet("Login")]
-        public async Task<ActionResult<User>> Login(string email, string password)
+        // POST /api/Users/Login
+        [HttpPost("Login")]
+        public async Task<ActionResult<User>> Login([FromForm] string email, [FromForm] string password)
         {
             try
             {
