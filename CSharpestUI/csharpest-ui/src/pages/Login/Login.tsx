@@ -20,9 +20,9 @@ function Login() {
     <div id="login_page">
       <h1 id="welcome_header">Welcome to the CSharpest Candy Store</h1>
 
-      <Card>
-        <Card.Header>Login</Card.Header>
-        <Card.Body>
+      <Card id="login_card">
+        <Card.Header id="login_card_header">Login</Card.Header>
+        <Card.Body id="login_card_body">
           <Card.Text>
             <form id="login_form">
               <label id="username_label">Email</label>
@@ -38,26 +38,8 @@ function Login() {
               </button>
             </form>         
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
         </Card.Body>
       </Card>
-
-      <div id="login_container">
-        <h2 id="login_header">Login</h2>
-        <form id="login_form">
-          <label id="username_label">Email</label>
-          <br></br>
-          <input id="username_input"></input>
-          <br></br>
-          <label id="password_label">Password</label>
-          <br></br>
-          <input id="password_input"></input>
-          <br></br>
-          <button type="submit" id="login_submit_button">
-            Login{" "}
-          </button>
-        </form>
-      </div>
 
       <div id="signup_container">
         <h2 id="signup_header">Create an Account</h2>
