@@ -4,6 +4,8 @@ using CSharpestServer.Models;
 using CSharpestServer.Services;
 using CSharpestServer.Services.Interfaces;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 namespace CSharpestServer.Controllers
 
 {
@@ -55,6 +57,57 @@ namespace CSharpestServer.Controllers
             return Ok(sorted);
         }
 
+        [HttpPatch("ChangeStock")]
+        public async Task<IActionResult> ChangeStock(Guid itemId, int quantity, bool add)
+        {
+            try {
+                await _itemService.ChangeStockAsync(itemId, quantity, add);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
+        }
 
+        [HttpPatch("ChangePrice")]
+        public async Task<IActionResult> ChangePrice(Guid itemId, decimal price)
+        {
+            try
+            {
+                await _itemService.ChangePriceAsync(itemId, price);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddItem(Item item)
+        {
+            try {
+                await _itemService.AddItem(item);
+            } catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveItem(Guid itemId)
+        {
+            try
+            {
+                await _itemService.RemoveItem(itemId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
+        }
     }
 }
