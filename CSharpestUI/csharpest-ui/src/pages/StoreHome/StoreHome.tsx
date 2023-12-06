@@ -5,10 +5,10 @@ import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML compone
 import "./StoreHome.css";
 import { UUID } from "crypto";
 import UserConstants from "../../UserConstants";
+import NavBar from "../../components/Navbar";
 
 function StoreHome() {
   const [itemList, setItemsList] = useState<any>([]);
-
   // we're getting the list of all items here in this GET request. It's stored in a JavaScript array. Use developer tools to view what it looks like. You'll must likely need to map it into table to display it onto the screen.
   const getItems = () => {
     axios
@@ -59,13 +59,18 @@ function StoreHome() {
       .value;
     const quantity = (document.getElementById("Quantity") as HTMLInputElement)
       .value;
-    formData.append("ItemID", itemID);
-    formData.append("Quantity", quantity);
 
-    axios
-      .post("https://localhost:7150/Cart/AddItemToCart", formData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    formData.append("ItemId", itemID);
+    formData.append("Quantity", quantity);
+    formData.append("CartId", UserConstants.getLocalStorage("userId", "ABC"));
+
+    console.log(itemID + "item");
+    console.log(quantity + "quant");
+    console.log(UserConstants.getLocalStorage("userId", "ABC") + "cart");
+    // axios
+    //   .post("https://localhost:7150/Cart/AddItemToCart", formData)
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
   }
 
   // const getUsers = async () => {
@@ -83,12 +88,27 @@ function StoreHome() {
   //   }
   // };
 
+  // function getLocalStorage(key: string, initialValue: any) {
+  //   try {
+  //     const value = window.localStorage.getItem(key);
+  //     return value ? JSON.parse(value) : initialValue;
+  //   } catch (e) {
+  //     // if error, return initial value
+  //     return initialValue;
+  //   }
+  // }
+
   useEffect(() => {
     getItems();
+    // console.log(getLocalStorage("userId", "ABC"));
   }, []);
   return (
     <div>
-      <h1 id="shop_header">Welcome, {UserConstants.getFirstName()}</h1>
+      <NavBar></NavBar>
+
+      <h1 id="shop_header">
+        Welcome, {UserConstants.getLocalStorage("firstName", "")}
+      </h1>
       <h1 id="shop_header">Shop the CSharpest Store</h1>
 
       <div id="sort_buttons">

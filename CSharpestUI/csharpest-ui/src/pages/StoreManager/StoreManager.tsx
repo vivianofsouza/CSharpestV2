@@ -4,6 +4,7 @@ import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "./StoreManager.css";
 import { UUID } from "crypto";
+import NavBar from "../../components/Navbar";
 
 function StoreHome() {
   const [itemList, setItemsList] = useState<any>([]);
@@ -44,39 +45,42 @@ function StoreHome() {
     getItems();
   }, []);
   return (
-    <div>
-      <h1>Store Home</h1>
-      {itemList.map(
-        (item: {
-          itemId: UUID;
-          bogo: boolean;
-          stock: number;
-          price: number;
-          description: string;
-          name: string;
-        }) => (
-          <>
-            <li>{item.name}</li>
-            <li>{item.description}</li>
-            <li>{item.price}</li>
-            <li>{item.stock}</li>
-            <li>{item.bogo ? "BOGO" : ""}</li>
-            <li>
-              <form id="form">
-                <label>Quantity</label>
-                <input id="Quantity"></input>
-                <input type="hidden" id="ItemID" value={item.itemId}></input>
+    <>
+      <NavBar></NavBar>
+      <div>
+        <h1>Store Home</h1>
+        {itemList.map(
+          (item: {
+            itemId: UUID;
+            bogo: boolean;
+            stock: number;
+            price: number;
+            description: string;
+            name: string;
+          }) => (
+            <>
+              <li>{item.name}</li>
+              <li>{item.description}</li>
+              <li>{item.price}</li>
+              <li>{item.stock}</li>
+              <li>{item.bogo ? "BOGO" : ""}</li>
+              <li>
+                <form id="form">
+                  <label>Quantity</label>
+                  <input id="Quantity"></input>
+                  <input type="hidden" id="ItemID" value={item.itemId}></input>
 
-                <button type="submit" onClick={addToCart}>
-                  Add to Cart
-                </button>
-              </form>
-            </li>
-            <br></br>
-          </>
-        )
-      )}
-    </div>
+                  <button type="submit" onClick={addToCart}>
+                    Add to Cart
+                  </button>
+                </form>
+              </li>
+              <br></br>
+            </>
+          )
+        )}
+      </div>
+    </>
   );
 }
 

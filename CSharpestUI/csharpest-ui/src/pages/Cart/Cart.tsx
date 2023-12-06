@@ -3,27 +3,32 @@ import logo from "./logo.svg";
 import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "./Cart.css";
+import UserConstants from "../../UserConstants";
+import NavBar from "../../components/Navbar";
 
 function Cart() {
   const [cartList, setCartList] = useState<any>([]);
 
   const getCartItems = () => {
+    const params = {
+      userID: UserConstants.getLocalStorage("userId", ""),
+    };
     axios
-      .get(
-        "https://localhost:7150/Cart/GetCartItems?UserID=c4f9f3c1-9aa1-4d72-8a4c-4e03549e5bc1"
-      )
+      .get("https://localhost:7150/Cart/GetCartItems", { params })
       .then((response) => {
         setCartList(response.data);
+        console.log("success!");
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    getCartItems();
+    // getCartItems();
   }, []);
 
   return (
     <div>
+      <NavBar></NavBar>
       <h1 id="cart_header">Cart</h1>
 
       {cartList.map(

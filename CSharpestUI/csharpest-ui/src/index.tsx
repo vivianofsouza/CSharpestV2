@@ -6,8 +6,7 @@ import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Login from "./pages/Login/Login";
 import { useState } from "react";
-import Navbar from "./Navigation";
-import MainLayoutRoutes from "./MainLayoutRoutes";
+import UserConstants from "./UserConstants";
 
 export default function App() {
   const [showNav, setShowNav] = useState(true);
@@ -16,7 +15,9 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="*" element={<MainLayoutRoutes />} />
+        <Route path="storeHome" element={<StoreHome />} />{" "}
+        <Route path="cart" element={<Cart />} />{" "}
+        <Route path="checkout" element={<Checkout />} />{" "}
       </Routes>
     </BrowserRouter>
   );

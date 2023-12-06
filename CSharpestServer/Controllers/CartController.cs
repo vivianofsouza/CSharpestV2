@@ -40,7 +40,7 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpPost("AddItemToCart")]
-        public async Task<IActionResult> AddItemToCart(Guid ItemId, Guid CartId, int quantity) //[FromForm] Guid ItemID, [FromForm] int quantity)
+        public async Task<IActionResult> AddItemToCart([FromForm] Guid ItemId, [FromForm] Guid CartId, [FromForm] int quantity) //[FromForm] Guid ItemID, [FromForm] int quantity)
         {
             try
             {

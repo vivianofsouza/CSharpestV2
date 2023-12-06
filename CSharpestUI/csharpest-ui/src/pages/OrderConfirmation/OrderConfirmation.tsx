@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "./OrderConfirmation.css";
+import NavBar from "../../components/Navbar";
 
 function OrderConfirmation() {
   const [cartList, setCartList] = useState<any>([]);
@@ -35,6 +36,8 @@ function OrderConfirmation() {
 
   return (
     <div>
+      <NavBar></NavBar>
+
       <h1>Checkout</h1>
 
       {cartList.map(

@@ -3,7 +3,9 @@ import logo from "./logo.svg";
 import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "./Checkout.css";
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
+import NavBar from "../../components/Navbar";
+import UserConstants from "../../UserConstants";
 
 function Checkout() {
   const [cartList, setCartList] = useState<any>([]);
@@ -36,6 +38,8 @@ function Checkout() {
 
   return (
     <div>
+      <NavBar></NavBar>
+
       <h1 id="checkout_header">Checkout</h1>
 
       {cartList.map(
@@ -65,46 +69,49 @@ function Checkout() {
       <h4>Total: ${total}</h4>
 
       <Card id="payment_card">
-            <Card.Header id="payment_card_header">Enter Payment Details</Card.Header>
-            <Card.Body id="payment_card_body">
-              <Card.Text id="payment_card_text">
-                <form id="payment_form">
-                  <label id="label">Card number</label>
-                  <br></br>
-                  <input id="input"></input>
-                  <br></br>
+        <Card.Header id="payment_card_header">
+          Enter Payment Details
+        </Card.Header>
+        <Card.Body id="payment_card_body">
+          <Card.Text id="payment_card_text">
+            <form id="payment_form">
+              <label id="label">Card number</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
 
-                  <label id="label">Expiration Month</label>
-                  <br></br>
-                  <input id="input"></input>
-                  <br></br>
+              <label id="label">Expiration Month</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
 
-                  <label id="label">Expiration Year</label>
-                  <br></br>
-                  <input id="input"></input>
-                  <br></br>
+              <label id="label">Expiration Year</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
 
-                  <label id="label">CVV</label>
-                  <br></br>
-                  <input id="input"></input>
-                  <br></br>
+              <label id="label">CVV</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
 
-                  <label id="label">Cardholder Name</label>
-                  <br></br>
-                  <input id="input"></input>
-                  <br></br>
+              <label id="label">Cardholder Name</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
 
-                  <label id="label">Billing Address</label>
-                  <br></br>
-                  <input id="input"></input>
-                  <br></br>
+              <label id="label">Billing Address</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
 
-                  <button type="submit" id="confirm_payment_button">Purchase</button>
-                </form>        
-              </Card.Text>
-            </Card.Body>
-          </Card>
-
+              <button type="submit" id="confirm_payment_button">
+                Purchase
+              </button>
+            </form>
+          </Card.Text>
+        </Card.Body>
+      </Card>
     </div>
   );
 }

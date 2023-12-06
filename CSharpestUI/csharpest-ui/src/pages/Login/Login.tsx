@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import axios from "axios";
 import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
@@ -42,11 +42,17 @@ function Login() {
       .then((res) => {
         if (res.status == 200) {
           console.log(res.data);
-          UserConstants.setCurrUser(res.data.id);
-          UserConstants.setCurrCart(res.data.cartId);
-          UserConstants.setIsAdmin(res.data.isAdmin);
-          UserConstants.setFirstName(res.data.firstName);
-          UserConstants.setLastName(res.data.lastName);
+          UserConstants.setLocalStorage("userId", res.data.id);
+          UserConstants.setLocalStorage("cartId", res.data.cartId);
+          UserConstants.setLocalStorage("isAdmin", res.data.isAdmin);
+          UserConstants.setLocalStorage("firstName", res.data.firstName);
+          UserConstants.setLocalStorage("lastName", res.data.lastName);
+          console.log(UserConstants.getLocalStorage("userId", "dsdf"));
+          console.log(UserConstants.getLocalStorage("cartId", "dsdf"));
+          console.log(UserConstants.getLocalStorage("isAdmin", "dsdf"));
+          console.log(UserConstants.getLocalStorage("firstName", "dsdf"));
+          console.log(UserConstants.getLocalStorage("lastName", "dsdf"));
+
           navigate("/storeHome");
         } else {
           alert(
