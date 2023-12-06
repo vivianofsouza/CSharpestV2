@@ -27,8 +27,8 @@ namespace CSharpestServer.Services
             item.ItemId = itemId;
             item.CartId = cartId;
             item.Quantity = quantity;
-
-            item.TotalPrice = calculateTotal(quantity, my_item.Price, _storeContext.bundles.Find(itemId));
+            Bundle bundle = _storeContext.bundles.Find(itemId);
+            item.TotalPrice = calculateTotal(quantity, my_item.Price, bundle);
 
             _storeContext.cartItems.Add(item);
             _storeContext.SaveChanges();
@@ -56,13 +56,14 @@ namespace CSharpestServer.Services
             {
                 throw new InvalidOperationException($"CartItem with ID {itemId} not found in cart.");
             }
-            var unit_cost = _storeContext.items.Find(_item.ItemId).Price;
-            var bundle = _storeContext.bundles.Find(_storeContext.items.Find(_item.ItemId));
+            Item my_item =  _storeContext.items.Find(_item.ItemId)
+            var unit_cost = my_item.Price;
+            var bundle = _storeContext.bundles.Find(my_item.bundleId);
 
             if (Add)
             {
                 // find the stock
-                int stock = _storeContext.items.Find(_item.ItemId).Stock;
+                int stock = my_item.Stock;
                 // check if we have that much in stock
                 if (stock < Quantity + _item.Quantity)
                 {

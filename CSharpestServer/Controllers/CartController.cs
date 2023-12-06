@@ -78,7 +78,7 @@ namespace CSharpestServer.Controllers
             return Ok();
         }
 
-        [HttpPatch("ChangeStock")]
+        [HttpPatch("ChangeQuantity")]
         public async Task<IActionResult> ChangeQuantityAsync(Guid cartId, Guid itemId, int quantity, bool add)
         {
             try
@@ -92,33 +92,33 @@ namespace CSharpestServer.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveFromCart")]
         public async Task<IActionResult> RemoveItemFromCart(Guid itemId, Guid cartId)
         {
             try
             {
                 await _cartItemService.RemoveAsync(itemId, cartId);
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest(ex);
+                throw;
             }
             return Ok();
         }
 
-        //[HttpDelete]
-        //public async Task<IActionResult> ClearCart(Guid cartId)
-        //{
-        //    try
-        //    {
-        //        await _cartItemService.ClearCartAsync(cartId);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex);
-        //    }
-        //    return Ok();
-        //}
+        [HttpDelete("ClearCart")]
+        public async Task<IActionResult> ClearCart(Guid cartId)
+        {
+            try
+            {
+                await _cartItemService.ClearCartAsync(cartId);
+            }
+            catch
+            {
+                throw;
+            }
+            return Ok();
+        }
 
         private bool CartItemExists(Guid id)
         {
