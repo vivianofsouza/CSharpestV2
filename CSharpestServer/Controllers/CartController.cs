@@ -48,6 +48,7 @@ namespace CSharpestServer.Controllers
                           select new
                           {
                               name = item.Name,
+                              imageURL = item.ImageURL,
                               unitPrice = item.Price,
                               quantity = cartItem.Quantity,
                               totalPrice = cartItem.TotalPrice
