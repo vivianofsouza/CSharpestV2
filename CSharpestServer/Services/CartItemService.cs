@@ -1,5 +1,6 @@
 ﻿using CSharpestServer.Models;
 using CSharpestServer.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -141,33 +142,34 @@ namespace CSharpestServer.Services
                 _storeContext.SaveChanges();
                 return Task.FromResult(items);
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e);
                 throw;
             }
         }
 
 
-        public Task RemoveAsync(Guid id, Guid cartId)
+        public Task RemoveAsync(Guid itemId, Guid cartId)
         {
             try
             {
-                CartItem item = _storeContext?.cartItems.FindAsync(cartId, id).Result;
-                //CartItem item = _storeContext?.cartItems
-                //    .Where(cartItem => cartItem.CartId == cartId && cartItem.Id == id)
-                //    .FirstOrDefaultAsync().Result;
+                //CartItem item = _storeContext?.cartItems.FindAsync(cartId, id).Result;
+                CartItem? item = _storeContext.cartItems
+                    .Select(i => i)
+                    .Where(i => i.CartId == cartId && i.ItemId == itemId)
+                    .FirstOrDefault();
 
                 if (item != null)
                 {
-                    _storeContext?.cartItems.Remove(item);
+                    _storeContext.cartItems.Remove(item);
                     _storeContext.SaveChanges();
+                    return Task.CompletedTask;
                 }
-                return Task.FromResult(item);
+
+                throw new InvalidOperationException($"Item with ID {itemId} not found in User {cartId}'s cart."); ;
             }
-            catch (Exception e)
+            catch 
             {
-                Console.WriteLine(e);
                 throw;
             }
         }
