@@ -70,7 +70,7 @@ namespace CSharpestServer.Services
 
             else
             {
-                if (Quantity > _item.Quantity)
+                if (Quantity >= _item.Quantity)
                 {
                     // quantity will be zeroed which is the same as removing it
                     _storeContext.cartItems.Remove(_item);
@@ -86,10 +86,16 @@ namespace CSharpestServer.Services
 
         }
 
-        public Task<IEnumerable<CartItem>?> GetByCartAsync(Guid cartId)
+        public Task<IEnumerable<CartItem>?> GetItemsByCart(Guid cartId)
         {
             var items = _storeContext.cartItems.Where(item => item.CartId == cartId).ToList();
             return Task.FromResult<IEnumerable<CartItem>?>(items);
+        }
+
+        public Task<Cart?> GetCartByUser(Guid userId)
+        {
+            var cart = _storeContext.carts.Where(c => c.userId == userId).ToList().FirstOrDefault();
+            return Task.FromResult<Cart?>(cart);
         }
 
         public Task ClearCart(Guid cartId)
@@ -141,7 +147,6 @@ namespace CSharpestServer.Services
         }
 
         //PRIVATE HELPER SERVICES
-
         private CartItem GetInitialisedId(CartItem item)
         {
             if (item.Id == Guid.Empty) { item.Id = Guid.NewGuid(); }

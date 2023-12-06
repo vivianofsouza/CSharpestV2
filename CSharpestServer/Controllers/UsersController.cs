@@ -33,9 +33,9 @@ namespace CSharpestServer.Controllers
             {
                 await _usersService.GetAllAsync();
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest(ex);
+                throw;
             }
             return Ok();
         }
@@ -51,7 +51,7 @@ namespace CSharpestServer.Controllers
             }
             catch
             {
-                return NotFound();
+                throw;
             } 
         }
 
@@ -88,16 +88,9 @@ namespace CSharpestServer.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch
             {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return Ok();
@@ -125,10 +118,12 @@ namespace CSharpestServer.Controllers
             try
             {
                 await _usersService.DeleteUser(id);
-                return Ok();
+                
             } catch {
                 throw;
             }
+            
+            return Ok();
         }
 
         private bool UserExists(Guid id)

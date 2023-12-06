@@ -54,7 +54,7 @@ namespace CSharpestServer.Services
                 } else
                 {
                     //wrong password
-                    return Task.FromException<User>(new NullReferenceException());
+                    return Task.FromException<User>(new InvalidOperationException($"Login/password is incorrect"));
                 }
             } catch
             {
@@ -80,7 +80,14 @@ namespace CSharpestServer.Services
 
         public Task<IEnumerable<User>> GetAllAsync()
         {
+            try
+            {
                 return Task.FromResult(_storeContext.users.AsEnumerable());
+            } catch
+            {
+                throw;
+            }
+                
         }
 
         //PRIVATE SERVICES

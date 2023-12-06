@@ -14,7 +14,6 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddScoped<BundleService, BundleService>();
-builder.Services.AddScoped<CartService, CartService>();
 builder.Services.AddScoped<CartItemService, CartItemService>();
 builder.Services.AddScoped<ItemService, ItemService>();
 builder.Services.AddScoped<OrderItemService, OrderItemService>();

@@ -63,9 +63,9 @@ namespace CSharpestServer.Controllers
             try {
                 await _itemService.ChangeStock(itemId, quantity, add);
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest(ex);
+                throw;
             }
             return Ok();
         }
@@ -91,9 +91,9 @@ namespace CSharpestServer.Controllers
             {
                 await _itemService.ChangePriceAsync(itemId, price);
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest(ex);
+                throw;
             }
             return Ok();
         }
@@ -103,9 +103,10 @@ namespace CSharpestServer.Controllers
         {
             try {
                 await _itemService.AddItem(item);
-            } catch(Exception ex)
+
+            } catch
             {
-                return BadRequest(ex);
+                throw;
             }
             return Ok();
         }
@@ -117,9 +118,9 @@ namespace CSharpestServer.Controllers
             {
                 await _itemService.RemoveItem(itemId);
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest(ex);
+                throw;
             }
             return Ok();
         }
