@@ -58,7 +58,7 @@ namespace CSharpestServer.Services
                 _item.Price = price;
             } else
             {
-                return Task.FromException(new InvalidOperationException("Cannot have negative price"));
+                throw new InvalidOperationException("Cannot have negative price");
             }
 
             _storeContext.SaveChanges();

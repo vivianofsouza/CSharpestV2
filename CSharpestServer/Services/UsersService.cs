@@ -13,12 +13,7 @@ namespace CSharpestServer.Services
         {
             _storeContext = storeContext;
         }
-        private User GetInitialisedId(User user)
-        {
-            if (user.Id == Guid.Empty) { user.Id = Guid.NewGuid(); }
-
-            return user;
-        }
+        
         public Task AddAsync(User user)
         {
             try
@@ -35,9 +30,8 @@ namespace CSharpestServer.Services
                     _storeContext.SaveChanges();
                 }
 
-            } catch (Exception ex)
+            } catch
             {
-                Console.WriteLine(ex);
                 throw;
             }
 
@@ -62,9 +56,8 @@ namespace CSharpestServer.Services
                     //wrong password
                     return Task.FromException<User>(new NullReferenceException());
                 }
-            } catch (Exception ex)
+            } catch
             {
-                Console.WriteLine(ex);
                 throw;
             }
         }
@@ -77,9 +70,8 @@ namespace CSharpestServer.Services
                 _storeContext.users.Remove(user);
                 _storeContext.SaveChanges();
 
-            } catch (Exception e)
+            } catch
             {
-                Console.WriteLine(e);
                 throw;
             }       
 
@@ -91,5 +83,12 @@ namespace CSharpestServer.Services
                 return Task.FromResult(_storeContext.users.AsEnumerable());
         }
 
+        //PRIVATE SERVICES
+        private User GetInitialisedId(User user)
+        {
+            if (user.Id == Guid.Empty) { user.Id = Guid.NewGuid(); }
+
+            return user;
+        }
     }
 }

@@ -100,7 +100,7 @@ namespace CSharpestServer.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Users
@@ -125,7 +125,7 @@ namespace CSharpestServer.Controllers
             try
             {
                 await _usersService.DeleteUser(id);
-                return NoContent();
+                return Ok();
             } catch {
                 throw;
             }
