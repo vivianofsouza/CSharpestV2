@@ -9,6 +9,7 @@ import NavBar from "../../components/Navbar";
 function Cart() {
   const [cartList, setCartList] = useState<any>([]);
 
+  console.log(UserConstants.getLocalStorage("userId", ""));
   const getCartItems = () => {
     const params = {
       userID: UserConstants.getLocalStorage("userId", ""),
@@ -23,7 +24,7 @@ function Cart() {
   };
 
   useEffect(() => {
-    // getCartItems();
+    getCartItems();
   }, []);
 
   return (
@@ -33,18 +34,14 @@ function Cart() {
 
       {cartList.map(
         (cartItem: {
-          item: {
-            name: string;
-            price: number;
-            bogo: boolean;
-          };
+          name: string;
+          unitPrice: number;
           quantity: number;
           totalPrice: number;
         }) => (
           <>
-            <li>{cartItem.item.name}</li>
-            <li>{cartItem.item.price}</li>
-            <li>{cartItem.item.bogo}</li>
+            <li>{cartItem.name}</li>
+            <li>{cartItem.unitPrice}</li>
             <li>{cartItem.quantity}</li>
             <li>{cartItem.totalPrice}</li>
             <br></br>

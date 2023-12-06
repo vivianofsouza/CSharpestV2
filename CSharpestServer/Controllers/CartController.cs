@@ -16,11 +16,15 @@ namespace CSharpestServer.Controllers
         private readonly StoreContext _context;
         private readonly ICartService _cartService;
         private readonly ICartItemService _cartItemService;
-        public CartController(StoreContext context, CartService cartService, CartItemService cartItemService)
+        private readonly IItemService _itemService;
+
+        public CartController(StoreContext context, CartService cartService, CartItemService cartItemService, ItemService itemService)
         {
             this._context = context;
             this._cartService = cartService;
             this._cartItemService = cartItemService;
+            this._itemService = itemService;
+
         }
 
         // GET: api/<CartController>
@@ -35,8 +39,20 @@ namespace CSharpestServer.Controllers
 
             // gets all items belonging to this user's cart
             var cartItems = await _cartItemService.GetByCartAsync(userCart.Id);
+            var allItems = await _itemService.GetAllAsync();
 
-            return Ok(cartItems);
+
+            var inCart = (from cartItem in cartItems
+                                  join item in allItems
+                                  on cartItem.ItemId equals item.Id
+                                  select new
+                                  {
+                                      name = item.Name,
+                                      unitPrice = item.Price, 
+                                      quantity = cartItem.Quantity,
+                                      totalPrice = cartItem.TotalPrice
+                                  }).ToList();
+            return Ok(inCart);
         }
 
         [HttpPost("AddItemToCart")]

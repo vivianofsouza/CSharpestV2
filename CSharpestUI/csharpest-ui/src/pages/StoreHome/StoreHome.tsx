@@ -143,8 +143,8 @@ function StoreHome() {
           <>
             <li>{item.name}</li>
             <li>{item.description}</li>
-            <li>{item.price}</li>
-            <li>{item.stock}</li>
+            <li>Price: {item.price}</li>
+            <li>Quantity left: {item.stock}</li>
             <li>{item.bogo ? "BOGO" : ""}</li>
             <li>
               <img src={item.imageURL} width="200" height="200"></img>
