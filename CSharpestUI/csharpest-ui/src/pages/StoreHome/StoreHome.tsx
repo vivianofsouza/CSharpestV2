@@ -55,22 +55,23 @@ function StoreHome() {
     });
 
     const formData = new FormData();
-    const itemID = (document.getElementById("ItemID") as HTMLInputElement)
+    const itemID = (document.getElementById("ItemId") as HTMLInputElement)
       .value;
     const quantity = (document.getElementById("Quantity") as HTMLInputElement)
       .value;
 
     formData.append("ItemId", itemID);
+    formData.append("CartId", UserConstants.getLocalStorage("userId", ""));
     formData.append("Quantity", quantity);
-    formData.append("CartId", UserConstants.getLocalStorage("userId", "ABC"));
 
     console.log(itemID + "item");
     console.log(quantity + "quant");
-    console.log(UserConstants.getLocalStorage("userId", "ABC") + "cart");
-    // axios
-    //   .post("https://localhost:7150/Cart/AddItemToCart", formData)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
+    console.log(UserConstants.getLocalStorage("userId", "") + "cart");
+
+    axios
+      .post("https://localhost:7150/Cart/AddItemToCart", formData)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
 
   // const getUsers = async () => {
@@ -100,7 +101,6 @@ function StoreHome() {
 
   useEffect(() => {
     getItems();
-    // console.log(getLocalStorage("userId", "ABC"));
   }, []);
   return (
     <div>
@@ -132,7 +132,7 @@ function StoreHome() {
 
       {itemList.map(
         (item: {
-          itemId: UUID;
+          id: UUID;
           bogo: boolean;
           stock: number;
           price: number;
@@ -153,7 +153,7 @@ function StoreHome() {
               <form id="form">
                 <label>Quantity</label>
                 <input id="Quantity"></input>
-                <input type="hidden" id="ItemID" value={item.itemId}></input>
+                <input type="hidden" id="ItemId" value={item.id}></input>
 
                 <button type="submit" onClick={addToCart}>
                   Add to Cart
