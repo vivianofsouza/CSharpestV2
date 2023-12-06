@@ -47,26 +47,30 @@ function StoreHome() {
   };
 
   // add to Cart POST request, hardcoded values for now
-  function addToCart() {
-    const form = document.getElementById("form");
+  function addToCart(fromFormItem: string) {
+    const formData = new FormData();
+
+    const itemID = (
+      document.getElementById(`itemId-${fromFormItem}`) as HTMLInputElement
+    ).value;
+
+    const quantity = (
+      document.getElementById(`quantity-${fromFormItem}`) as HTMLInputElement
+    ).value;
+
+    const form = document.getElementById(`form-${fromFormItem}`);
 
     form!.addEventListener("submit", (e) => {
       e.preventDefault();
     });
 
-    const formData = new FormData();
-    const itemID = (document.getElementById("ItemId") as HTMLInputElement)
-      .value;
-    const quantity = (document.getElementById("Quantity") as HTMLInputElement)
-      .value;
-
     formData.append("ItemId", itemID);
-    formData.append("CartId", UserConstants.getLocalStorage("userId", ""));
+    formData.append("CartId", UserConstants.getLocalStorage("cartId", ""));
     formData.append("Quantity", quantity);
 
     console.log(itemID + "item");
     console.log(quantity + "quant");
-    console.log(UserConstants.getLocalStorage("userId", "") + "cart");
+    console.log(UserConstants.getLocalStorage("cartId", "") + "cart");
 
     axios
       .post("https://localhost:7150/Cart/AddItemToCart", formData)
@@ -150,12 +154,12 @@ function StoreHome() {
               <img src={item.imageURL} width="200" height="200"></img>
             </li>
             <li>
-              <form id="form">
+              <form id={`form-${item.id}`}>
                 <label>Quantity</label>
-                <input id="Quantity"></input>
-                <input type="hidden" id="ItemId" value={item.id}></input>
+                <input id={`quantity-${item.id}`}></input>
+                <input id={`itemId-${item.id}`} value={item.id}></input>
 
-                <button type="submit" onClick={addToCart}>
+                <button type="submit" onClick={() => addToCart(item.id)}>
                   Add to Cart
                 </button>
               </form>
