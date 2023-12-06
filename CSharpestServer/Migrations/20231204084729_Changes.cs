@@ -59,7 +59,10 @@ namespace CSharpestServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    userId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    userId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    tax = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    totalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                 },
                 constraints: table =>
                 {
