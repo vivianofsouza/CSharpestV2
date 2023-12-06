@@ -1,0 +1,39 @@
+#nav {
+    background-color: #385170;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    width: 100%;
+}
+
+#nav_link {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 150%;
+    padding: 3%;
+    color:#142d4c;
+}
+
+#nav_link:active{
+    color:#142d4c;
+}
+
+#nav_link:hover {
+    color: #e9e9e6;
+}
+
+#nav_link_cart {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 150%;
+    padding: 3%;
+    padding-left: 60%;
+    color:#142d4c;
+}
+
+#nav_link_cart:active {
+    color:#142d4c;
+}
+
+#nav_link_cart:hover {
+    color:#e9e9e6;
+}
