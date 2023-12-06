@@ -33,9 +33,13 @@ namespace CSharpestServer.Services
                     throw new InvalidOperationException($"Address validation error");
                 }
 
-                if (!ManageStock(cart))
+                var cost = ManageStockAndCost(cart);
+                if (cost == 0.0M)
                 {
                     throw new InvalidOperationException($"Error manipulating item stocks");
+                } else
+                {
+                    order.TotalCost = cost;
                 }
 
                 //NEED TO CLEAR CART
@@ -96,38 +100,41 @@ namespace CSharpestServer.Services
         }
         private bool ValidateAddress(string address)
         {
-            Regex regex = new Regex("^[0-9]+$");
+            /*Regex regex = new Regex("^[0-9]+$");
             string[] addrArray = address.Split(' ');
 
             if (regex.IsMatch(addrArray[0]))
             {
                 return true;
-            }
+            }*/
 
-            return false;
+            return true;
         }
 
         // Removes stock amounts from the store's inventory upon purchase
-        private bool ManageStock(Cart cart)
+        private decimal ManageStockAndCost(Cart cart)
         {
             var inCart = _storeContext.cartItems.AsEnumerable();
             var stock = _storeContext.items.AsEnumerable();
             var items = from i in inCart
                         where i.CartId == cart.Id
                         select i;
+            var cost = 0.0M;
+
             foreach (CartItem item in items)
             {
                 try
                 {
                     _itemService.ChangeStock(item.ItemId, item.Quantity, false);
+                    cost += item.TotalPrice;
                 }
                 catch
                 {
-                    return false;
+                    return 0.0M;
                 }
             }
             _storeContext.SaveChanges();
-            return true;
+            return cost;
         }
 
         // Generates an order ID
