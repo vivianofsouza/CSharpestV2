@@ -43,24 +43,24 @@ namespace CSharpestServer.Controllers
 
 
             var inCart = (from cartItem in cartItems
-                                  join item in allItems
-                                  on cartItem.ItemId equals item.Id
-                                  select new
-                                  {
-                                      name = item.Name,
-                                      unitPrice = item.Price, 
-                                      quantity = cartItem.Quantity,
-                                      totalPrice = cartItem.TotalPrice
-                                  }).ToList();
+                          join item in allItems
+                          on cartItem.ItemId equals item.Id
+                          select new
+                          {
+                              name = item.Name,
+                              unitPrice = item.Price,
+                              quantity = cartItem.Quantity,
+                              totalPrice = cartItem.TotalPrice
+                          }).ToList();
             return Ok(inCart);
         }
 
         [HttpPost("AddItemToCart")]
-        public async Task<IActionResult> AddItemToCart([FromForm] Guid ItemId, Guid CartId, [FromForm] int quantity)
+        public async Task<IActionResult> AddItemToCart([FromForm] Guid ItemId, [FromForm] Guid CartId, [FromForm] int quantity)
         {
             try
             {
-                var cartItem = CartItemExists(ItemId);
+                var cartItem = CartItemExists(ItemId, CartId);
                 if (cartItem != null)
                 {
                     await _cartItemService.ChangeQuantityAsync(CartId, cartItem.Id, quantity, true);
@@ -83,7 +83,7 @@ namespace CSharpestServer.Controllers
         {
             try
             {
-                var cartItem = CartItemExists(itemId);
+                var cartItem = CartItemExists(itemId, cartId);
                 await _cartItemService.ChangeQuantityAsync(cartId, cartItem.Id, quantity, add);
             }
             catch
@@ -121,10 +121,13 @@ namespace CSharpestServer.Controllers
             return Ok();
         }
 
-        private CartItem CartItemExists(Guid id)
+        private CartItem? CartItemExists(Guid itemId, Guid cartId)
         {
-            // the itemId is recognisable
-            return _context.cartItems?.FirstOrDefault(e => e.ItemId == id);
+            // Does this cart contain any quantity of this item
+            return _context.cartItems?
+                .Select(i => i)
+                .Where(i => cartId == i.CartId)
+                .FirstOrDefault(e => e.ItemId == itemId);
         }
 
     }
