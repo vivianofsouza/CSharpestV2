@@ -16,13 +16,7 @@ namespace CSharpestServer.Services
             _storeContext = storeContext;
         }
 
-        public CartItem GetInitialisedId(CartItem item)
-        {
-            if (item.Id == Guid.Empty) { item.Id = Guid.NewGuid();}
-            return item;
-        }
-
-        public Task AddAsync(Guid itemId, Guid cartId, int quantity)
+        public Task AddToCart(Guid itemId, Guid cartId, int quantity)
         {
             try
             {
@@ -45,19 +39,7 @@ namespace CSharpestServer.Services
             
         }
 
-        public Task AddRangeAsync(IEnumerable<CartItem> items)
-        {
-            foreach (var i in items)
-            {
-                CartItem item = GetInitialisedId(i);
-                _storeContext.Add(item);
-            }
-            _storeContext.SaveChanges();
-            return Task.CompletedTask;
-
-        }
-
-        public Task ChangeQuantityAsync(Guid cartId, Guid cartItemId, int Quantity, bool Add)
+        public Task ChangeQuantity(Guid cartId, Guid cartItemId, int Quantity, bool Add)
         {
             
             CartItem? _item = _storeContext.cartItems.Find(cartItemId);
@@ -104,29 +86,13 @@ namespace CSharpestServer.Services
 
         }
 
-        public Task<IEnumerable<CartItem>> GetAllAsync()
-        {
-            return Task.FromResult(_storeContext.cartItems.AsEnumerable());
-        }
-
         public Task<IEnumerable<CartItem>?> GetByCartAsync(Guid cartId)
         {
             var items = _storeContext.cartItems.Where(item => item.CartId == cartId).ToList();
             return Task.FromResult<IEnumerable<CartItem>?>(items);
         }
 
-        public CartItem? GetById(Guid id)
-        {
-            return _storeContext.cartItems.Find(id);
-        }
-
-        public Task<CartItem?> GetByIdAsync(Guid id)
-        {
-            CartItem? item = _storeContext.cartItems.Find(id);
-            return Task.FromResult(item);
-        }
-
-        public Task ClearCartAsync(Guid cartId)
+        public Task ClearCart(Guid cartId)
         {
             try 
             {
@@ -149,7 +115,7 @@ namespace CSharpestServer.Services
         }
 
 
-        public Task RemoveAsync(Guid itemId, Guid cartId)
+        public Task RemoveFromCart(Guid itemId, Guid cartId)
         {
             try
             {
@@ -173,6 +139,15 @@ namespace CSharpestServer.Services
                 throw;
             }
         }
+
+        //PRIVATE HELPER SERVICES
+
+        private CartItem GetInitialisedId(CartItem item)
+        {
+            if (item.Id == Guid.Empty) { item.Id = Guid.NewGuid(); }
+            return item;
+        }
+
         private decimal calculateTotal(int quantity, decimal unit_cost, Bundle bundle)
         {
             if (bundle != null)

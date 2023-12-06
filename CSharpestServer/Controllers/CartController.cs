@@ -63,13 +63,12 @@ namespace CSharpestServer.Controllers
                 var cartItem = CartItemExists(ItemId, CartId);
                 if (cartItem != null)
                 {
-                    await _cartItemService.ChangeQuantityAsync(CartId, cartItem.Id, quantity, true);
+                    await _cartItemService.ChangeQuantity(CartId, cartItem.Id, quantity, true);
                 }
                 else
                 {
-                    await _cartItemService.AddAsync(ItemId, CartId, quantity);
+                    await _cartItemService.AddToCart(ItemId, CartId, quantity);
                 }
-
             }
             catch
             {
@@ -79,12 +78,12 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpPatch("ChangeQuantity")]
-        public async Task<IActionResult> ChangeQuantityAsync([FromForm] Guid itemId, Guid cartId, [FromForm] int quantity, [FromForm] bool add)
+        public async Task<IActionResult> ChangeQuantity([FromForm] Guid itemId, [FromForm] Guid cartId, [FromForm] int quantity, [FromForm] bool add)
         {
             try
             {
                 var cartItem = CartItemExists(itemId, cartId);
-                await _cartItemService.ChangeQuantityAsync(cartId, cartItem.Id, quantity, add);
+                await _cartItemService.ChangeQuantity(cartId, cartItem.Id, quantity, add);
             }
             catch
             {
@@ -98,7 +97,7 @@ namespace CSharpestServer.Controllers
         {
             try
             {
-                await _cartItemService.RemoveAsync(itemId, cartId);
+                await _cartItemService.RemoveFromCart(itemId, cartId);
             }
             catch
             {
@@ -112,7 +111,7 @@ namespace CSharpestServer.Controllers
         {
             try
             {
-                await _cartItemService.ClearCartAsync(cartId);
+                await _cartItemService.ClearCart(cartId);
             }
             catch
             {
