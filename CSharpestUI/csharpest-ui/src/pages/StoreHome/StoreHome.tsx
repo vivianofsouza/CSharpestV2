@@ -157,7 +157,11 @@ function StoreHome() {
               <form id={`form-${item.id}`}>
                 <label>Quantity</label>
                 <input id={`quantity-${item.id}`}></input>
-                <input id={`itemId-${item.id}`} value={item.id}></input>
+                <input
+                  type="hidden"
+                  id={`itemId-${item.id}`}
+                  value={item.id}
+                ></input>
 
                 <button type="submit" onClick={() => addToCart(item.id)}>
                   Add to Cart
