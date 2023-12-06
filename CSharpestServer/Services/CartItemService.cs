@@ -56,7 +56,7 @@ namespace CSharpestServer.Services
             {
                 throw new InvalidOperationException($"CartItem with ID {itemId} not found in cart.");
             }
-            Item my_item =  _storeContext.items.Find(_item.ItemId)
+            Item my_item = _storeContext.items.Find(_item.ItemId);
             var unit_cost = my_item.Price;
             var bundle = _storeContext.bundles.Find(my_item.bundleId);
 
