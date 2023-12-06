@@ -9,15 +9,6 @@ import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import UserConstants from "../../UserConstants";
 
-const validateUser = () => {
-  axios
-    .get("https://localhost:7150/api/Users/Login")
-    .then((response) => {
-      //setItemsList(response.data);
-    })
-    .catch((error) => console.log(error));
-};
-
 function Login() {
   // creates navigation object to navigate to next page based on whether a user is store manager or customer
   const navigate = useNavigate();

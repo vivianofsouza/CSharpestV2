@@ -47,6 +47,7 @@ namespace CSharpestServer.Controllers
                           on cartItem.ItemId equals item.Id
                           select new
                           {
+                              id = item.Id,
                               name = item.Name,
                               imageURL = item.ImageURL,
                               unitPrice = item.Price,
@@ -94,7 +95,7 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpDelete("RemoveFromCart")]
-        public async Task<IActionResult> RemoveItemFromCart([FromForm] Guid itemId, Guid cartId)
+        public async Task<IActionResult> RemoveItemFromCart(Guid itemId, Guid cartId)
         {
             try
             {
