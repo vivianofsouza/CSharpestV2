@@ -17,12 +17,12 @@ namespace CSharpestServer.Controllers
 
         // POST: /placeOrder
         [HttpPost]
-        public async Task<ActionResult<Order>> PlaceOrder(Cart cart, Guid userId, string cardNo, int month, int year, string name, int cVV, int zip, string address)
+        public async Task<ActionResult<Order>> PlaceOrder([FromForm] Guid userId, [FromForm] string cardNo, [FromForm] int month, [FromForm] int year, [FromForm] string name, [FromForm] int cVV, [FromForm] int zip, [FromForm] string address)
         {
             try
             {
                 Card card = new Card(cardNo, month, year, name, cVV, zip);
-                var order = await _orderService.PlaceOrder(cart, userId, card, address);
+                var order = await _orderService.PlaceOrder(userId, card, address);
                 return Ok(order);
             } catch
             {
