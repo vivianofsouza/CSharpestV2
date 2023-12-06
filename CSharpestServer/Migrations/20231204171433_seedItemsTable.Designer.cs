@@ -125,21 +125,15 @@ namespace CSharpestServer.Migrations
                     b.Property<Guid?>("bundleId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("bundleId");
 
                     b.ToTable("items");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("958fe8be-b592-4ce6-b6c7-6761b997065f"),
-                            Description = "candy",
-                            Name = "Jolly Ranchers",
-                            Price = 0.18m,
-                            Stock = 500
-                        });
                 });
 
             modelBuilder.Entity("CSharpestServer.Models.Order", b =>
