@@ -1,16 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\CSharpestServer",
-    "\\CSharpestServer\\Services",
-    "\\CSharpestUI",
-    "\\CSharpestUI\\csharpest-ui",
-    "\\CSharpestUI\\csharpest-ui\\src",
-    "\\CSharpestUI\\csharpest-ui\\src\\pages",
-    "\\CSharpestUI\\csharpest-ui\\src\\pages\\Login",
-    "\\CSharpestUI\\csharpest-ui\\src\\pages\\StoreHome",
-    "\\CSharpestUI\\csharpest-ui\\src\\pages\\StoreManager"
+    ""
   ],
-  "SelectedNode": "\\CSharpestServer\\Services\\UsersService.cs",
   "PreviewInSolutionExplorer": false
 }

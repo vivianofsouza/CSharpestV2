@@ -1,5 +1,6 @@
 ﻿using CSharpestServer.Models;
 using CSharpestServer.Services.Interfaces;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -22,18 +23,25 @@ namespace CSharpestServer.Services
 
         public Task AddAsync(Guid itemId, Guid cartId, int quantity)
         {
-            var my_item = _storeContext.items.Find(itemId);
-            CartItem item = GetInitialisedId(new CartItem());
-            item.ItemId = itemId;
-            item.CartId = cartId;
-            item.Quantity = quantity;
-            Bundle bundle = _storeContext.bundles.Find(itemId);
-            item.TotalPrice = calculateTotal(quantity, my_item.Price, bundle);
+            try
+            {
+                var my_item = _storeContext.items.Find(itemId);
+                CartItem item = GetInitialisedId(new CartItem());
+                item.ItemId = itemId;
+                item.CartId = cartId;
+                item.Quantity = quantity;
+                Bundle bundle = _storeContext.bundles.Find(itemId);
+                item.TotalPrice = calculateTotal(quantity, my_item.Price, bundle);
 
-            _storeContext.cartItems.Add(item);
-            _storeContext.SaveChanges();
+                _storeContext.cartItems.Add(item);
+                _storeContext.SaveChanges();
 
-            return Task.CompletedTask;
+                return Task.CompletedTask;
+            } catch
+            {
+                throw;
+            }
+            
         }
 
         public Task AddRangeAsync(IEnumerable<CartItem> items)
@@ -48,13 +56,14 @@ namespace CSharpestServer.Services
 
         }
 
-        public Task ChangeQuantityAsync(Guid cartId, Guid itemId, int Quantity, bool Add)
+        public Task ChangeQuantityAsync(Guid cartId, Guid cartItemId, int Quantity, bool Add)
         {
-            CartItem? _item = _storeContext.cartItems.Find(itemId);
+            
+            CartItem? _item = _storeContext.cartItems.Find(cartItemId);
 
             if (_item == null || _item.CartId != cartId)
             {
-                throw new InvalidOperationException($"CartItem with ID {itemId} not found in cart.");
+                throw new InvalidOperationException($"CartItem with ID {cartItemId} not found in cart.");
             }
             Item my_item = _storeContext.items.Find(_item.ItemId);
             var unit_cost = my_item.Price;
