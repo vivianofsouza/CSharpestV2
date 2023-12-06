@@ -56,14 +56,14 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpPost("AddItemToCart")]
-        public async Task<IActionResult> AddItemToCart([FromForm] Guid ItemId, [FromForm] Guid CartId, [FromForm] int quantity) //[FromForm] Guid ItemID, [FromForm] int quantity)
+        public async Task<IActionResult> AddItemToCart([FromForm] Guid ItemId, Guid CartId, [FromForm] int quantity)
         {
             try
             {
-                if (CartItemExists(ItemId))
+                var cartItem = CartItemExists(ItemId);
+                if (cartItem != null)
                 {
-                    var cartItem = _context.cartItems?.FirstOrDefault(e => e.ItemId == ItemId);
-                    await _cartItemService.ChangeQuantityAsync(cartItem.Id, ItemId, quantity, true);
+                    await _cartItemService.ChangeQuantityAsync(CartId, cartItem.Id, quantity, true);
                 }
                 else
                 {
@@ -71,29 +71,30 @@ namespace CSharpestServer.Controllers
                 }
 
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest(ex);
+                throw;
             }
             return Ok();
         }
 
         [HttpPatch("ChangeQuantity")]
-        public async Task<IActionResult> ChangeQuantityAsync(Guid cartId, Guid itemId, int quantity, bool add)
+        public async Task<IActionResult> ChangeQuantityAsync([FromForm] Guid itemId, Guid cartId, [FromForm] int quantity, [FromForm] bool add)
         {
             try
             {
-                await _cartItemService.ChangeQuantityAsync(cartId, itemId, quantity, add);
+                var cartItem = CartItemExists(itemId);
+                await _cartItemService.ChangeQuantityAsync(cartId, cartItem.Id, quantity, add);
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest(ex);
+                throw;
             }
             return Ok();
         }
 
         [HttpDelete("RemoveFromCart")]
-        public async Task<IActionResult> RemoveItemFromCart(Guid itemId, Guid cartId)
+        public async Task<IActionResult> RemoveItemFromCart([FromForm] Guid itemId, Guid cartId)
         {
             try
             {
@@ -120,10 +121,10 @@ namespace CSharpestServer.Controllers
             return Ok();
         }
 
-        private bool CartItemExists(Guid id)
+        private CartItem CartItemExists(Guid id)
         {
             // the itemId is recognisable
-            return (_context.cartItems?.Any(e => e.ItemId == id)).GetValueOrDefault();
+            return _context.cartItems?.FirstOrDefault(e => e.ItemId == id);
         }
 
     }
