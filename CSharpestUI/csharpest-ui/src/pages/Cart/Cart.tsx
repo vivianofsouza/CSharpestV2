@@ -35,11 +35,15 @@ function Cart() {
       {cartList.map(
         (cartItem: {
           name: string;
+          imageURL: string;
           unitPrice: number;
           quantity: number;
           totalPrice: number;
         }) => (
           <>
+            <li>
+              <img src={cartItem.imageURL} width="200" height="200"></img>
+            </li>
             <li>{cartItem.name}</li>
             <li>{cartItem.unitPrice}</li>
             <li>{cartItem.quantity}</li>
