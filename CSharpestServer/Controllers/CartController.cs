@@ -99,7 +99,7 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpDelete("RemoveFromCart")]
-        public async Task<IActionResult> RemoveItemFromCart([FromForm] Guid itemId, Guid cartId)
+        public async Task<IActionResult> RemoveItemFromCart(Guid itemId, Guid cartId)
         {
             try
             {

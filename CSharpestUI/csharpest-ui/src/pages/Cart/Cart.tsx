@@ -27,6 +27,21 @@ function Cart() {
     getCartItems();
   }, []);
 
+  function removeFromCart(cartItem: string) {
+    axios
+      .delete("https://localhost:7150/Cart/RemoveFromCart/", {
+        params: {
+          cartId: UserConstants.getLocalStorage("cartId", ""),
+          itemId: cartItem,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        document.getElementById(`itemId-${cartItem}`)!.style.display = "none";
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <div>
       <NavBar></NavBar>
@@ -34,6 +49,7 @@ function Cart() {
 
       {cartList.map(
         (cartItem: {
+          id: string;
           name: string;
           imageURL: string;
           unitPrice: number;
@@ -41,14 +57,20 @@ function Cart() {
           totalPrice: number;
         }) => (
           <>
-            <li>
-              <img src={cartItem.imageURL} width="200" height="200"></img>
-            </li>
-            <li>{cartItem.name}</li>
-            <li>{cartItem.unitPrice}</li>
-            <li>{cartItem.quantity}</li>
-            <li>{cartItem.totalPrice}</li>
-            <br></br>
+            <div id={`itemId-${cartItem.id}`}>
+              <li>
+                <img src={cartItem.imageURL} width="200" height="200"></img>
+              </li>
+              <li>{cartItem.name}</li>
+              <li>{cartItem.unitPrice}</li>
+              <li>{cartItem.quantity}</li>
+              <li>{cartItem.totalPrice}</li>
+              <br></br>
+
+              <button type="submit" onClick={() => removeFromCart(cartItem.id)}>
+                Remove from Cart
+              </button>
+            </div>
           </>
         )
       )}
