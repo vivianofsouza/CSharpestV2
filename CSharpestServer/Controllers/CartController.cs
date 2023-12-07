@@ -38,6 +38,11 @@ namespace CSharpestServer.Controllers
 
                 // gets all items belonging to this user's cart
                 var cartItems = await _cartItemService.GetItemsByCart(cart.Id);
+                if (cartItems == null)
+                {
+                    return Ok();
+                }
+
                 var allItems = await _itemService.GetAllAsync();
 
                 var inCart = (from cartItem in cartItems
