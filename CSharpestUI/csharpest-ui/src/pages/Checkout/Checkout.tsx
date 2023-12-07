@@ -69,17 +69,17 @@ function Checkout() {
         }) => (
           <>
             <Col ls="2">
-              <Card>
+              <Card id="cart_card">
                 <div id={`itemId-${cartItem.id}`}>
-                  <Card.Header id="card_header">{cartItem.name}</Card.Header>
-                  <Card.Body id="card_body">
+                  <Card.Header id="cart_header">{cartItem.name}</Card.Header>
+                  <Card.Body id="cart_body">
                     <img src={cartItem.imageURL} width="200" height="200"></img>
                     <br></br>
-                    Price by oz: {cartItem.unitPrice}
+                    Price by oz: ${cartItem.unitPrice}
                     <br></br>
                     Quantity: {cartItem.quantity} oz
                     <br></br>
-                    Total Price: {cartItem.totalPrice}
+                    Total Price: ${cartItem.totalPrice}
                     <br></br>
                   </Card.Body>
                 </div>
