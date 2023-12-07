@@ -29,6 +29,7 @@ namespace CSharpestServer.Services
                 item.Quantity = quantity;
                 Bundle bundle = _storeContext.bundles.Find(itemId);
                 item.TotalPrice = calculateTotal(quantity, my_item.Price, bundle);
+                _storeContext.SaveChanges();
 
                 _storeContext.cartItems.Add(item);
                 _storeContext.SaveChanges();
@@ -195,12 +196,13 @@ namespace CSharpestServer.Services
             
             if (cart != null)
             { 
+                cart.preSubtotal = 0;
+                cart.postSubtotal = 0;
+                cart.Tax = 0;
+                cart.TotalPrice = 0;
+
                 if (items.Result != null)
                 {
-                    cart.preSubtotal = 0;
-                    cart.postSubtotal = 0;
-                    cart.Tax = 0;
-                    cart.TotalPrice = 0;
                     foreach (CartItem ci in items.Result)
                     {
                         Item my_item = _storeContext.items.Find(ci.ItemId);
@@ -212,20 +214,11 @@ namespace CSharpestServer.Services
                     }
                     cart.TotalPrice = cart.postSubtotal + cart.Tax;
                     cart.TotalPrice += 5.99M;
-                    return cart;
-                } else
-                {
-                    cart.preSubtotal = 0;
-                    cart.postSubtotal = 0;
-                    cart.Tax = 0;
-                    cart.TotalPrice = 0;
-                    return cart;
-                }
-                
-            } else
-            {
-                return cart;
+                }    
             }
+
+            return cart;
         }
+        
     }
 }

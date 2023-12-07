@@ -90,10 +90,12 @@ function StoreHome() {
     <div>
       <NavBar></NavBar>
 
-      <h1 id="shop_header">
-        Welcome {UserConstants.getLocalStorage("firstName", "")}!
-      </h1>
-      <h1 id="shop_header">Shop the CSharpest Store Now</h1>
+        <div id="header">
+            <h1 id="shop_header">
+            Welcome,  {UserConstants.getLocalStorage("firstName", "")}!
+            </h1>
+            <h2 id="shop_subheader">Shop the CSharpest Store Now</h2>
+        </div>
 
       <div id="sort_buttons">
         <button id="sort_by_price" type="submit" onClick={getItems}>
@@ -129,12 +131,12 @@ function StoreHome() {
               <>
                 <Col xs="3">
                   <Card>
-                    <Card.Header id="card_header">{item.name}</Card.Header>
-                    <Card.Subtitle>{item.description}</Card.Subtitle>
-                    <Card.Body>
+                    <Card.Header id="card_header">{item.name}<span id="bundle">{item.bundleId ? "BOGO" : ""}</span></Card.Header>
+                    <Card.Subtitle id="card_subtitle">{item.description}</Card.Subtitle>
+                    <Card.Body id="card_body">
                       <img src={item.imageURL} width="150" height="150"></img>
-                      <br></br>${item.price} per oz.{" "}
-                      {item.bundleId ? "BOGO" : ""}
+                      <br></br>${item.price.toFixed(2)} per oz.{" "}
+                      
                       <br></br>
                       {item.stock} left in stock
                       <br></br>
@@ -142,15 +144,23 @@ function StoreHome() {
 
                     <Card.Footer>
                       <form id={`form-${item.id}`}>
-                        <label>Quantity</label>
-                        <input id={`quantity-${item.id}`}></input>
+                      <div id="rowone">
+                        <span id="quan">
+                            <label>Quantity</label>
+                        </span>
+                        <span id="answer">
+                            <input id={`quantity-${item.id}`}></input>
+                        </span>
+                      </div>
+                        
                         <input
                           type="hidden"
                           id={`itemId-${item.id}`}
                           value={item.id}
                         ></input>
-
+                        <br></br>
                         <button
+                          id="add"
                           type="submit"
                           onClick={() => addToCart(item.id)}
                         >

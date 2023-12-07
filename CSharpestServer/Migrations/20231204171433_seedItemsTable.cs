@@ -17,6 +17,21 @@ namespace CSharpestServer.Migrations
               values: new object[] { new Guid("6818FB3A-3079-4117-BA4C-7C16BE4F9422"), "bogo" });
 
             migrationBuilder.InsertData(
+             table: "bundles",
+             columns: new[] { "Id", "Name" },
+             values: new object[] { new Guid("c4229070-dc1c-4121-b5d7-d33231c24c20"), "thirtyoff" });
+
+            migrationBuilder.InsertData(
+             table: "bundles",
+             columns: new[] { "Id", "Name" },
+             values: new object[] { new Guid("10836660-07a5-4bfe-95c5-bff33d13c09d"), "halfoff" });
+
+            migrationBuilder.InsertData(
+             table: "bundles",
+             columns: new[] { "Id", "Name" },
+             values: new object[] { new Guid("519de2c1-84d3-49ab-a65a-d5e55c819d60"), "tenoff" });
+
+            migrationBuilder.InsertData(
                 table: "items",
                 columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
                 values: new object[] { new Guid("47E5D565-3AF5-4911-AEF4-0BDDCEE90C62"), "Sweet Powdered tablets that melt in your mouth", "Smarties", 0.53m, 500, null, "https://smartiesstore.com/cdn/shop/products/205CandyRolls_1024x1024.jpg?v=1676494015" });
