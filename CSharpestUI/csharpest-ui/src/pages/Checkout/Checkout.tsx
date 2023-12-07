@@ -6,9 +6,11 @@ import "./Checkout.css";
 import Card from "react-bootstrap/Card";
 import NavBar from "../../components/Navbar";
 import UserConstants from "../../UserConstants";
+import { useNavigate } from "react-router-dom";
 
 function Checkout() {
   const [cart, setCart] = useState<any>([]);
+  const navigate = useNavigate();
 
   const getCartTotals = () => {
     const params = {
@@ -60,8 +62,14 @@ function Checkout() {
     formData.append("address", cardAddress);
 
     axios
-      .post("https://localhost:7150/Order/")
-      .then((response) => console.log(response))
+      .post("https://localhost:7150/Order/", formData)
+      .then((response) => {
+        console.log(response);
+        alert(
+          "Successfully placed order! We'll return you to the store for further shopping."
+        );
+        navigate("/storeHome");
+      })
       .catch((error: any) => console.log(error));
   };
 
