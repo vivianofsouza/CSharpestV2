@@ -1,18 +1,15 @@
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./Layout";
 import StoreHome from "./pages/StoreHome/StoreHome";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Login from "./pages/Login/Login";
 import StoreManager from "./pages/StoreManager/StoreManager";
 import { useState } from "react";
-import UserConstants from "./UserConstants";
 import Grid from "./Grid";
 
+// sets the navigation for the app
 export default function App() {
-  const [showNav, setShowNav] = useState(true);
-
   return (
     <BrowserRouter>
       <Routes>

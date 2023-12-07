@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import axios from "axios";
-import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "./StoreHome.css";
 import { UUID } from "crypto";
 import UserConstants from "../../UserConstants";
@@ -11,9 +9,11 @@ import Col from "react-bootstrap/esm/Col";
 import Card from "react-bootstrap/esm/Card";
 import Container from "react-bootstrap/esm/Container";
 
+// renders the Store Home page, where users can browse items and sales an add items to cart
 function StoreHome() {
   const [itemList, setItemsList] = useState<any>([]);
-  // we're getting the list of all items here in this GET request. It's stored in a JavaScript array. Use developer tools to view what it looks like. You'll must likely need to map it into table to display it onto the screen.
+
+  // Req to get all store inventory items. The default sort is by Price.
   const getItems = () => {
     axios
       .get("https://localhost:7150/Item/GetAllItemsPriceSort")
@@ -23,6 +23,7 @@ function StoreHome() {
       .catch((error) => console.log(error));
   };
 
+  // Same as above, but sorted by alphabet.
   const getItemsByAlphabet = () => {
     axios
       .get("https://localhost:7150/Item/GetAllItemsAZSort")
@@ -32,6 +33,7 @@ function StoreHome() {
       .catch((error) => console.log(error));
   };
 
+  // Same as above, but sorted by stock left.
   const getItemsByStock = () => {
     axios
       .get("https://localhost:7150/Item/GetAllItemsStockSort")
@@ -41,6 +43,7 @@ function StoreHome() {
       .catch((error) => console.log(error));
   };
 
+  // Returns all store inventory that's on sale.
   const getOnSale = () => {
     axios
       .get("https://localhost:7150/Item/GetAllItemsOnSale")
@@ -50,7 +53,9 @@ function StoreHome() {
       .catch((error) => console.log(error));
   };
 
-  // add to Cart POST request, hardcoded values for now
+  // Adds an item to cart
+  // funcParams: fromFormItem, a string that indicates which item a user would like to add to cart
+  // reqParams: itemId (from fromFormItem), quantity (from input on page), cartId (from UserConstants global variables)
   function addToCart(fromFormItem: string) {
     const formData = new FormData();
 
@@ -72,16 +77,13 @@ function StoreHome() {
     formData.append("CartId", UserConstants.getLocalStorage("cartId", ""));
     formData.append("Quantity", quantity);
 
-    console.log(itemID + "item");
-    console.log(quantity + "quant");
-    console.log(UserConstants.getLocalStorage("cartId", "") + "cart");
-
     axios
       .post("https://localhost:7150/Cart/AddItemToCart", formData)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   }
 
+  // renders store inventory upon navigation to page
   useEffect(() => {
     getItems();
   }, []);
@@ -90,12 +92,14 @@ function StoreHome() {
     <div>
       <NavBar></NavBar>
 
-        <div id="header">
-            <h1 id="shop_header">
-            Welcome,  {UserConstants.getLocalStorage("firstName", "")}!
-            </h1>
-            <h2 id="shop_subheader">Shop the CSharpest Store Now</h2>
-        </div>
+      <div id="header">
+        <h1 id="shop_header">
+          Welcome, {UserConstants.getLocalStorage("firstName", "")}!
+        </h1>
+        <h2 id="shop_subheader">Shop the CSharpest Store Now</h2>
+      </div>
+
+      {/*Buttons to sort the inventory */}
 
       <div id="sort_buttons">
         <button id="sort_by_price" type="submit" onClick={getItems}>
@@ -116,6 +120,7 @@ function StoreHome() {
         </button>
       </div>
 
+      {/*Grid to display the inventory */}
       <Container>
         <Row>
           {itemList.map(
@@ -131,28 +136,31 @@ function StoreHome() {
               <>
                 <Col xs="3">
                   <Card>
-                    <Card.Header id="card_header">{item.name}<span id="bundle">{item.bundleId ? "BOGO" : ""}</span></Card.Header>
-                    <Card.Subtitle id="card_subtitle">{item.description}</Card.Subtitle>
+                    <Card.Header id="card_header">
+                      {item.name}
+                      <span id="bundle">{item.bundleId ? "BOGO" : ""}</span>
+                    </Card.Header>
+                    <Card.Subtitle id="card_subtitle">
+                      {item.description}
+                    </Card.Subtitle>
                     <Card.Body id="card_body">
                       <img src={item.imageURL} width="150" height="150"></img>
-                      <br></br>${item.price.toFixed(2)} per oz.{" "}
-                      
-                      <br></br>
+                      <br></br>${item.price.toFixed(2)} per oz. <br></br>
                       {item.stock} left in stock
                       <br></br>
                     </Card.Body>
 
                     <Card.Footer>
                       <form id={`form-${item.id}`}>
-                      <div id="rowone">
-                        <span id="quan">
+                        <div id="rowone">
+                          <span id="quan">
                             <label>Quantity</label>
-                        </span>
-                        <span id="answer">
+                          </span>
+                          <span id="answer">
                             <input id={`quantity-${item.id}`}></input>
-                        </span>
-                      </div>
-                        
+                          </span>
+                        </div>
+
                         <input
                           type="hidden"
                           id={`itemId-${item.id}`}
