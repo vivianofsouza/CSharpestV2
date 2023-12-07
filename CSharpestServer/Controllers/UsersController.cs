@@ -13,7 +13,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CSharpestServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {

@@ -31,6 +31,10 @@ function NavBar() {
           {UserConstants.getLocalStorage("isAdmin", "") ? "" : <h3>My Cart</h3>}
         </Navbar.Brand>
 
+        <Navbar.Brand href="/profile" id="nav_link">
+            <h3>Profile</h3>
+        </Navbar.Brand>
+
         <Navbar.Brand
           href="/"
           id="nav_link"
