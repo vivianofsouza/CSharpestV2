@@ -9,6 +9,7 @@ using CSharpestServer.Models;
 using CSharpestServer.Services.Interfaces;
 using CSharpestServer.Services;
 using System.Web.Helpers;
+using System.ComponentModel.DataAnnotations;
 
 namespace CSharpestServer.Controllers
 {
@@ -57,7 +58,7 @@ namespace CSharpestServer.Controllers
 
         // GET: api/Users/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(Guid id)
+        public async Task<ActionResult<User>> GetUser([FromForm] Guid id)
         {
           if (_context.users == null)
           {
@@ -73,47 +74,24 @@ namespace CSharpestServer.Controllers
             return Ok(User);
         }
 
-        // PUT: api/Users/{id}
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(Guid id, User user)
-        {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch
-            {
-                throw;
-            }
-
-            return Ok();
-        }
-
         // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser( [FromForm] bool isAdmin, [FromForm] string email, [FromForm] string fName, [FromForm] string lName, [FromForm] string pw)
         {
           try
             {
+                User user = new User(email, isAdmin, fName, lName, pw, null, null);
                 await _usersService.AddAsync(user);
+                return CreatedAtAction("GetUser", new { id = user.Id }, user);
             } catch
             {
                 throw;
             }
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(Guid id)
+        public async Task<IActionResult> DeleteUser([FromForm] Guid id)
         {
             try
             {
@@ -124,11 +102,6 @@ namespace CSharpestServer.Controllers
             }
             
             return Ok();
-        }
-
-        private bool UserExists(Guid id)
-        {
-            return (_context.users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
