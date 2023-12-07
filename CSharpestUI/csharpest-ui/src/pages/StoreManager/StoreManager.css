@@ -112,23 +112,16 @@
 }
 
 /*User input for quantity*/
-#answer {
+.answer {
     font-family: Rockwell;
     color: #385170;
     font-weight: bold;
-    padding-left: 15%;
-}
-
-/*Add to cart button*/
-#add {
-    background-color: #142d4c;
-    text-align: center;
-    margin-left: 30%;
-    margin-right: 30%;
-    color: #ececec;
-    font-family: 'Palatino Linotype';
-    transition-duration: 0.4s;
-    cursor: pointer;
+    width: 40%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-right:2%;
+    margin-left:2%;
+    height:50%;
 }
 
 /*For grouping of quantity and input correctly*/
@@ -142,6 +135,12 @@
   display:flex;
   font-family: 'Palatino Linotype';
 }
+
+#rowthree {
+    display:flex;
+    font-family: 'Palatino Linotype';
+}
+
 span:first-of-type {
     flex:1;
 }
@@ -161,7 +160,7 @@ input {
     height: 99%;
     width: 100%;
     margin-top: 2%;
-    padding-bottom: 5%;
+    padding-bottom: 1%;
 }
 
 #candy_pic {
@@ -177,8 +176,100 @@ input {
     padding-bottom: 5%;
 }
 
+#price {
+    font-family: Rockwell;
+    color: #385170;
+    font-weight:bold;
+    font-size:100%;
+    padding-left:2%;
+    width: 60%;
+}
+
+#stock {
+    font-family: Rockwell;
+    color: #385170;
+    font-weight:bold;
+    font-size:100%;
+    padding-left:2%;
+    width:60%;
+}
+
+#modifyPrice {
+    background-color: #142d4c;
+    text-align: center;
+    color: #ececec;
+    font-family: 'Palatino Linotype';
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 75%;
+    margin-bottom: 2%;
+}
+
+#modifyStock {
+    background-color: #142d4c;
+    text-align: center;
+    color: #ececec;
+    font-family: 'Palatino Linotype';
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 75%;
+}
+
+#deleteItem {
+    background-color: #cf1020;
+    text-align: center;
+    color: #ececec;
+    font-family: 'Palatino Linotype';
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 75%;
+    margin-left: 12%;
+    margin-top: 5%;
+}
+
+#add_item_card {
+    background-color: #d3d3d3;
+    border: 2px solid #385170;
+    border-radius: 5px;
+    width: 40%;
+    margin-top: 2%;
+    margin-left: 30%;
+}
+
+#add_item_header {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 200%;
+    text-align:center;
+    color: #385170;
+    margin-bottom: 2%;
+}
+
+#add_item_form {
+    width: 90%;
+    margin-left: 4%;
+}
+
+#label2 {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 125%;
+    color: #385170;
+}
+
+#input {
+    height: 18%;
+    width: 100%;
+    margin-bottom: 2%;
+}
 
 
-
-
-
+#add_item_button {
+    margin-top: 4%;
+    margin-left: 74%;
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 28%;
+}

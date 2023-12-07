@@ -183,12 +183,8 @@ function StoreHome() {
                           ></input>
 
                           <div id="rowone">
-                            <span id="price">
-                              <label>New Price</label>
-                            </span>
-                            <span id="answer">
-                              <input id={`price-${item.id}`}></input>
-                            </span>
+                            <label id="price">New Price</label>
+                            <input id={`price-${item.id}`} className ="answer"></input>
 
                             <button
                               id="modifyPrice"
@@ -200,12 +196,8 @@ function StoreHome() {
                           </div>
 
                           <div id="rowtwo">
-                            <span id="stock">
-                              <label>New Stock</label>
-                            </span>
-                            <span id="answer">
-                              <input id={`stock-${item.id}`}></input>
-                            </span>
+                            <label id="stock">New Stock</label>
+                            <input id={`stock-${item.id}`} className="answer"></input>
 
                             <button
                               id="modifyStock"
@@ -213,6 +205,17 @@ function StoreHome() {
                               onClick={() => modifyStock(item.id)}
                             >
                               Modify Stock
+                            </button>
+                          </div>
+
+                          <div id="rowthree">
+
+                            <button
+                              id="deleteItem"
+                              type="submit"
+                              onClick={() => modifyStock(item.id)}
+                            >
+                              Delete Item
                             </button>
                           </div>
                         </form>
@@ -224,6 +227,46 @@ function StoreHome() {
             )}
           </Row>
         </Container>
+
+      <Card id="add_item_card">
+        <Card.Header id="add_item_header">
+          Add New Item to CSharpest Store
+        </Card.Header>
+        <Card.Body id="add_item_body">
+          <Card.Text id="add_item_text">
+            <form id="payment_form">
+              <label id="label2">Item Name</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
+
+              <label id="label2">Item Description</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
+
+              <label id="label2">Item Price (per oz.)</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
+
+              <label id="label2">Stock</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
+
+              <label id="label2">Sale</label>
+              <br></br>
+              <input id="input"></input>
+              <br></br>
+
+              <button type="submit" id="add_item_button">
+                Add Item to CSharpest Store
+              </button>
+            </form>
+          </Card.Text>
+        </Card.Body>
+      </Card>
       </div>
     </>
   );
