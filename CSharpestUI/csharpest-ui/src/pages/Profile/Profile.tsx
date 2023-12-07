@@ -21,8 +21,10 @@ function Profile() {
         formData.append("UserId", UserConstants.getLocalStorage("userId", ""));
         formData.append("newName", newName);
 
+        UserConstants.setLocalStorage("firstName", newName);
+
         axios
-            .patch("https://localhost:7150/Profile/fName", formData)
+            .patch("https://localhost:7150/Users/fName", formData)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     }
@@ -43,8 +45,10 @@ function Profile() {
         formData.append("UserId", UserConstants.getLocalStorage("userId", ""));
         formData.append("newName", newName);
 
+        UserConstants.setLocalStorage("lastName", newName);
+
         axios
-            .patch("https://localhost:7150/Profile/lName", formData)
+            .patch("https://localhost:7150/Users/lName", formData)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     }
@@ -66,7 +70,7 @@ function Profile() {
         formData.append("newEmail", newEmail);
 
         axios
-            .patch("https://localhost:7150/Profile/email", formData)
+            .patch("https://localhost:7150/Users/email", formData)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     }
@@ -88,7 +92,7 @@ function Profile() {
         formData.append("newPassword", newPassword);
 
         axios
-            .patch("https://localhost:7150/Profile/password", formData)
+            .patch("https://localhost:7150/Users/password", formData)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     }

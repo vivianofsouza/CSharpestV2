@@ -27,7 +27,7 @@ namespace CSharpestServer.Services
                 item.ItemId = itemId;
                 item.CartId = cartId;
                 item.Quantity = quantity;
-                Bundle bundle = _storeContext.bundles.Find(itemId);
+                Bundle bundle = _storeContext.bundles.Find(my_item.bundleId);
                 item.TotalPrice = calculateTotal(quantity, my_item.Price, bundle);
                 _storeContext.SaveChanges();
 
@@ -182,9 +182,27 @@ namespace CSharpestServer.Services
         {
             if (bundle != null)
             {
-                if (bundle.Name.StartsWith('b'))
+                /*if (bundle.Name.StartsWith('b'))
                 {
-                    return ((quantity % 2) * unit_cost) + (unit_cost * (quantity / 2));
+                    return ((quantity % 2) * unit_cost) + (unit_cost * (quantity / 2m));
+                }*/
+                switch (bundle.Name)
+                {
+                    case "bogo":
+                        return ((quantity / 2) + (quantity % 2)) * unit_cost * 1m;
+                    //return ((quantity % 2) * unit_cost) + (unit_cost * (quantity / 2m));
+
+                    case "halfoff":
+                        return (quantity * unit_cost) / 2m;
+
+                    case "tenoff":
+                        return (quantity * unit_cost) * 0.9m;
+
+                    case "thirtyoff":
+                        return (quantity * unit_cost) * 0.7m;
+
+                    default: // if bundle is null
+                        return unit_cost * quantity;
                 }
             }
             return unit_cost * quantity;
