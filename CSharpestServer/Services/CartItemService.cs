@@ -102,7 +102,8 @@ namespace CSharpestServer.Services
         {
             try 
             {
-                var items = _storeContext.cartItems.Where(item => item.CartId == cartId);
+                var items = _storeContext.cartItems.Where(item => item.CartId == cartId).AsEnumerable();
+                items = items.ToList();
 
                 foreach (CartItem item in items)
                 {

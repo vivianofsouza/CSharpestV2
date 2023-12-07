@@ -9,14 +9,16 @@ namespace CSharpestServer.Services
     {
         private readonly StoreContext _storeContext;
         private readonly IItemService _itemService;
+        private readonly ICartItemService _cartItemService;
 
-        public OrderService(StoreContext storeContext, ItemService itemService)
+        public OrderService(StoreContext storeContext, ItemService itemService, CartItemService cartItemService)
         {
             _storeContext = storeContext;
             this._itemService = itemService;
+            this._cartItemService = cartItemService;
         }
 
-        public Task<Order> PlaceOrder(Cart cart, Guid userId, Card card, string address)
+        public Task<Order> PlaceOrder(Guid userId, Card card, string address)
         {
             try
             {
@@ -33,17 +35,29 @@ namespace CSharpestServer.Services
                     throw new InvalidOperationException($"Address validation error");
                 }
 
-                var cost = ManageStockAndCost(cart);
-                if (cost == 0.0M)
+                var cart = _cartItemService.GetCartByUser(userId).Result;
+                if (cart == null)
                 {
-                    throw new InvalidOperationException($"Error manipulating item stocks");
-                } else
-                {
-                    order.TotalCost = cost;
+                    throw new InvalidOperationException($"Couldn't find cart associated with User {userId}");
                 }
 
-                //NEED TO CLEAR CART
+                try
+                {
+                    var cost = ManageStockAndCost(cart);
+                    if (cost.Result == 0.0M)
+                    {
+                        throw new InvalidOperationException($"No items found");
+                    } else
+                    {
+                        order.TotalCost = cost.Result;
+                    }
 
+                } catch
+                {
+                    throw;
+                }               
+
+                _cartItemService.ClearCart(cart.Id);
                 AddOrder(order);
                 return Task.FromResult(order);
 
@@ -112,14 +126,15 @@ namespace CSharpestServer.Services
         }
 
         // Removes stock amounts from the store's inventory upon purchase
-        private decimal ManageStockAndCost(Cart cart)
+        private Task<decimal> ManageStockAndCost(Cart cart)
         {
             var inCart = _storeContext.cartItems.AsEnumerable();
             var stock = _storeContext.items.AsEnumerable();
             var items = from i in inCart
                         where i.CartId == cart.Id
                         select i;
-            var cost = 0.0M;
+            decimal cost = 0.0M;
+            items = items.ToList();
 
             foreach (CartItem item in items)
             {
@@ -130,11 +145,11 @@ namespace CSharpestServer.Services
                 }
                 catch
                 {
-                    return 0.0M;
+                    throw;
                 }
             }
             _storeContext.SaveChanges();
-            return cost;
+            return Task.FromResult(cost);
         }
 
         // Generates an order ID
