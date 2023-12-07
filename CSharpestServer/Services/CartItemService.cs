@@ -29,6 +29,7 @@ namespace CSharpestServer.Services
                 item.Quantity = quantity;
                 Bundle bundle = _storeContext.bundles.Find(itemId);
                 item.TotalPrice = calculateTotal(quantity, my_item.Price, bundle);
+                _storeContext.SaveChanges();
 
                 _storeContext.cartItems.Add(item);
                 _storeContext.SaveChanges();
