@@ -48,7 +48,7 @@ function Login() {
     formData.append("pw", pw);
 
     axios
-      .post("https://localhost:7150/api/Users/", formData)
+      .post("https://localhost:7150/Users/", formData)
       .then((res) => {
         if (res.status == 201) {
           UserConstants.setLocalStorage("userId", res.data.id);
@@ -96,7 +96,7 @@ function Login() {
     formData.append("Password", password);
 
     axios
-      .post("https://localhost:7150/api/Users/Login", formData)
+      .post("https://localhost:7150/Users/Login", formData)
       .then((res) => {
         if (res.status == 200) {
           UserConstants.setLocalStorage("userId", res.data.id);
