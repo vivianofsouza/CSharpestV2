@@ -15,7 +15,6 @@ public class CartItem : IComparable<CartItem>
     public int Quantity { get; set; }
     public decimal TotalPrice { get; set; }
 
-
     public CartItem(Guid itemId, Guid cartId, int quantity, decimal totalPrice)
     {
         Id = Guid.NewGuid();

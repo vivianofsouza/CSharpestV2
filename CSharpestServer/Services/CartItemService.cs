@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Web.Helpers;
 
 namespace CSharpestServer.Services
 {
@@ -31,6 +32,13 @@ namespace CSharpestServer.Services
                 _storeContext.cartItems.Add(item);
                 _storeContext.SaveChanges();
 
+                Cart? _cart = _storeContext.carts.Find(cartId);
+                if (_cart != null)
+                {
+                    UpdateCartTotals(_cart);
+                    _storeContext.SaveChanges();
+                }
+
                 return Task.CompletedTask;
             } catch
             {
@@ -43,6 +51,7 @@ namespace CSharpestServer.Services
         {
             
             CartItem? _item = _storeContext.cartItems.Find(cartItemId);
+            Cart? _cart = _storeContext.carts.Find(cartId);
 
             if (_item == null || _item.CartId != cartId)
             {
@@ -64,11 +73,9 @@ namespace CSharpestServer.Services
                 else
                 {
                     _item.Quantity += Quantity;
-                    _item.TotalPrice = calculateTotal(Quantity, unit_cost, bundle);
+                    _item.TotalPrice = calculateTotal(_item.Quantity, unit_cost, bundle);
                 }
-            }
-
-            else
+            }   else
             {
                 if (Quantity >= _item.Quantity)
                 {
@@ -78,11 +85,15 @@ namespace CSharpestServer.Services
                 else
                 {
                     _item.Quantity -= Quantity;
-                    _item.TotalPrice = calculateTotal(Quantity, unit_cost, bundle);
+                    _item.TotalPrice = calculateTotal(_item.Quantity, unit_cost, bundle);
                 }
             }
             _storeContext.SaveChanges();
-            return Task.FromResult(_item);
+
+            UpdateCartTotals(_cart);
+            _storeContext.SaveChanges();
+
+            return Task.CompletedTask;
 
         }
 
@@ -164,6 +175,29 @@ namespace CSharpestServer.Services
                 }
             }
             return unit_cost * quantity;
+        }
+
+        private Cart UpdateCartTotals(Cart cart)
+        {
+            var items = GetItemsByCart(cart.Id);
+            if (cart != null && items.Result != null)
+            {
+                cart.Subtotal = 0;
+                cart.Tax = 0;
+                cart.TotalPrice = 0;
+                foreach (CartItem ci in items.Result)
+                {
+                    cart.Subtotal += ci.TotalPrice;
+                    cart.Tax += ci.TotalPrice * 0.08M;
+                }
+                cart.TotalPrice = cart.Subtotal + cart.Tax;
+                cart.TotalPrice += 5.99M;
+                return cart;
+
+            } else
+            {
+                return cart;
+            }
         }
     }
 }
