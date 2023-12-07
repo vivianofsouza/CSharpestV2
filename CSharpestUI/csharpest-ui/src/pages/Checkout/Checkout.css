@@ -5,6 +5,7 @@
     color: #385170;
     line-height: 80%;
     font-size: 250%;
+    padding: 2%;
 }
 
 h4 {
@@ -58,4 +59,28 @@ h4 {
     color: #385170;
     height: 28%;
     width: 28%;
+}
+
+#card_header {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    float:left;
+    margin-right: .5%;  
+    font-size:135%;
+    font-weight:bold;
+    text-align: center;
+}
+
+#card_subtitle {
+    font-family: 'Palatino Linotype';
+    color: #385170;
+    font-size:110%;
+    padding:5%;
+}
+
+#card_body {
+    font-family: 'Palatino Linotype';
+    color: #385170;
+    font-weight:bold;
 }

@@ -113,7 +113,7 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> RemoveItem([FromForm] Guid itemId)
+        public async Task<IActionResult> RemoveItem(Guid itemId)
         {
             try
             {
