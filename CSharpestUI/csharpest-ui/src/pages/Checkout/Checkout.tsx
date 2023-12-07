@@ -10,6 +10,8 @@ import UserConstants from "../../UserConstants";
 function Checkout() {
   const [cartList, setCartList] = useState<any>([]);
   const [tax, setTax] = useState(0);
+  const [preSubTotal, setPreSubTotal] = useState(0);
+  const [postSubTotal, setPostSubTotal] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
 
@@ -36,11 +38,14 @@ function Checkout() {
         },
       })
       .then((response) => {
-        if (response.data != null) {
-          setTotal(response.data.totalPrice);
-          setTax(response.data.tax);
-          setSubTotal(response.data.subtotal);
-        }
+        setTotal(response.data.totalPrice);
+        setTax(response.data.tax);
+        setPreSubTotal(response.data.preSubTotal);
+        setPostSubTotal(response.data.postSubTotal);
+        console.log(response.data.preSubTotal);
+        console.log(response.data.postSubTotal);
+        console.log(response.data.tax);
+        console.log(response.data.totalPrice);
       })
       .catch((error: any) => console.log(error));
   };
@@ -75,19 +80,15 @@ function Checkout() {
               <li>{cartItem.quantity}</li>
               <li>{cartItem.totalPrice}</li>
               <br></br>
-
-              {/* <button type="submit" onClick={() => removeFromCart(cartItem.id)}>
-                Remove from Cart
-              </button> */}
             </div>
           </>
         )
       )}
 
-      <h4>Subtotal: ${subTotal}</h4>
-      <h4>Discounts: $</h4>
+      <h4>Subtotal: ${preSubTotal}</h4>
+      <h4>Discounts: ${postSubTotal}</h4>
       <h4>Taxes: ${tax}</h4>
-      <h4>Shipping: $5.99</h4>
+      <h4>Shipping: ${5.99}</h4>
       <h4>Total: ${total}</h4>
 
       <Card id="payment_card">

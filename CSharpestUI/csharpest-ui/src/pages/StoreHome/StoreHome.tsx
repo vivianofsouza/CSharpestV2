@@ -6,9 +6,10 @@ import "./StoreHome.css";
 import { UUID } from "crypto";
 import UserConstants from "../../UserConstants";
 import NavBar from "../../components/Navbar";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
+import Card from "react-bootstrap/esm/Card";
+import Container from "react-bootstrap/esm/Container";
 
 function StoreHome() {
   const [itemList, setItemsList] = useState<any>([]);
@@ -84,6 +85,7 @@ function StoreHome() {
   useEffect(() => {
     getItems();
   }, []);
+
   return (
     <div>
       <NavBar></NavBar>
@@ -112,51 +114,59 @@ function StoreHome() {
         </button>
       </div>
 
-      {itemList.map(
-        (item: {
-          id: UUID;
-          bundleId: string;
-          stock: number;
-          price: number;
-          description: string;
-          name: string;
-          imageURL: string;
-        }) => (
-          <>
-            <div key={item.id} className="candy_card_container">
-              <Card>
-                <Card.Header>{item.name}</Card.Header>
-                <Card.Subtitle>{item.description}</Card.Subtitle>
-                <Card.Body>
-                  <img src={item.imageURL} width="150" height="150"></img>
-                  <br></br>${item.price} per oz. {item.bundleId ? "BOGO" : ""}
-                  <br></br>
-                  {item.stock} left in stock
-                  <br></br>
-                </Card.Body>
+      <Container>
+        <Row>
+          {itemList.map(
+            (item: {
+              id: UUID;
+              bundleId: string;
+              stock: number;
+              price: number;
+              description: string;
+              name: string;
+              imageURL: string;
+            }) => (
+              <>
+                <Col xs="3">
+                  <Card>
+                    <Card.Header id="card_header">{item.name}</Card.Header>
+                    <Card.Subtitle>{item.description}</Card.Subtitle>
+                    <Card.Body>
+                      <img src={item.imageURL} width="150" height="150"></img>
+                      <br></br>${item.price} per oz.{" "}
+                      {item.bundleId ? "BOGO" : ""}
+                      <br></br>
+                      {item.stock} left in stock
+                      <br></br>
+                    </Card.Body>
 
-                <Card.Footer>
-                  <form id={`form-${item.id}`}>
-                    <label>Quantity</label>
-                    <input id={`quantity-${item.id}`}></input>
-                    <input
-                      type="hidden"
-                      id={`itemId-${item.id}`}
-                      value={item.id}
-                    ></input>
+                    <Card.Footer>
+                      <form id={`form-${item.id}`}>
+                        <label>Quantity</label>
+                        <input id={`quantity-${item.id}`}></input>
+                        <input
+                          type="hidden"
+                          id={`itemId-${item.id}`}
+                          value={item.id}
+                        ></input>
 
-                    <button type="submit" onClick={() => addToCart(item.id)}>
-                      Add to Cart
-                    </button>
-                  </form>
-                </Card.Footer>
+                        <button
+                          type="submit"
+                          onClick={() => addToCart(item.id)}
+                        >
+                          Add to Cart
+                        </button>
+                      </form>
+                    </Card.Footer>
 
-                <br></br>
-              </Card>
-            </div>
-          </>
-        )
-      )}
+                    <br></br>
+                  </Card>
+                </Col>
+              </>
+            )
+          )}
+        </Row>
+      </Container>
     </div>
   );
 }

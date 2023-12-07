@@ -5,6 +5,10 @@ import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML compone
 import "./Cart.css";
 import UserConstants from "../../UserConstants";
 import NavBar from "../../components/Navbar";
+import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
+import Card from "react-bootstrap/esm/Card";
 
 function Cart() {
   const [cartList, setCartList] = useState<any>([]);

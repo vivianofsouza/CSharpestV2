@@ -39,12 +39,12 @@
     margin-right: .5%;
 }
 
-#on_sale {
+#card_header {
     font-family: Rockwell;
     font-variant: small-caps;
     color: #385170;
-    height: 28%;
-    width: 12%;
+    /* height: 28%;
+    width: 12%; */
     margin-right: .5%;   
 }
 
