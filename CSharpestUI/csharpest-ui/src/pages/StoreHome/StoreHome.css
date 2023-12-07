@@ -47,3 +47,17 @@
     width: 12%;
     margin-right: .5%;   
 }
+
+#candy_card {
+    background-color: #d3d3d3;
+    border: 2px solid #385170;
+    border-radius: 5px;
+    width: 80%;
+}
+
+.card_container {
+    background-color: #d3d3d3;
+    border: 2px solid #385170;
+    border-radius: 5px;
+    width: 80%;
+}
