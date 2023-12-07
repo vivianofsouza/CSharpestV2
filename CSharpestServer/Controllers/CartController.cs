@@ -104,12 +104,17 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpPatch("ChangeQuantity")]
-        public async Task<IActionResult> ChangeQuantity([FromForm] Guid itemId, [FromForm] Guid cartId, [FromForm] int quantity, [FromForm] bool add)
+        public async Task<IActionResult> ChangeQuantity([FromForm] Guid itemId, [FromForm] Guid cartId, [FromForm] int quantity, [FromForm] string add)
         {
             try
             {
+                var aOrR = false;
+                if (add.StartsWith('t'))
+                {
+                    aOrR = true;
+                }
                 var cartItem = CartItemExists(itemId, cartId);
-                await _cartItemService.ChangeQuantity(cartId, cartItem.Id, quantity, add);
+                await _cartItemService.ChangeQuantity(cartId, cartItem.Id, quantity, aOrR);
             }
             catch
             {

@@ -88,10 +88,12 @@ function Cart() {
         formData.append("ItemId", itemID);
         formData.append("CartId", UserConstants.getLocalStorage("cartId", ""));
         formData.append("Quantity", quantity);
-        formData.append("true", add);
+        formData.append("add", "true");
+
+        console.log(formData);
 
         axios
-            .post("https://localhost:7150/Cart/ChangeQuantity", formData)
+            .patch("https://localhost:7150/Cart/ChangeQuantity", formData)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     }
@@ -118,10 +120,10 @@ function Cart() {
         formData.append("ItemId", itemID);
         formData.append("CartId", UserConstants.getLocalStorage("cartId", ""));
         formData.append("Quantity", quantity);
-        formData.append("false", add);
+        formData.append("remove", "false");
 
         axios
-            .post("https://localhost:7150/Cart/ChangeQuantity", formData)
+            .patch("https://localhost:7150/Cart/ChangeQuantity", formData)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     }
