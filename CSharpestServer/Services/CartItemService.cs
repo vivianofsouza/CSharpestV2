@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Security.Policy;
 using System.Web.Helpers;
 
 namespace CSharpestServer.Services
@@ -196,20 +197,26 @@ namespace CSharpestServer.Services
             { 
                 if (items.Result != null)
                 {
-                    cart.Subtotal = 0;
+                    cart.preSubtotal = 0;
+                    cart.postSubtotal = 0;
                     cart.Tax = 0;
                     cart.TotalPrice = 0;
                     foreach (CartItem ci in items.Result)
                     {
-                        cart.Subtotal += ci.TotalPrice;
+                        Item my_item = _storeContext.items.Find(ci.ItemId);
+                        var unit_cost = my_item.Price;
+
+                        cart.preSubtotal += ci.Quantity * unit_cost;
+                        cart.postSubtotal += ci.TotalPrice;
                         cart.Tax += ci.TotalPrice * 0.08M;
                     }
-                    cart.TotalPrice = cart.Subtotal + cart.Tax;
+                    cart.TotalPrice = cart.postSubtotal + cart.Tax;
                     cart.TotalPrice += 5.99M;
                     return cart;
                 } else
                 {
-                    cart.Subtotal = 0;
+                    cart.preSubtotal = 0;
+                    cart.postSubtotal = 0;
                     cart.Tax = 0;
                     cart.TotalPrice = 0;
                     return cart;

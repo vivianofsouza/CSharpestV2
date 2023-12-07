@@ -11,15 +11,17 @@ public class Cart : IComparable<Cart>
 {
     public Guid Id { get; set; } // primary key: cartId
     public Guid userId { get; set; }
+    public decimal preSubtotal { get; set; }
+    public decimal postSubtotal { get; set; }
     public decimal Tax { get; set; }
-    public decimal Subtotal { get; set; }
     public decimal TotalPrice { get; set; }
     public Cart(User user)
     {
         Id = user.CartId;
         userId = user.Id;
+        preSubtotal = 0.00M;
+        postSubtotal = 0.00M;
         Tax = 0.00M;
-        Subtotal = 0.00M;
         TotalPrice = 0.00M;
     }
 
