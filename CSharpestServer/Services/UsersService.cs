@@ -19,7 +19,7 @@ namespace CSharpestServer.Services
             try
             {
                 user = GetInitialisedId(user);
-                user.CartId = user.Id;
+                user.CartId = Guid.NewGuid();
                 _storeContext.users.Add(user);
                 _storeContext.SaveChanges();
                 
