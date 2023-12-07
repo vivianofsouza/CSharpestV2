@@ -6,45 +6,24 @@ import "./Checkout.css";
 import Card from "react-bootstrap/Card";
 import NavBar from "../../components/Navbar";
 import UserConstants from "../../UserConstants";
-import Col from "react-bootstrap/esm/Col";
 
 function Checkout() {
-  const [cartList, setCartList] = useState<any>([]);
-  const [tax, setTax] = useState(0);
-  const [preSubTotal, setPreSubTotal] = useState(0);
-  const [postSubTotal, setPostSubTotal] = useState(0);
-  const [subTotal, setSubTotal] = useState(0);
-  const [total, setTotal] = useState(0);
-
-  const getCartItems = () => {
-    axios
-      .get("https://localhost:7150/Cart/GetCartItems", {
-        params: {
-          userId: UserConstants.getLocalStorage("userId", ""),
-        },
-      })
-      .then((response) => {
-        if (response.data != null) {
-          setCartList(response.data);
-        }
-      })
-      .catch((error) => console.log(error));
-  };
+  const [cart, setCart] = useState<any>([]);
 
   const getCartTotals = () => {
+    const params = {
+      userID: UserConstants.getLocalStorage("userId", ""),
+    };
+
     axios
-      .get("https://localhost:7150/Cart/GetCartTotals", {
-        params: {
-          userId: UserConstants.getLocalStorage("userId", ""),
-        },
-      })
+      .get("https://localhost:7150/Cart/GetCartTotals", { params })
       .then((response) => {
-        setTotal(response.data.totalPrice);
-        setTax(response.data.tax);
-        setPreSubTotal(response.data.preSubTotal);
-        setPostSubTotal(response.data.postSubTotal);
+        if (response.data != null) {
+          setCart(response.data);
+        }
+        console.log("success!");
       })
-      .catch((error: any) => console.log(error));
+      .catch((error) => console.log(error));
   };
 
   const placeOrder = () => {
@@ -87,7 +66,6 @@ function Checkout() {
   };
 
   useEffect(() => {
-    getCartItems();
     getCartTotals();
   }, []);
 
@@ -96,48 +74,21 @@ function Checkout() {
       <NavBar></NavBar>
 
       <h1 id="checkout_header">Checkout</h1>
-      <div id="cart">
-        {cartList.map(
-          (cartItem: {
-            id: string;
-            name: string;
-            imageURL: string;
-            unitPrice: number;
-            quantity: number;
-            totalPrice: number;
-          }) => (
-            <>
-              <Col ls="2">
-                <Card id="cart_card">
-                  <div id={`itemId-${cartItem.id}`}>
-                    <Card.Header id="cart_header">{cartItem.name}</Card.Header>
-                    <Card.Body id="cart_body">
-                      <img
-                        src={cartItem.imageURL}
-                        width="200"
-                        height="200"
-                      ></img>
-                      <br></br>
-                      Price by oz: ${cartItem.unitPrice}
-                      <br></br>
-                      Quantity: {cartItem.quantity} oz
-                      <br></br>
-                      Total Price: ${cartItem.totalPrice}
-                      <br></br>
-                    </Card.Body>
-                  </div>
-                </Card>
-              </Col>
-            </>
-          )
-        )}
-      </div>
 
-      <h4>Subtotal: ${preSubTotal}</h4>
-      <h4>Discounts: ${postSubTotal}</h4>
-      <h4>Taxes: ${tax}</h4>
-      <h4>Shipping: ${5.99}</h4>
-      <h4>Total: ${total}</h4>
+      <table id="summary">
+        <tr>
+          <th id="pre_header">Pre-Discount Subtotal</th>
+          <th id="post_header">Discounted Subtotal</th>
+          <th id="tax_header">Tax</th>
+          <th id="total_header">Total</th>
+        </tr>
+        <tr>
+          <td id="total">{cart.preSubtotal}</td>
+          <td id="total">{cart.postSubtotal}</td>
+          <td id="total">{cart.tax}</td>
+          <td id="total">{cart.totalPrice}</td>
+        </tr>
+      </table>
 
       <Card id="payment_card">
         <Card.Header id="payment_card_header">

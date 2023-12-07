@@ -1,17 +1,55 @@
+#body, #cart_container {
+    min-width: 1300px;
+}
+
+/*Totals*/
+
+/*Table formatting*/
+table {
+    border: 2px solid black;
+    font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif;
+    margin-left: auto;
+    margin-right: auto;
+    color: #385170;
+    margin-top:30px;
+    margin-bottom: 50px;
+}
+
+/*Table header*/
+th {
+    color: #142d4c;
+    padding:2px 20px;
+}
+
+/*Columns for Name and Price of items*/
+td:last-child {
+    font-weight: bold
+}
+
+/* Each item*/
+td {
+    text-align: center;
+    padding: 10px;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia,serif;
+    border-bottom: 1px solid #ddd;
+}
+
+
 #cart_header {
     text-align: center;
     font-family: Rockwell;
     font-variant: small-caps;
-    color: #385170;
-    line-height: 80%;
-    font-size: 250%;
+    background-color: #142d4c;
+    color: #ececec;
+    line-height: 150%;
+    font-size: 300%;
 }
 
-#subtotal_header {
+#card_header {
     font-family: Rockwell;
     font-variant: small-caps;
-    font-size: 150%;
     color: #385170;
+<<<<<<< HEAD
 }
 
 #checkout_header {
@@ -100,3 +138,73 @@ h4 {
     color: #385170;
     font-weight:bold;
 }
+=======
+    float: left;
+    margin-right: .5%;
+    font-size: 135%;
+    font-weight: bold;
+    text-align: center;
+}
+
+#candy_image {
+    margin-left:35px;
+}
+
+#card_subtitle {
+    font-family: 'Palatino Linotype';
+    color: #385170;
+    font-size: 110%;
+    padding: 5%;
+}
+
+#card_body {
+    font-family: 'Palatino Linotype';
+    color: #385170;
+    font-weight: bold;
+}
+
+#card_label {
+    margin-left:30px;
+    list-style-type:none;
+    font-family: 'Palatino Linotype';
+    color: #385170;
+    font-weight: bold;
+}
+
+#remove_button {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#remove_button, #clear_cart, #add, #remove {
+    background-color: #385170;
+    color: #ececec;
+    font-family: 'Palatino Linotype';
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+    #remove_button:hover, #clear_cart:hover, #add:hover, #remove:hover {
+        background-color: #142d4c;
+    }
+
+/*User input for quantity*/
+#answer {
+    font-family: Rockwell;
+    color: #385170;
+    font-weight: bold;
+    padding-left: 15%;
+}
+
+/*Add to cart button*/
+#add, #remove {
+    background-color: #142d4c;
+    text-align: center;
+    color: #ececec;
+    font-family: 'Palatino Linotype';
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+>>>>>>> 7b5f353b77b4cfd883ca63b4f436bc43fb208bed

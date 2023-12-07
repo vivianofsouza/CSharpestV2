@@ -14,7 +14,8 @@ function StoreHome() {
   const [itemList, setItemsList] = useState<any>([]);
 
   // Req to get all store inventory items. The default sort is by Price.
-  const getItems = () => {
+    const getItems = () => {
+        console.log(UserConstants.getLocalStorage("userId", ""));
     axios
       .get("https://localhost:7150/Item/GetAllItemsPriceSort")
       .then((response) => {
