@@ -5,7 +5,7 @@ import StoreHome from "./pages/StoreHome/StoreHome";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Login from "./pages/Login/Login";
-import StoreManager from "./pages/StoreManager/StoreManager"
+import StoreManager from "./pages/StoreManager/StoreManager";
 import { useState } from "react";
 import UserConstants from "./UserConstants";
 

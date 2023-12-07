@@ -1,5 +1,3 @@
-import { UUID } from "crypto";
-
 class UserConstants {
   static setLocalStorage(key: string, value: any) {
     try {
@@ -17,6 +15,15 @@ class UserConstants {
           return initialValue;
         }
       }
+
+    static logOut() {
+      this.setLocalStorage("userId", "");
+      this.setLocalStorage("cartId", "");
+      this.setLocalStorage("isAdmin", "");
+      this.setLocalStorage("firstName", "");
+      this.setLocalStorage("lastName", "");
+      console.log(this.getLocalStorage("userId", "dsd"));
+    }
 }
 
 export default UserConstants;
