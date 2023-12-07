@@ -48,7 +48,7 @@ function StoreHome() {
     <>
       <NavBar></NavBar>
       <div>
-        <h1>Store Home</h1>
+      <h1 id="store_manager_header">Manage the CSharpest Store Now</h1>
         {itemList.map(
           (item: {
             itemId: UUID;
