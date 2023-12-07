@@ -101,6 +101,9 @@ namespace CSharpestServer.Services
             //checks for valid CVV
             if (card.CVV.ToString().Length! > 4)    {return false;}
 
+            //checks for valid zipcode
+            if (card.ZipCode.ToString().Length != 5) { return false; }
+
             return true;
         }
         private bool AddCard(Card card)
@@ -114,15 +117,14 @@ namespace CSharpestServer.Services
         }
         private bool ValidateAddress(string address)
         {
-            /*Regex regex = new Regex("^[0-9]+$");
-            string[] addrArray = address.Split(' ');
+            var regex = new Regex(@"^[A-Za-z0-9]+(?:\s[A-Za-z0-9'_-]+)+$");
 
-            if (regex.IsMatch(addrArray[0]))
+            if (regex.IsMatch(address))
             {
                 return true;
-            }*/
+            }
 
-            return true;
+            return false;
         }
 
         // Removes stock amounts from the store's inventory upon purchase
