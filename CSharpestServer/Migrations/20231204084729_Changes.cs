@@ -61,7 +61,8 @@ namespace CSharpestServer.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     userId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     tax = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    preSubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    postSubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     totalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                 },
                 constraints: table =>

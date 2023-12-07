@@ -18,7 +18,7 @@ function NavBar() {
         </Navbar.Brand>
         <Navbar.Brand
           href="/"
-          id="nav_link_cart"
+          id="nav_link"
           onClick={() => UserConstants.logOut()}
         >
           Log out

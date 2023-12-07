@@ -119,13 +119,13 @@ namespace CSharpestServer.Migrations
 
             migrationBuilder.InsertData(
                  table: "carts",
-                 columns: new[] { "Id", "userId", "tax", "subtotal", "totalPrice" },
-                 values: new object[] { new Guid("73BDA49F-3457-4D0E-A41B-B471346F9B3C"), new Guid("628EB41B-EF6A-4CAB-A860-C916E27272B6"), 0.0m, 0.0m, 0.0m });
+                 columns: new[] { "Id", "userId", "tax", "preSubtotal", "postSubtotal", "totalPrice" },
+                 values: new object[] { new Guid("73BDA49F-3457-4D0E-A41B-B471346F9B3C"), new Guid("628EB41B-EF6A-4CAB-A860-C916E27272B6"), 0.0m, 0.0m, 0.0m, 0.0m });
 
             migrationBuilder.InsertData(
                  table: "carts",
-                 columns: new[] { "Id", "userId", "tax", "subtotal", "totalPrice" },
-                 values: new object[] { new Guid("039D8391-FE9C-4506-80E3-CA6FE7B05625"), new Guid("93F164A3-00AE-453E-B21A-C18EA9A43543"), 0.0m, 0.0m, 0.0m });
+                 columns: new[] { "Id", "userId", "tax", "preSubtotal", "postSubtotal", "totalPrice" },
+                 values: new object[] { new Guid("039D8391-FE9C-4506-80E3-CA6FE7B05625"), new Guid("93F164A3-00AE-453E-B21A-C18EA9A43543"), 0.0m, 0.0m, 0.0m, 0.0m });
         }
 
         /// <inheritdoc />

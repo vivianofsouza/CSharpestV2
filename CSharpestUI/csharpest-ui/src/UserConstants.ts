@@ -22,7 +22,6 @@ class UserConstants {
       this.setLocalStorage("isAdmin", "");
       this.setLocalStorage("firstName", "");
       this.setLocalStorage("lastName", "");
-      console.log(this.getLocalStorage("userId", "dsd"));
     }
 }
 

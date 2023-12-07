@@ -77,7 +77,10 @@ namespace CSharpestServer.Migrations
                     b.Property<decimal>("tax")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("subtotal")
+                    b.Property<decimal>("preSubtotal")
+                       .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("postSubtotal")
                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("totalPrice")
