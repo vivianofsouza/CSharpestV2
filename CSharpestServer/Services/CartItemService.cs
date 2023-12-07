@@ -181,7 +181,7 @@ namespace CSharpestServer.Services
         {
             if (bundle != null)
             {
-                if (bundle.Name == "bogo")
+                if (bundle.Name.StartsWith('b'))
                 {
                     return ((quantity % 2) * unit_cost) + (unit_cost * (quantity / 2));
                 }
