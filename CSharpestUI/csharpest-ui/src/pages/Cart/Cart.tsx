@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import axios from "axios";
-import Nav from "react-bootstrap/Nav"; // Using bootstrap, pre-made HTML components for React projects. import components one by one as needed
 import "./Cart.css";
 import UserConstants from "../../UserConstants";
 import NavBar from "../../components/Navbar";
-import Container from "react-bootstrap/esm/Container";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
-import Card from "react-bootstrap/esm/Card";
 
 function Cart() {
   const [cartList, setCartList] = useState<any>([]);
+  const [preSubTotal, setPreSubTotal] = useState(0);
 
   console.log(UserConstants.getLocalStorage("userId", ""));
   const getCartItems = () => {
@@ -30,8 +25,24 @@ function Cart() {
       .catch((error) => console.log(error));
   };
 
+  const getCartTotals = () => {
+    axios
+      .get("https://localhost:7150/Cart/GetCartTotals", {
+        params: {
+          userId: UserConstants.getLocalStorage("userId", ""),
+        },
+      })
+      .then((response) => {
+        setPreSubTotal(response.data.preSubTotal);
+        console.log(response.data.preSubTotal);
+        console.log(UserConstants.getLocalStorage("userId", ""));
+      })
+      .catch((error: any) => console.log(error));
+  };
+
   useEffect(() => {
     getCartItems();
+    getCartTotals();
   }, []);
 
   function removeFromCart(cartItem: string) {
@@ -103,7 +114,7 @@ function Cart() {
       <button type="submit" onClick={clearCart}>
         Clear Cart
       </button>
-      <h4 id="subtotal_header">Subtotal:</h4>
+      <h4 id="subtotal_header">Subtotal:{preSubTotal}</h4>
     </div>
   );
 }
