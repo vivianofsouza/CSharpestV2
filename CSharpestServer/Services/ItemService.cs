@@ -16,13 +16,6 @@ namespace CSharpestServer.Services
             _storeContext = storeContext;
         }
 
-        private Item GetInitialisedId(Item item)
-        {
-            if (item.Id == Guid.Empty) { item.Id = Guid.NewGuid(); }
-
-            return item;
-        }
-
         public Task ChangeStock(Guid itemId, int quantity, bool addOrRemove)
         {
             Item? _item = _storeContext.items.Find(itemId);
@@ -58,7 +51,7 @@ namespace CSharpestServer.Services
                 _item.Price = price;
             } else
             {
-                throw new InvalidOperationException("Cannot have negative price");
+                throw new InvalidOperationException("Item cannot have negative price");
             }
 
             _storeContext.SaveChanges();
@@ -67,18 +60,18 @@ namespace CSharpestServer.Services
 
         public Task AddItem(Item item)
         {
-            item = GetInitialisedId(item);
+            
             if (_storeContext.items == null)
             {
-                return Task.FromException(new NullReferenceException());
+                throw new InvalidOperationException("Error loading items database");
             }
 
             try {
                 _storeContext.items.Add(item);
                 _storeContext.SaveChanges();
 
-            } catch (Exception e) {
-                return Task.FromException(e);
+            } catch {
+                throw new InvalidOperationException($"Error adding {item.Name} to database");
             }
 
             return Task.CompletedTask;
@@ -97,7 +90,7 @@ namespace CSharpestServer.Services
 
                 if (item == null)
                 {
-                    return Task.FromException(new NullReferenceException());
+                    throw new InvalidOperationException($"Could not find item {id}");
                 }
 
                 _storeContext.items.Remove(item);

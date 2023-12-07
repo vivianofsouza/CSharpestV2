@@ -148,6 +148,10 @@ namespace CSharpestServer.Services
                     throw;
                 }
             }
+
+            cost += Math.Round(cost * 0.08M, 2);
+            cost += 5.99M;
+
             _storeContext.SaveChanges();
             return Task.FromResult(cost);
         }
