@@ -14,46 +14,52 @@ namespace CSharpestServer.Controllers
     public class CartController : ControllerBase
     {
         private readonly StoreContext _context;
-        private readonly ICartService _cartService;
         private readonly ICartItemService _cartItemService;
         private readonly IItemService _itemService;
 
-        public CartController(StoreContext context, CartService cartService, CartItemService cartItemService, ItemService itemService)
+        public CartController(StoreContext context, CartItemService cartItemService, ItemService itemService)
         {
             this._context = context;
-            this._cartService = cartService;
             this._cartItemService = cartItemService;
             this._itemService = itemService;
-
         }
 
         // GET: api/<CartController>
+        // Researched returning anonymous type from function and considered creating 'returnedCart' class in service
+        // Decided although it does not follow our typical Controller -> Service format, it is far less code this way
+        // Hence this endpoint is a little messier but it works fine
         [HttpGet("GetCartItems")]
         public async Task<IActionResult> GetCartItems(Guid UserID)
         {
-            // gets a user's carts (as a list but really only one) + all Cart Items in DB
-            var carts = await _cartService.GetByUserAsync(UserID);
+            try
+            {
+                // gets a user's carts (as a list but really only one) + all Cart Items in DB
+                var cart = await _cartItemService.GetCartByUser(UserID);
 
-            // obtains cart instance for user
-            var userCart = carts.First();
+                // gets all items belonging to this user's cart
+                var cartItems = await _cartItemService.GetItemsByCart(cart.Id);
+                var allItems = await _itemService.GetAllAsync();
 
-            // gets all items belonging to this user's cart
-            var cartItems = await _cartItemService.GetByCartAsync(userCart.Id);
-            var allItems = await _itemService.GetAllAsync();
+                var inCart = (from cartItem in cartItems
+                              join item in allItems
+                              on cartItem.ItemId equals item.Id
+                              select new
+                              {
+                                  id = item.Id,
+                                  name = item.Name,
+                                  imageURL = item.ImageURL,
+                                  unitPrice = item.Price,
+                                  quantity = cartItem.Quantity,
+                                  totalPrice = cartItem.TotalPrice
+                              }).ToList();
 
+                return Ok(inCart);
 
-            var inCart = (from cartItem in cartItems
-                          join item in allItems
-                          on cartItem.ItemId equals item.Id
-                          select new
-                          {
-                              name = item.Name,
-                              imageURL = item.ImageURL,
-                              unitPrice = item.Price,
-                              quantity = cartItem.Quantity,
-                              totalPrice = cartItem.TotalPrice
-                          }).ToList();
-            return Ok(inCart);
+            } catch
+            {
+                throw;
+            }
+            
         }
 
         [HttpPost("AddItemToCart")]
@@ -64,13 +70,12 @@ namespace CSharpestServer.Controllers
                 var cartItem = CartItemExists(ItemId, CartId);
                 if (cartItem != null)
                 {
-                    await _cartItemService.ChangeQuantityAsync(CartId, cartItem.Id, quantity, true);
+                    await _cartItemService.ChangeQuantity(CartId, cartItem.Id, quantity, true);
                 }
                 else
                 {
-                    await _cartItemService.AddAsync(ItemId, CartId, quantity);
+                    await _cartItemService.AddToCart(ItemId, CartId, quantity);
                 }
-
             }
             catch
             {
@@ -80,12 +85,12 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpPatch("ChangeQuantity")]
-        public async Task<IActionResult> ChangeQuantityAsync([FromForm] Guid itemId, Guid cartId, [FromForm] int quantity, [FromForm] bool add)
+        public async Task<IActionResult> ChangeQuantity([FromForm] Guid itemId, [FromForm] Guid cartId, [FromForm] int quantity, [FromForm] bool add)
         {
             try
             {
                 var cartItem = CartItemExists(itemId, cartId);
-                await _cartItemService.ChangeQuantityAsync(cartId, cartItem.Id, quantity, add);
+                await _cartItemService.ChangeQuantity(cartId, cartItem.Id, quantity, add);
             }
             catch
             {
@@ -99,7 +104,7 @@ namespace CSharpestServer.Controllers
         {
             try
             {
-                await _cartItemService.RemoveAsync(itemId, cartId);
+                await _cartItemService.RemoveFromCart(itemId, cartId);
             }
             catch
             {
@@ -113,7 +118,7 @@ namespace CSharpestServer.Controllers
         {
             try
             {
-                await _cartItemService.ClearCartAsync(cartId);
+                await _cartItemService.ClearCart(cartId);
             }
             catch
             {
@@ -122,6 +127,7 @@ namespace CSharpestServer.Controllers
             return Ok();
         }
 
+        //Private controller service to decide which service to call
         private CartItem? CartItemExists(Guid itemId, Guid cartId)
         {
             // Does this cart contain any quantity of this item

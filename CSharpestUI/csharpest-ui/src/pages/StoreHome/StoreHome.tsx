@@ -81,31 +81,6 @@ function StoreHome() {
       .catch((err) => console.log(err));
   }
 
-  // const getUsers = async () => {
-  //   const params = {
-  //     page: 1,
-  //     limit: 10,
-  //     sort: 'name',
-  //   };
-  //   try {
-  //     const response = await axios.get(baseURL, { params });
-  //     const users = response.data;
-  //     console.log(users);
-  //   } catch (error) {
-  //     console.error('Error fetching users:', error);
-  //   }
-  // };
-
-  // function getLocalStorage(key: string, initialValue: any) {
-  //   try {
-  //     const value = window.localStorage.getItem(key);
-  //     return value ? JSON.parse(value) : initialValue;
-  //   } catch (e) {
-  //     // if error, return initial value
-  //     return initialValue;
-  //   }
-  // }
-
   useEffect(() => {
     getItems();
   }, []);
