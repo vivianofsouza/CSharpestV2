@@ -5,6 +5,7 @@ import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Login from "./pages/Login/Login";
 import StoreManager from "./pages/StoreManager/StoreManager";
+import Profile from "./pages/Profile/Profile";
 import { useState } from "react";
 import Grid from "./Grid";
 
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="checkout" element={<Checkout />} />{" "}
         <Route path="storeManager" element={<StoreManager />} />{" "}
         <Route path="grid" element={<Grid />} />{" "}
+        <Route path="profile" element={<Profile />} />{" "}
       </Routes>
     </BrowserRouter>
   );

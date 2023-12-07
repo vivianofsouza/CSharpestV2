@@ -1,6 +1,15 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CSharpestUI",
+    "\\CSharpestUI\\csharpest-ui",
+    "\\CSharpestUI\\csharpest-ui\\src",
+    "\\CSharpestUI\\csharpest-ui\\src\\components",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages\\Cart",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages\\Login",
+    "\\CSharpestUI\\csharpest-ui\\src\\pages\\StoreHome"
   ],
+  "SelectedNode": "\\CSharpestUI\\csharpest-ui\\src\\components\\Navbar.tsx",
   "PreviewInSolutionExplorer": false
 }
