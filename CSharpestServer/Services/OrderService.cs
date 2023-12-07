@@ -1,6 +1,8 @@
 ﻿using CSharpestServer.Models;
 using CSharpestServer.Services.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Hosting;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 
 namespace CSharpestServer.Services
@@ -10,12 +12,14 @@ namespace CSharpestServer.Services
         private readonly StoreContext _storeContext;
         private readonly IItemService _itemService;
         private readonly ICartItemService _cartItemService;
+        private readonly IOrderItemService _orderItemService;
 
-        public OrderService(StoreContext storeContext, ItemService itemService, CartItemService cartItemService)
+        public OrderService(StoreContext storeContext, ItemService itemService, CartItemService cartItemService, OrderItemService orderItemService)
         {
             _storeContext = storeContext;
             this._itemService = itemService;
             this._cartItemService = cartItemService;
+            this._orderItemService = orderItemService;
         }
 
         public Task<Order> PlaceOrder(Guid userId, Card card, string address)
@@ -56,9 +60,9 @@ namespace CSharpestServer.Services
                 {
                     throw;
                 }               
-
+                
+                AddOrder(order, cart);
                 _cartItemService.ClearCart(cart.Id);
-                AddOrder(order);
                 return Task.FromResult(order);
 
             } catch
@@ -68,14 +72,38 @@ namespace CSharpestServer.Services
             
         }
 
-        public Task AddOrder(Order order)
+        // Creates an order and all of the Order Items, adds them to db
+        private async Task AddOrder(Order order, Cart cart)
         {
             try
             {
+                var inCart = _storeContext.cartItems.AsEnumerable();
+                var items = from i in inCart
+                            where i.CartId == cart.Id
+                            select i;
+
+                var inventory = _storeContext.items.AsEnumerable();
+                foreach (CartItem cItem in items)
+                {
+                    try
+                    {
+                        Item? realItem = _storeContext.items.Find(cItem.ItemId);
+                        if (realItem != null)
+                        {
+                            OrderItem newOI = new OrderItem(order.Id, realItem.Id, realItem.bundleId, cItem.Quantity, cItem.TotalPrice);
+                            await _orderItemService.AddAsync(newOI);
+                        }
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+                }
+
                 order = GetInitialisedId(order);
                 _storeContext.orders.Add(order);
                 _storeContext.SaveChanges();
-                return Task.CompletedTask;
+                return;
             } catch
             {
                 throw;

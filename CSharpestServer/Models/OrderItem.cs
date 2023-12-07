@@ -12,17 +12,17 @@ public class OrderItem : IComparable<OrderItem>
     public Guid Id { get; set; } // primary key: OrderItemId
     public Guid OrderId { get; set; }
     public Guid ItemId { get; set; }
-    public Guid BundleId { get; set; }
+    public Guid? BundleId { get; set; }
     public int Quantity { get; set; }
     public decimal Subtotal { get; set; }
 
 
-    public OrderItem(Order order, Item item, Bundle bundle, int quantity, decimal subtotal)
+    public OrderItem(Guid _orderId, Guid _itemId, Guid? _bundleId, int quantity, decimal subtotal)
     {
         Id = Guid.NewGuid();
-        OrderId = order.Id;
-        ItemId = item.Id;
-        BundleId = bundle.Id;
+        OrderId = _orderId;
+        ItemId = _itemId;
+        BundleId = _bundleId;
         Quantity = quantity;
         Subtotal = subtotal; // leave this for now but this is where the bundle effect will be calculated.
     }

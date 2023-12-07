@@ -20,11 +20,18 @@ namespace CSharpestServer.Services
         }
         public Task AddAsync(OrderItem item)
         {
-            item = GetInitialisedId(item);
-            _storeContext.orderItems.Add(item);
-            _storeContext.SaveChanges();
+            try
+            {
+                item = GetInitialisedId(item);
+                _storeContext.orderItems.Add(item);
+                _storeContext.SaveChanges();
 
-            return Task.CompletedTask;
+                return Task.CompletedTask;
+            } catch
+            {
+                throw;
+            }
+            
         }
         public Task AddRangeAsync(IEnumerable<OrderItem> items)
         {
