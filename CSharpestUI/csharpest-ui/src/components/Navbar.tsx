@@ -26,6 +26,9 @@ function NavBar() {
                         <a href="/checkout" id="nav_checkout">Checkout</a>
                     </li>
                     <li id="bar">
+                        <a href="/profile" id="nav_profile">Profile</a>
+                    </li>
+                    <li id="bar">
                         <a href="/" id="nav_logout" onClick={() => UserConstants.logOut()}>Logout</a>
                     </li>
                 </ul>
