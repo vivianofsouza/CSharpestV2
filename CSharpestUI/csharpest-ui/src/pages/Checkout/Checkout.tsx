@@ -19,7 +19,9 @@ function Checkout() {
         },
       })
       .then((response) => {
-        setCartList(response.data);
+        if (response.data != null) {
+          setCartList(response.data);
+        }
       })
       .catch((error) => console.log(error));
   };
