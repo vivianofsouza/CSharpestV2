@@ -17,6 +17,9 @@ function NavBar() {
             <Navbar.Brand href="/cart" id="nav_link">
               My Cart
             </Navbar.Brand>
+            <Navbar.Brand href="/profile" id="nav_link">
+                Profile
+            </Navbar.Brand>
             <Navbar.Brand
               href="/"
               id="nav_link"
