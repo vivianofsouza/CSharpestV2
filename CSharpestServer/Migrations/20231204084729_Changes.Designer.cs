@@ -182,7 +182,7 @@ namespace CSharpestServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BundleId")
+                    b.Property<Guid?>("bundleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ItemId")
