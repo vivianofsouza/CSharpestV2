@@ -38,13 +38,12 @@ function Login() {
           UserConstants.setLocalStorage("isAdmin", res.data.isAdmin);
           UserConstants.setLocalStorage("firstName", res.data.firstName);
           UserConstants.setLocalStorage("lastName", res.data.lastName);
-          console.log(UserConstants.getLocalStorage("userId", "dsdf"));
-          console.log(UserConstants.getLocalStorage("cartId", "dsdf"));
-          console.log(UserConstants.getLocalStorage("isAdmin", "dsdf"));
-          console.log(UserConstants.getLocalStorage("firstName", "dsdf"));
-          console.log(UserConstants.getLocalStorage("lastName", "dsdf"));
 
-          navigate("/storeHome");
+          if (UserConstants.getLocalStorage("isAdmin", "") == false) {
+            navigate("/storeHome");
+          } else {
+            navigate("/storeManager");
+          }
         } else {
           alert(
             "Invalid Username or Password. Please try again or Create an Account."
