@@ -121,8 +121,8 @@ function StoreHome() {
       </div>
 
       {/*Grid to display the inventory */}
-      <Container>
-        <Row>
+      <Container id="candy_container">
+        <Row id="candy_row">
           {itemList.map(
             (item: {
               id: UUID;
@@ -135,7 +135,7 @@ function StoreHome() {
             }) => (
               <>
                 <Col xs="3">
-                  <Card>
+                  <Card id="candy_card">
                     <Card.Header id="card_header">
                       {item.name}
                       <span id="bundle">{item.bundleId ? "BOGO" : ""}</span>
@@ -144,13 +144,18 @@ function StoreHome() {
                       {item.description}
                     </Card.Subtitle>
                     <Card.Body id="card_body">
-                      <img src={item.imageURL} width="150" height="150"></img>
+                      <img
+                        src={item.imageURL}
+                        width="150"
+                        height="150"
+                        id="candy_pic"
+                      ></img>
                       <br></br>${item.price.toFixed(2)} per oz. <br></br>
                       {item.stock} left in stock
                       <br></br>
                     </Card.Body>
 
-                    <Card.Footer>
+                    <Card.Footer id="card_footer">
                       <form id={`form-${item.id}`}>
                         <div id="rowone">
                           <span id="quan">
@@ -176,8 +181,6 @@ function StoreHome() {
                         </button>
                       </form>
                     </Card.Footer>
-
-                    <br></br>
                   </Card>
                 </Col>
               </>
