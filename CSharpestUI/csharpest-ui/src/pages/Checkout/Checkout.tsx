@@ -9,6 +9,8 @@ import UserConstants from "../../UserConstants";
 
 function Checkout() {
   const [cartList, setCartList] = useState<any>([]);
+  const [tax, setTax] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
 
   const getCartItems = () => {
@@ -26,18 +28,26 @@ function Checkout() {
       .catch((error) => console.log(error));
   };
 
-  const getCartTotal = () => {
+  const getCartTotals = () => {
     axios
-      .get("https://localhost:7150/Checkout/CalculateTotal")
-      .then((response: { data: React.SetStateAction<number> }) => {
-        setTotal(response.data);
+      .get("https://localhost:7150/Cart/GetCartTotals", {
+        params: {
+          userId: UserConstants.getLocalStorage("userId", ""),
+        },
+      })
+      .then((response) => {
+        if (response.data != null) {
+          setTotal(response.data.totalPrice);
+          setTax(response.data.tax);
+          setSubTotal(response.data.subtotal);
+        }
       })
       .catch((error: any) => console.log(error));
   };
 
   useEffect(() => {
     getCartItems();
-    //getCartTotal();
+    getCartTotals();
   }, []);
 
   return (
@@ -74,10 +84,10 @@ function Checkout() {
         )
       )}
 
-      <h4>Subtotal: $</h4>
+      <h4>Subtotal: ${subTotal}</h4>
       <h4>Discounts: $</h4>
-      <h4>Taxes: $</h4>
-      <h4>Shipping: $</h4>
+      <h4>Taxes: ${tax}</h4>
+      <h4>Shipping: $5.99</h4>
       <h4>Total: ${total}</h4>
 
       <Card id="payment_card">
