@@ -62,6 +62,20 @@ namespace CSharpestServer.Controllers
             
         }
 
+        //Get totals to display for entire cart
+        [HttpGet("GetCartTotals")]
+        public async Task<IActionResult> GetCartTotals(Guid UserId)
+        {
+            try
+            {
+                var cart = await _cartItemService.GetCartByUser(UserId);
+                return Ok(cart);
+            } catch
+            {
+                throw;
+            }
+        }
+
         [HttpPost("AddItemToCart")]
         public async Task<IActionResult> AddItemToCart([FromForm] Guid ItemId, [FromForm] Guid CartId, [FromForm] int quantity)
         {
