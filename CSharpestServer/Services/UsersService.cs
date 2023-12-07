@@ -90,6 +90,84 @@ namespace CSharpestServer.Services
                 
         }
 
+        //PROFILE MODIFICATION
+        public Task ChangeFName(Guid userId, string newName)
+        {
+            try
+            {
+                User? _user = _storeContext.users.Find(userId);
+                if (_user == null)
+                {
+                    throw new InvalidOperationException($"User with ID {userId} not found.");
+                }
+
+                _user.FirstName = newName;
+                _storeContext.SaveChanges();
+                return Task.CompletedTask;
+            }   catch
+            {
+                throw;
+            }
+        }
+        public Task ChangeLName(Guid userId, string newName)
+        {
+            try
+            {
+                User? _user = _storeContext.users.Find(userId);
+                if (_user == null)
+                {
+                    throw new InvalidOperationException($"User with ID {userId} not found.");
+                }
+
+                _user.LastName = newName;
+                _storeContext.SaveChanges();
+                return Task.CompletedTask;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public Task ChangeEmail(Guid userId, string email)
+        {
+            try
+            {
+                User? _user = _storeContext.users.Find(userId);
+                if (_user == null)
+                {
+                    throw new InvalidOperationException($"User with ID {userId} not found.");
+                }
+
+                _user.Email = email;
+                _storeContext.SaveChanges();
+                return Task.CompletedTask;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public Task ChangePW(Guid userId, string password)
+        {
+            try
+            {
+                User? _user = _storeContext.users.Find(userId);
+                if (_user == null)
+                {
+                    throw new InvalidOperationException($"User with ID {userId} not found.");
+                }
+
+                _user.Password = password;
+                _storeContext.SaveChanges();
+                return Task.CompletedTask;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         //PRIVATE SERVICES
         private User GetInitialisedId(User user)
         {

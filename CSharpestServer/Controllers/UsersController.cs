@@ -103,5 +103,66 @@ namespace CSharpestServer.Controllers
             
             return Ok();
         }
+
+        //PROFILE MODIFICATION CALLS
+        [HttpPatch("fName")]
+        public async Task<IActionResult> ChangeFirstName([FromForm] Guid id, [FromForm] string fName)
+        {
+            try
+            {
+                await _usersService.ChangeFName(id, fName);
+            }
+            catch
+            {
+                throw;
+            }
+
+            return Ok();
+        }
+
+        [HttpPatch("lName")]
+        public async Task<IActionResult> ChangeLastName([FromForm] Guid id, [FromForm] string lName)
+        {
+            try
+            {
+                await _usersService.ChangeFName(id, lName);
+            }
+            catch
+            {
+                throw;
+            }
+
+            return Ok();
+        }
+
+        [HttpPatch("email")]
+        public async Task<IActionResult> ChangeEmail([FromForm] Guid id, [FromForm] string email)
+        {
+            try
+            {
+                await _usersService.ChangeFName(id, email);
+            }
+            catch
+            {
+                throw;
+            }
+
+            return Ok();
+        }
+
+        [HttpPatch("password")]
+        public async Task<IActionResult> ChangePassword([FromForm] Guid id, [FromForm] string pw)
+        {
+            try
+            {
+                await _usersService.ChangeFName(id, pw);
+            }
+            catch
+            {
+                throw;
+            }
+
+            return Ok();
+        }
     }
 }
