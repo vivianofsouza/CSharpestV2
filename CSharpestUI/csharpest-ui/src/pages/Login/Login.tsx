@@ -88,7 +88,6 @@ function Login() {
                   ></input>
                   <label id="sm_label">Store Manager</label>
                   <br></br>
-                  <br></br>
                   <label id="email_label">Email</label>
                   <br></br>
                   <input id="email_input"></input>
