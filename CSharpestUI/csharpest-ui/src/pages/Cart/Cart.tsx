@@ -3,6 +3,10 @@ import axios from "axios";
 import "./Cart.css";
 import UserConstants from "../../UserConstants";
 import NavBar from "../../components/Navbar";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
+import Card from "react-bootstrap/esm/Card";
+import Container from "react-bootstrap/esm/Container";
 
 function Cart() {
     const [cartList, setCartList] = useState<any>([]);
@@ -40,21 +44,6 @@ function Cart() {
         console.log("success!");
       })
       .catch((error) => console.log(error));
-  };
-
-  const getCartTotals = () => {
-    axios
-      .get("https://localhost:7150/Cart/GetCartTotals", {
-        params: {
-          userId: UserConstants.getLocalStorage("userId", ""),
-        },
-      })
-      .then((response) => {
-        setPreSubTotal(response.data.preSubTotal);
-        console.log(response.data.preSubTotal);
-        console.log(UserConstants.getLocalStorage("userId", ""));
-      })
-      .catch((error: any) => console.log(error));
   };
 
   useEffect(() => {
