@@ -45,7 +45,7 @@ function Grid() {
             }) => (
               <>
                 <Col xs="3">
-                  <Card>
+                  <Card id="card">
                     <Card.Header>{item.name}</Card.Header>
                     <Card.Subtitle>{item.description}</Card.Subtitle>
                     <Card.Body>
