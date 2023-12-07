@@ -124,6 +124,8 @@ function StoreHome() {
             imageURL: string;
           }) => (
               <>
+
+                <div key={item.id} className="candy_card_container">
                   <Card>
                   
                   <Card.Header>{item.name}</Card.Header>
@@ -153,6 +155,7 @@ function StoreHome() {
             
                   <br></br>
                   </Card>
+                </div>
               </>
           )
         )}

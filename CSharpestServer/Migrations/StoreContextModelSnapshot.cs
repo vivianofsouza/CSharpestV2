@@ -71,6 +71,15 @@ namespace CSharpestServer.Migrations
                     b.Property<Guid>("userId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<decimal>("tax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("subtotal")
+                       .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("totalPrice")
+                       .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.ToTable("carts");
