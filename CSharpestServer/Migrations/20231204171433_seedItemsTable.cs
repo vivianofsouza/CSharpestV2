@@ -39,7 +39,7 @@ namespace CSharpestServer.Migrations
             migrationBuilder.InsertData(
                 table: "items",
                 columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
-                values: new object[] { new Guid("81590D03-CDF8-45BE-968D-124E4EA9BFAD"), "Milk chocolate with crispy rice", "Crunch", 0.62m, 500, null, "https://www.bulkecandy.com/cdn/shop/products/Nestle_Crunch_Bar__92165.jpeg?v=1455581612" });
+                values: new object[] { new Guid("81590D03-CDF8-45BE-968D-124E4EA9BFAD"), "Milk chocolate with crispy rice", "Crunch", 0.62m, 500, "C4229070-DC1C-4121-B5D7-D33231C24C20", "https://www.bulkecandy.com/cdn/shop/products/Nestle_Crunch_Bar__92165.jpeg?v=1455581612" });
 
             migrationBuilder.InsertData(
                  table: "items",
@@ -59,7 +59,7 @@ namespace CSharpestServer.Migrations
             migrationBuilder.InsertData(
                 table: "items",
                 columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
-                values: new object[] { new Guid("E3155287-24E0-4839-A1AB-65343934B164"), "Chewy cinnamon-flavored candy with a kick", "Hot Tamales", 0.69m, 500, null, "https://cdn11.bigcommerce.com/s-oxoxmgwste/images/stencil/1280x1280/products/2854/6164/just-born-hot-tamales__17030.1635047570.jpg?c=1" });
+                values: new object[] { new Guid("E3155287-24E0-4839-A1AB-65343934B164"), "Chewy cinnamon-flavored candy with a kick", "Hot Tamales", 0.69m, 500, "10836660-07A5-4BFE-95C5-BFF33D13C09D", "https://cdn11.bigcommerce.com/s-oxoxmgwste/images/stencil/1280x1280/products/2854/6164/just-born-hot-tamales__17030.1635047570.jpg?c=1" });
 
             migrationBuilder.InsertData(
                 table: "items",
@@ -69,7 +69,7 @@ namespace CSharpestServer.Migrations
             migrationBuilder.InsertData(
                  table: "items",
                  columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
-                 values: new object[] { new Guid("2A9773E0-2BDC-46F4-87E4-6D3F01F408A7"), "Soft, chewable, fruit-flavored taffy", "Starburst", 0.59m, 500, null, "https://i.ebayimg.com/images/g/AM4AAOSwmvpcPeir/s-l1600.jpg" });
+                 values: new object[] { new Guid("2A9773E0-2BDC-46F4-87E4-6D3F01F408A7"), "Soft, chewable, fruit-flavored taffy", "Starburst", 0.59m, 500, "C4229070-DC1C-4121-B5D7-D33231C24C20", "https://i.ebayimg.com/images/g/AM4AAOSwmvpcPeir/s-l1600.jpg" });
 
             migrationBuilder.InsertData(
                  table: "items",
@@ -79,27 +79,27 @@ namespace CSharpestServer.Migrations
             migrationBuilder.InsertData(
                  table: "items",
                  columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
-                 values: new object[] { new Guid("934693DF-8CE7-47E0-8F27-87179BF729D7"), "Soft peanut butter covered in chocolate", "Reeses Peanut Butter Cups", 0.50m, 500, null, "https://theeburgerdude.com/wp-content/uploads/2023/10/Reeses-Blog-3-scaled-735x735.jpg" });
+                 values: new object[] { new Guid("934693DF-8CE7-47E0-8F27-87179BF729D7"), "Soft peanut butter covered in chocolate", "Reeses Peanut Butter Cups", 0.50m, 500, "10836660-07A5-4BFE-95C5-BFF33D13C09D", "https://theeburgerdude.com/wp-content/uploads/2023/10/Reeses-Blog-3-scaled-735x735.jpg" });
 
             migrationBuilder.InsertData(
                  table: "items",
                  columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
-                 values: new object[] { new Guid("3DFC9A67-4F54-4A2E-8E86-A5BC91FB2098"), "Nougat topped with caramel, all covered in chocolate", "Milky Way", 0.37m, 500, null, "https://www.candywarehouse.com/cdn/shop/files/milky-way-candy-bars-36-piece-box-candy-warehouse-1.jpg?v=1689310168" });
+                 values: new object[] { new Guid("3DFC9A67-4F54-4A2E-8E86-A5BC91FB2098"), "Nougat topped with caramel, all covered in chocolate", "Milky Way", 0.37m, 500, "519DE2C1-84D3-49AB-A65A-D5E55C819D60", "https://www.candywarehouse.com/cdn/shop/files/milky-way-candy-bars-36-piece-box-candy-warehouse-1.jpg?v=1689310168" });
 
             migrationBuilder.InsertData(
                  table: "items",
                  columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
-                 values: new object[] { new Guid("5396BC7C-0917-41C0-BE43-B1734DC22A05"), "Button shaped chocolates covered in a hard shell", "M&Ms", 0.63m, 500, null, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSVQo_bNMGxqfCy7IuWgRsedgJoutNPiry8mXdkQOtLg&s" });
+                 values: new object[] { new Guid("5396BC7C-0917-41C0-BE43-B1734DC22A05"), "Button shaped chocolates covered in a hard shell", "M&Ms", 0.63m, 500, "519DE2C1-84D3-49AB-A65A-D5E55C819D60", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSVQo_bNMGxqfCy7IuWgRsedgJoutNPiry8mXdkQOtLg&s" });
 
             migrationBuilder.InsertData(
                  table: "items",
                  columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
-                 values: new object[] { new Guid("0692703F-794D-4181-BB50-B549468F019C"), "Chocolate covered wafers", "Kit Kat", 0.47m, 500, null, "https://www.candywarehouse.com/cdn/shop/files/kit-kat-candy-bars-36-piece-box-candy-warehouse-1_de97fd46-6fb3-4b97-89bd-1e2ce12b0270.jpg?v=1689309466" });
+                 values: new object[] { new Guid("0692703F-794D-4181-BB50-B549468F019C"), "Chocolate covered wafers", "Kit Kat", 0.47m, 500, "10836660-07A5-4BFE-95C5-BFF33D13C09D", "https://www.candywarehouse.com/cdn/shop/files/kit-kat-candy-bars-36-piece-box-candy-warehouse-1_de97fd46-6fb3-4b97-89bd-1e2ce12b0270.jpg?v=1689309466" });
 
             migrationBuilder.InsertData(
                  table: "items",
                  columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
-                 values: new object[] { new Guid("C0372D94-8C32-4D3B-8724-B83EB0EA8493"), "Fun-sized chocolate bar with caramel and crispy rice", "100 Grand", 0.61m, 500, null, "https://media.candynation.com/catalog/product/cache/37b377f2a2dfea30b42072b55c737119/1/0/100_grand_candy_bar.jpg" });
+                 values: new object[] { new Guid("C0372D94-8C32-4D3B-8724-B83EB0EA8493"), "Fun-sized chocolate bar with caramel and crispy rice", "100 Grand", 0.61m, 500, "519DE2C1-84D3-49AB-A65A-D5E55C819D60", "https://media.candynation.com/catalog/product/cache/37b377f2a2dfea30b42072b55c737119/1/0/100_grand_candy_bar.jpg" });
 
             migrationBuilder.InsertData(
                  table: "items",
