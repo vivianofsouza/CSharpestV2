@@ -111,16 +111,20 @@ namespace CSharpestServer.Migrations
                  columns: new[] { "Id", "Description", "Name", "Price", "Stock", "bundleId", "ImageURL" },
                  values: new object[] { new Guid("DA19C23E-A786-42C8-8BAC-E42047781F86"), "Almond and cocount flakes encased in milk chocolate", "Almond Joy", 0.65m, 500, null, "https://www.myamericanmarket.com/media/catalog/product/cache/b77af72255bfd3ee5c7895ae79272b2f/a/l/almond-joy-candy-bar-45g-1.6oz-1.jpg" });
 
+            migrationBuilder.InsertData(
+               table: "users",
+               columns: new[] { "Id", "CartId", "Email", "IsAdmin", "FirstName", "LastName", "Password", "Phone", "Address" },
+               values: new object[] { new Guid("e1888f30-26b3-4a24-9760-d6c0e0d0807a"), new Guid("00000000-0000-0000-0000-000000000000"), "boss@email.com", true, "The", "Boss", "doingitmyway", "8437771211", "898 HQ St" });
 
             migrationBuilder.InsertData(
                  table: "users",
                  columns: new[] { "Id", "CartId", "Email", "IsAdmin", "FirstName", "LastName", "Password", "Phone", "Address" },
-                 values: new object[] { new Guid("93F164A3-00AE-453E-B21A-C18EA9A43543"), new Guid("039D8391-FE9C-4506-80E3-CA6FE7B05625"), "rando2@email.com", false, "Uncle", "Surname", "password1#", "8037771211", "The Addy St" });
+                 values: new object[] { new Guid("93F164A3-00AE-453E-B21A-C18EA9A43543"), new Guid("039D8391-FE9C-4506-80E3-CA6FE7B05625"), "rando2@email.com", false, "Uncle", "Surname", "password1#", "8037771211", "456 Addy St" });
 
             migrationBuilder.InsertData(
                  table: "users",
                  columns: new[] { "Id", "CartId", "Email", "IsAdmin", "FirstName", "LastName", "Password", "Phone", "Address" },
-                 values: new object[] { new Guid("628EB41B-EF6A-4CAB-A860-C916E27272B6"), new Guid("73BDA49F-3457-4D0E-A41B-B471346F9B3C"), "rando@email.com", false, "Doc", "Surname", "password1", "8037771111", "My Addy St" });
+                 values: new object[] { new Guid("628EB41B-EF6A-4CAB-A860-C916E27272B6"), new Guid("73BDA49F-3457-4D0E-A41B-B471346F9B3C"), "rando@email.com", false, "Doc", "Surname", "password1", "8037771111", "31 Addy St" });
 
             migrationBuilder.InsertData(
                  table: "cards",
