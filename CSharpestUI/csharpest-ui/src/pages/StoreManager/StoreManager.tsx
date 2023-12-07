@@ -110,6 +110,69 @@ function StoreHome() {
       .catch((error) => console.log(error));
   }
 
+  function deleteItem(fromFormItem: string) {
+    console.log(fromFormItem + "item");
+    const form = document.getElementById(`form-${fromFormItem}`);
+
+    form!.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
+    axios
+      .delete("https://localhost:7150/Item/", {
+        params: {
+          itemId: fromFormItem,
+        },
+      })
+      .then((response) => {
+        alert("Item stock successfully deleted.");
+      })
+      .catch((error) => console.log(error));
+  }
+
+  function addItemToStore() {
+    const formData = new FormData();
+
+    const form = document.getElementById("payment_form");
+
+    const name = (document.getElementById("itemName") as HTMLInputElement)
+      .value;
+
+    const description = (
+      document.getElementById("itemDescription") as HTMLInputElement
+    ).value;
+
+    const image = (document.getElementById("itemImage") as HTMLInputElement)
+      .value;
+
+    const price = (document.getElementById("itemPrice") as HTMLInputElement)
+      .value;
+
+    const stock = (document.getElementById("itemStock") as HTMLInputElement)
+      .value;
+
+    const sale = (document.getElementById("itemSale") as HTMLInputElement)
+      .value;
+
+    form!.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
+    formData.append("name", name);
+    formData.append("desc", description);
+    formData.append("price", price);
+    formData.append("url", image);
+    formData.append("stock", stock);
+    formData.append("bundle", sale);
+
+    axios
+      .post("https://localhost:7150/Item/", formData)
+      .then((response) => {
+        alert("Item successfully added.");
+      })
+      .catch((error) => console.log(error));
+  }
+
   useEffect(() => {
     getItems();
   }, []);
@@ -184,7 +247,10 @@ function StoreHome() {
 
                           <div id="rowone">
                             <label id="price">New Price</label>
-                            <input id={`price-${item.id}`} className ="answer"></input>
+                            <input
+                              id={`price-${item.id}`}
+                              className="answer"
+                            ></input>
 
                             <button
                               id="modifyPrice"
@@ -197,7 +263,10 @@ function StoreHome() {
 
                           <div id="rowtwo">
                             <label id="stock">New Stock</label>
-                            <input id={`stock-${item.id}`} className="answer"></input>
+                            <input
+                              id={`stock-${item.id}`}
+                              className="answer"
+                            ></input>
 
                             <button
                               id="modifyStock"
@@ -209,11 +278,10 @@ function StoreHome() {
                           </div>
 
                           <div id="rowthree">
-
                             <button
                               id="deleteItem"
                               type="submit"
-                              onClick={() => modifyStock(item.id)}
+                              onClick={() => deleteItem(item.id)}
                             >
                               Delete Item
                             </button>
@@ -228,45 +296,54 @@ function StoreHome() {
           </Row>
         </Container>
 
-      <Card id="add_item_card">
-        <Card.Header id="add_item_header">
-          Add New Item to CSharpest Store
-        </Card.Header>
-        <Card.Body id="add_item_body">
-          <Card.Text id="add_item_text">
-            <form id="payment_form">
-              <label id="label2">Item Name</label>
-              <br></br>
-              <input id="input"></input>
-              <br></br>
+        <Card id="add_item_card">
+          <Card.Header id="add_item_header">
+            Add New Item to CSharpest Store
+          </Card.Header>
+          <Card.Body id="add_item_body">
+            <Card.Text id="add_item_text">
+              <form id="payment_form">
+                <label id="label2">Item Name</label>
+                <br></br>
+                <input id="itemName"></input>
+                <br></br>
 
-              <label id="label2">Item Description</label>
-              <br></br>
-              <input id="input"></input>
-              <br></br>
+                <label id="label2">Item Description</label>
+                <br></br>
+                <input id="itemDescription"></input>
+                <br></br>
 
-              <label id="label2">Item Price (per oz.)</label>
-              <br></br>
-              <input id="input"></input>
-              <br></br>
+                <label id="label2">Image URL</label>
+                <br></br>
+                <input id="itemImage"></input>
+                <br></br>
 
-              <label id="label2">Stock</label>
-              <br></br>
-              <input id="input"></input>
-              <br></br>
+                <label id="label2">Item Price (per oz.)</label>
+                <br></br>
+                <input id="itemPrice"></input>
+                <br></br>
 
-              <label id="label2">Sale</label>
-              <br></br>
-              <input id="input"></input>
-              <br></br>
+                <label id="label2">Stock</label>
+                <br></br>
+                <input id="itemStock"></input>
+                <br></br>
 
-              <button type="submit" id="add_item_button">
-                Add Item to CSharpest Store
-              </button>
-            </form>
-          </Card.Text>
-        </Card.Body>
-      </Card>
+                <label id="label2">Sale</label>
+                <br></br>
+                <input id="itemSale"></input>
+                <br></br>
+
+                <button
+                  type="submit"
+                  id="add_item_button"
+                  onClick={addItemToStore}
+                >
+                  Add Item to CSharpest Store
+                </button>
+              </form>
+            </Card.Text>
+          </Card.Body>
+        </Card>
       </div>
     </>
   );
