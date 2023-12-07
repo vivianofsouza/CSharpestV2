@@ -14,8 +14,8 @@ function StoreHome() {
   const [itemList, setItemsList] = useState<any>([]);
 
   // Req to get all store inventory items. The default sort is by Price.
-    const getItems = () => {
-        console.log(UserConstants.getLocalStorage("userId", ""));
+  const getItems = () => {
+    console.log(UserConstants.getLocalStorage("userId", ""));
     axios
       .get("https://localhost:7150/Item/GetAllItemsPriceSort")
       .then((response) => {
@@ -140,7 +140,26 @@ function StoreHome() {
                   <Card id="candy_card">
                     <Card.Header id="card_header">
                       {item.name}
-                      <span id="bundle">{item.bundleId ? "BOGO" : ""}</span>
+                      <span id="bundle">
+                        {item.bundleId == "6818fb3a-3079-4117-ba4c-7c16be4f9422"
+                          ? "BOGO"
+                          : ""}
+                      </span>
+                      <span id="bundle1">
+                        {item.bundleId == "10836660-07a5-4bfe-95c5-bff33d13c09d"
+                          ? "halfoff"
+                          : ""}
+                      </span>
+                      <span id="bundle2">
+                        {item.bundleId == "c4229070-dc1c-4121-b5d7-d33231c24c20"
+                          ? "thirtyoff"
+                          : ""}
+                      </span>
+                      <span id="bundle3">
+                        {item.bundleId == "519de2c1-84d3-49ab-a65a-d5e55c819d60"
+                          ? "tenoff"
+                          : ""}
+                      </span>
                     </Card.Header>
                     <Card.Subtitle id="card_subtitle">
                       {item.description}
