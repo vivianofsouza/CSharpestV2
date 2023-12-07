@@ -6,6 +6,7 @@ import "./Checkout.css";
 import Card from "react-bootstrap/Card";
 import NavBar from "../../components/Navbar";
 import UserConstants from "../../UserConstants";
+import Col from "react-bootstrap/esm/Col";
 
 function Checkout() {
   const [cartList, setCartList] = useState<any>([]);
@@ -42,10 +43,6 @@ function Checkout() {
         setTax(response.data.tax);
         setPreSubTotal(response.data.preSubTotal);
         setPostSubTotal(response.data.postSubTotal);
-        console.log(response.data.preSubTotal);
-        console.log(response.data.postSubTotal);
-        console.log(response.data.tax);
-        console.log(response.data.totalPrice);
       })
       .catch((error: any) => console.log(error));
   };
@@ -71,16 +68,23 @@ function Checkout() {
           totalPrice: number;
         }) => (
           <>
-            <div id={`itemId-${cartItem.id}`}>
-              <li>
-                <img src={cartItem.imageURL} width="200" height="200"></img>
-              </li>
-              <li>{cartItem.name}</li>
-              <li>{cartItem.unitPrice}</li>
-              <li>{cartItem.quantity}</li>
-              <li>{cartItem.totalPrice}</li>
-              <br></br>
-            </div>
+            <Col ls="2">
+              <Card>
+                <div id={`itemId-${cartItem.id}`}>
+                  <Card.Header id="card_header">{cartItem.name}</Card.Header>
+                  <Card.Body id="card_body">
+                    <img src={cartItem.imageURL} width="200" height="200"></img>
+                    <br></br>
+                    Price by oz: {cartItem.unitPrice}
+                    <br></br>
+                    Quantity: {cartItem.quantity} oz
+                    <br></br>
+                    Total Price: {cartItem.totalPrice}
+                    <br></br>
+                  </Card.Body>
+                </div>
+              </Card>
+            </Col>
           </>
         )
       )}
