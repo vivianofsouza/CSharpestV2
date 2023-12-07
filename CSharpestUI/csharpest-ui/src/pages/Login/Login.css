@@ -118,6 +118,18 @@ body {
     margin-bottom: 2%;
 }
 
+#email_input {
+    height: 18%;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+#password_input {
+    height: 18%;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
 #login_submit_button {
     margin-top: 4%;
     margin-left: 74%;
@@ -166,7 +178,7 @@ body {
 }
 
 #create_account_col {
-    width: 30%;
+    width: 35%;
     margin-top: 5%;
     margin-left: 5%;
 }
