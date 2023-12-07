@@ -58,7 +58,7 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpPatch("ChangeStock")]
-        public async Task<IActionResult> ChangeStock(Guid itemId, int quantity, bool add)
+        public async Task<IActionResult> ChangeStock([FromForm] Guid itemId, [FromForm] int quantity, [FromForm] bool add)
         {
             try {
                 await _itemService.ChangeStock(itemId, quantity, add);
@@ -85,7 +85,7 @@ namespace CSharpestServer.Controllers
 
 
         [HttpPatch("ChangePrice")]
-        public async Task<IActionResult> ChangePrice(Guid itemId, decimal price)
+        public async Task<IActionResult> ChangePrice([FromForm] Guid itemId, [FromForm] decimal price)
         {
             try
             {
@@ -99,9 +99,10 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddItem(Item item)
+        public async Task<IActionResult> AddItem([FromForm] string name, [FromForm] string desc, [FromForm] decimal price, [FromForm] int stock, [FromForm] Guid? bundle, [FromForm] string url)
         {
             try {
+                Item item = new Item(name, desc, price, stock, bundle, url);
                 await _itemService.AddItem(item);
 
             } catch
@@ -112,7 +113,7 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> RemoveItem(Guid itemId)
+        public async Task<IActionResult> RemoveItem([FromForm] Guid itemId)
         {
             try
             {

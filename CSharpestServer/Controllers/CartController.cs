@@ -57,7 +57,7 @@ namespace CSharpestServer.Controllers
 
             } catch
             {
-                throw;
+                return Ok(null);
             }
             
         }
