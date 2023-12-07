@@ -6,6 +6,9 @@ import "./StoreHome.css";
 import { UUID } from "crypto";
 import UserConstants from "../../UserConstants";
 import NavBar from "../../components/Navbar";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col"
+import Card from "react-bootstrap/Card"
 
 function StoreHome() {
   const [itemList, setItemsList] = useState<any>([]);
@@ -111,9 +114,9 @@ function StoreHome() {
       <NavBar></NavBar>
 
       <h1 id="shop_header">
-        Welcome, {UserConstants.getLocalStorage("firstName", "")}
+        Welcome {UserConstants.getLocalStorage("firstName", "")}!
       </h1>
-      <h1 id="shop_header">Shop the CSharpest Store</h1>
+      <h1 id="shop_header">Shop the CSharpest Store Now</h1>
 
       <div id="sort_buttons">
         <button id="sort_by_price" type="submit" onClick={getItems}>
@@ -134,44 +137,53 @@ function StoreHome() {
         </button>
       </div>
 
-      {itemList.map(
-        (item: {
-          id: UUID;
-          bogo: boolean;
-          stock: number;
-          price: number;
-          description: string;
-          name: string;
-          imageURL: string;
-        }) => (
-          <>
-            <li>{item.name}</li>
-            <li>{item.description}</li>
-            <li>Price: {item.price}</li>
-            <li>Quantity left: {item.stock}</li>
-            <li>{item.bogo ? "BOGO" : ""}</li>
-            <li>
-              <img src={item.imageURL} width="200" height="200"></img>
-            </li>
-            <li>
-              <form id={`form-${item.id}`}>
-                <label>Quantity</label>
-                <input id={`quantity-${item.id}`}></input>
-                <input
-                  type="hidden"
-                  id={`itemId-${item.id}`}
-                  value={item.id}
-                ></input>
 
-                <button type="submit" onClick={() => addToCart(item.id)}>
-                  Add to Cart
-                </button>
-              </form>
-            </li>
-            <br></br>
-          </>
-        )
-      )}
+        {itemList.map(
+          (item: {
+            id: UUID;
+            bogo: boolean;
+            stock: number;
+            price: number;
+            description: string;
+            name: string;
+            imageURL: string;
+          }) => (
+              <>
+                  <Card>
+                  
+                  <Card.Header>{item.name}</Card.Header>
+                  <Card.Subtitle>{item.description}</Card.Subtitle>
+                  <Card.Body><img src={item.imageURL} width="150" height="150"></img>
+                    <br></br>
+                    ${item.price} per oz.    {item.bogo ? "BOGO" : ""}
+                    <br></br>
+                    {item.stock} left in stock
+                    <br></br>
+                  </Card.Body>
+
+                  <Card.Footer>
+                    <form id={`form-${item.id}`}>
+                      <label>Quantity</label>
+                      <input id={`quantity-${item.id}`}></input>
+                      <input
+                        type="hidden"
+                        id={`itemId-${item.id}`}
+                        value={item.id}
+                      ></input>
+
+                      <button type="submit" onClick={() => addToCart(item.id)}>
+                        Add to Cart
+                      </button>
+                    </form></Card.Footer>
+            
+                  <br></br>
+                  </Card>
+              </>
+          )
+        )}
+
+
+
     </div>
   );
 }
