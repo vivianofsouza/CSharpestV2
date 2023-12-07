@@ -124,6 +124,11 @@ namespace CSharpestServer.Services
                     }
                 }
                 _storeContext.SaveChanges();
+
+                Cart? _cart = _storeContext.carts.Find(cartId);
+                UpdateCartTotals(_cart);
+                _storeContext.SaveChanges();
+
                 return Task.FromResult(items);
             }
             catch
@@ -147,6 +152,11 @@ namespace CSharpestServer.Services
                 {
                     _storeContext.cartItems.Remove(item);
                     _storeContext.SaveChanges();
+
+                    Cart? _cart = _storeContext.carts.Find(cartId);
+                    UpdateCartTotals(_cart);
+                    _storeContext.SaveChanges();
+
                     return Task.CompletedTask;
                 }
 
@@ -180,20 +190,30 @@ namespace CSharpestServer.Services
         private Cart UpdateCartTotals(Cart cart)
         {
             var items = GetItemsByCart(cart.Id);
-            if (cart != null && items.Result != null)
-            {
-                cart.Subtotal = 0;
-                cart.Tax = 0;
-                cart.TotalPrice = 0;
-                foreach (CartItem ci in items.Result)
+            
+            if (cart != null)
+            { 
+                if (items.Result != null)
                 {
-                    cart.Subtotal += ci.TotalPrice;
-                    cart.Tax += ci.TotalPrice * 0.08M;
+                    cart.Subtotal = 0;
+                    cart.Tax = 0;
+                    cart.TotalPrice = 0;
+                    foreach (CartItem ci in items.Result)
+                    {
+                        cart.Subtotal += ci.TotalPrice;
+                        cart.Tax += ci.TotalPrice * 0.08M;
+                    }
+                    cart.TotalPrice = cart.Subtotal + cart.Tax;
+                    cart.TotalPrice += 5.99M;
+                    return cart;
+                } else
+                {
+                    cart.Subtotal = 0;
+                    cart.Tax = 0;
+                    cart.TotalPrice = 0;
+                    return cart;
                 }
-                cart.TotalPrice = cart.Subtotal + cart.Tax;
-                cart.TotalPrice += 5.99M;
-                return cart;
-
+                
             } else
             {
                 return cart;
