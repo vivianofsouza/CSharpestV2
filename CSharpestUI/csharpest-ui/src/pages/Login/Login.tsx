@@ -13,8 +13,72 @@ function Login() {
   // creates navigation object to navigate to next page based on whether a user is store manager or customer
   const navigate = useNavigate();
 
+  function createUser() {
+    const form = document.getElementById("create_account_form");
+
+    form!.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
+    const formData = new FormData();
+    var isAdmin = "false";
+
+    if (
+      (document.getElementById("store_manager_account") as HTMLInputElement)
+        .value
+    ) {
+      isAdmin = "true";
+    }
+
+    const email = (document.getElementById("email_input") as HTMLInputElement)
+      .value;
+    const fName = (
+      document.getElementById("first_name_input") as HTMLInputElement
+    ).value;
+    const lName = (
+      document.getElementById("last_name_input") as HTMLInputElement
+    ).value;
+    const pw = (document.getElementById("password_input") as HTMLInputElement)
+      .value;
+
+    formData.append("isAdmin", isAdmin);
+    formData.append("email", email);
+    formData.append("fName", fName);
+    formData.append("lName", lName);
+    formData.append("pw", pw);
+
+    axios
+      .post("https://localhost:7150/api/Users/", formData)
+      .then((res) => {
+        if (res.status == 201) {
+          loginUser();
+          // UserConstants.setLocalStorage("userId", res.data.id);
+          // UserConstants.setLocalStorage("cartId", res.data.cartId);
+          // UserConstants.setLocalStorage("isAdmin", res.data.isAdmin);
+          // UserConstants.setLocalStorage("firstName", res.data.firstName);
+          // UserConstants.setLocalStorage("lastName", res.data.lastName);
+
+          // if (UserConstants.getLocalStorage("isAdmin", "") == false) {
+          //   navigate("/storeHome");
+          // } else {
+          //   navigate("/storeManager");
+          // }
+        } else {
+          alert(
+            "Couldn't create account. Invalid username, password, or email. Please check these values and try again."
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(
+          "Couldn't create account. Invalid username, password, or email. Please check these values and try again."
+        );
+      });
+  }
+
   // handles customer login
-  function loginCustomer() {
+  function loginUser() {
     const form = document.getElementById("login_form");
 
     form!.addEventListener("submit", (e) => {
@@ -22,9 +86,11 @@ function Login() {
     });
 
     const formData = new FormData();
-    const email = (document.getElementById("Email") as HTMLInputElement).value;
-    const password = (document.getElementById("Password") as HTMLInputElement)
+    const email = (document.getElementById("email_input") as HTMLInputElement)
       .value;
+    const password = (
+      document.getElementById("password_input") as HTMLInputElement
+    ).value;
     formData.append("Email", email);
     formData.append("Password", password);
 
@@ -104,7 +170,11 @@ function Login() {
                   <br></br>
                   <input id="password_input"></input>
                   <br></br>
-                  <button type="submit" id="create_account_submit_button">
+                  <button
+                    type="submit"
+                    id="create_account_submit_button"
+                    onClick={createUser}
+                  >
                     Create Account
                   </button>
                 </form>
@@ -121,16 +191,16 @@ function Login() {
                 <form id="login_form">
                   <label id="email_label">Email</label>
                   <br></br>
-                  <input id="Email"></input>
+                  <input id="email_input"></input>
                   <br></br>
                   <label id="password_label">Password</label>
                   <br></br>
-                  <input id="Password"></input>
+                  <input id="password_input"></input>
                   <br></br>
                   <button
                     type="submit"
                     id="login_submit_button"
-                    onClick={loginCustomer}
+                    onClick={loginUser}
                   >
                     Login{" "}
                   </button>

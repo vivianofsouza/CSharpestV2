@@ -12,7 +12,7 @@ function StoreHome() {
   // we're getting the list of all items here in this GET request. It's stored in a JavaScript array. Use developer tools to view what it looks like. You'll must likely need to map it into table to display it onto the screen.
   const getItems = () => {
     axios
-      .get("https://localhost:7150/Item/GetAllItems")
+      .get("https://localhost:7150/Item/GetAllItemsPriceSort")
       .then((response) => {
         setItemsList(response.data);
       })
@@ -48,7 +48,7 @@ function StoreHome() {
     <>
       <NavBar></NavBar>
       <div>
-      <h1 id="store_manager_header">Manage the CSharpest Store Now</h1>
+        <h1 id="store_manager_header">Manage the CSharpest Store Now</h1>
         {itemList.map(
           (item: {
             itemId: UUID;
