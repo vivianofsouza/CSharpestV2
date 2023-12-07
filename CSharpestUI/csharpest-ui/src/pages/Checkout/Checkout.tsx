@@ -47,6 +47,45 @@ function Checkout() {
       .catch((error: any) => console.log(error));
   };
 
+  const placeOrder = () => {
+    const formData = new FormData();
+
+    const cardNo = (document.getElementById("cardNo") as HTMLInputElement)
+      .value;
+    const expMonth = (document.getElementById("expMonth") as HTMLInputElement)
+      .value;
+    const expYear = (document.getElementById("expYear") as HTMLInputElement)
+      .value;
+    const cvv = (document.getElementById("cvv") as HTMLInputElement).value;
+    const cardName = (document.getElementById("cardName") as HTMLInputElement)
+      .value;
+    const zip = (document.getElementById("zip") as HTMLInputElement).value;
+
+    const cardAddress = (
+      document.getElementById("cardAddress") as HTMLInputElement
+    ).value;
+
+    const form = document.getElementById("payment_form");
+
+    form!.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
+    formData.append("userId", UserConstants.getLocalStorage("userId", ""));
+    formData.append("cardNo", cardNo);
+    formData.append("month", expMonth);
+    formData.append("year", expYear);
+    formData.append("name", cardName);
+    formData.append("cVV", cvv);
+    formData.append("zip", zip);
+    formData.append("address", cardAddress);
+
+    axios
+      .post("https://localhost:7150/Order/")
+      .then((response) => console.log(response))
+      .catch((error: any) => console.log(error));
+  };
+
   useEffect(() => {
     getCartItems();
     getCartTotals();
@@ -57,37 +96,42 @@ function Checkout() {
       <NavBar></NavBar>
 
       <h1 id="checkout_header">Checkout</h1>
-
-      {cartList.map(
-        (cartItem: {
-          id: string;
-          name: string;
-          imageURL: string;
-          unitPrice: number;
-          quantity: number;
-          totalPrice: number;
-        }) => (
-          <>
-            <Col ls="2">
-              <Card id="cart_card">
-                <div id={`itemId-${cartItem.id}`}>
-                  <Card.Header id="cart_header">{cartItem.name}</Card.Header>
-                  <Card.Body id="cart_body">
-                    <img src={cartItem.imageURL} width="200" height="200"></img>
-                    <br></br>
-                    Price by oz: ${cartItem.unitPrice}
-                    <br></br>
-                    Quantity: {cartItem.quantity} oz
-                    <br></br>
-                    Total Price: ${cartItem.totalPrice}
-                    <br></br>
-                  </Card.Body>
-                </div>
-              </Card>
-            </Col>
-          </>
-        )
-      )}
+      <div id="cart">
+        {cartList.map(
+          (cartItem: {
+            id: string;
+            name: string;
+            imageURL: string;
+            unitPrice: number;
+            quantity: number;
+            totalPrice: number;
+          }) => (
+            <>
+              <Col ls="2">
+                <Card id="cart_card">
+                  <div id={`itemId-${cartItem.id}`}>
+                    <Card.Header id="cart_header">{cartItem.name}</Card.Header>
+                    <Card.Body id="cart_body">
+                      <img
+                        src={cartItem.imageURL}
+                        width="200"
+                        height="200"
+                      ></img>
+                      <br></br>
+                      Price by oz: ${cartItem.unitPrice}
+                      <br></br>
+                      Quantity: {cartItem.quantity} oz
+                      <br></br>
+                      Total Price: ${cartItem.totalPrice}
+                      <br></br>
+                    </Card.Body>
+                  </div>
+                </Card>
+              </Col>
+            </>
+          )
+        )}
+      </div>
 
       <h4>Subtotal: ${preSubTotal}</h4>
       <h4>Discounts: ${postSubTotal}</h4>
@@ -104,35 +148,44 @@ function Checkout() {
             <form id="payment_form">
               <label id="label">Card number</label>
               <br></br>
-              <input id="input"></input>
+              <input id="cardNo"></input>
               <br></br>
 
               <label id="label">Expiration Month</label>
               <br></br>
-              <input id="input"></input>
+              <input id="expMonth"></input>
               <br></br>
 
               <label id="label">Expiration Year</label>
               <br></br>
-              <input id="input"></input>
+              <input id="expYear"></input>
               <br></br>
 
               <label id="label">CVV</label>
               <br></br>
-              <input id="input"></input>
+              <input id="cvv"></input>
               <br></br>
 
               <label id="label">Cardholder Name</label>
               <br></br>
-              <input id="input"></input>
+              <input id="cardName"></input>
               <br></br>
 
               <label id="label">Billing Address</label>
               <br></br>
-              <input id="input"></input>
+              <input id="cardAddress"></input>
               <br></br>
 
-              <button type="submit" id="confirm_payment_button">
+              <label id="label">Zip Code</label>
+              <br></br>
+              <input id="zip"></input>
+              <br></br>
+
+              <button
+                type="submit"
+                id="confirm_payment_button"
+                onClick={placeOrder}
+              >
                 Purchase
               </button>
             </form>

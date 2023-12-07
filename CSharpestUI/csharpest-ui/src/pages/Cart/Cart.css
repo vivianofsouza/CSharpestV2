@@ -13,3 +13,90 @@
     font-size: 150%;
     color: #385170;
 }
+
+#checkout_header {
+    text-align: center;
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    line-height: 80%;
+    font-size: 250%;
+    padding: 2%;
+}
+
+h4 {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 125%;
+    color: #385170;
+}
+
+#payment_card {
+    background-color: #d3d3d3;
+    border: 2px solid #385170;
+    border-radius: 5px;
+    width: 40%;
+    margin-top: 5%;
+    margin-left: 30%;
+}
+
+#payment_card_header {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 200%;
+    text-align:center;
+    color: #385170;
+    margin-bottom: 2%;
+}
+
+#payment_form {
+    width: 90%;
+    margin-left: 4%;
+}
+
+#label {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    font-size: 125%;
+    color: #385170;
+}
+
+#input {
+    height: 18%;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+#confirm_payment_button {
+    margin-top: 4%;
+    margin-left: 74%;
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 28%;
+}
+
+#card_header {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    float:left;
+    margin-right: .5%;  
+    font-size:135%;
+    font-weight:bold;
+    text-align: center;
+}
+
+#card_subtitle {
+    font-family: 'Palatino Linotype';
+    color: #385170;
+    font-size:110%;
+    padding:5%;
+}
+
+#card_body {
+    font-family: 'Palatino Linotype';
+    color: #385170;
+    font-weight:bold;
+}

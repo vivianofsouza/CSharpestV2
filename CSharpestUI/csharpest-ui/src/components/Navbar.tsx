@@ -19,6 +19,10 @@ function NavBar() {
           Home
         </Navbar.Brand>
 
+        <Navbar.Brand href="/cart" id="nav_link">
+          {UserConstants.getLocalStorage("isAdmin", "") ? "" : <h3>My Cart</h3>}
+        </Navbar.Brand>
+
         <Navbar.Brand href="/checkout" id="nav_link">
           {UserConstants.getLocalStorage("isAdmin", "") ? (
             ""
@@ -26,13 +30,8 @@ function NavBar() {
             <h3>Checkout</h3>
           )}
         </Navbar.Brand>
-
-        <Navbar.Brand href="/cart" id="nav_link">
-          {UserConstants.getLocalStorage("isAdmin", "") ? "" : <h3>My Cart</h3>}
-        </Navbar.Brand>
-
         <Navbar.Brand href="/profile" id="nav_link">
-            <h3>Profile</h3>
+          <h3>Profile</h3>
         </Navbar.Brand>
 
         <Navbar.Brand
