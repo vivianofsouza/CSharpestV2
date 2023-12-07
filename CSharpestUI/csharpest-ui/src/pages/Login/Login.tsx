@@ -51,18 +51,19 @@ function Login() {
       .post("https://localhost:7150/api/Users/", formData)
       .then((res) => {
         if (res.status == 201) {
-          loginUser();
-          // UserConstants.setLocalStorage("userId", res.data.id);
-          // UserConstants.setLocalStorage("cartId", res.data.cartId);
-          // UserConstants.setLocalStorage("isAdmin", res.data.isAdmin);
-          // UserConstants.setLocalStorage("firstName", res.data.firstName);
-          // UserConstants.setLocalStorage("lastName", res.data.lastName);
+          UserConstants.setLocalStorage("userId", res.data.id);
+          UserConstants.setLocalStorage("cartId", res.data.cartId);
+          UserConstants.setLocalStorage("isAdmin", res.data.isAdmin);
+          UserConstants.setLocalStorage("firstName", res.data.firstName);
+          UserConstants.setLocalStorage("lastName", res.data.lastName);
 
-          // if (UserConstants.getLocalStorage("isAdmin", "") == false) {
-          //   navigate("/storeHome");
-          // } else {
-          //   navigate("/storeManager");
-          // }
+          console.log(UserConstants.getLocalStorage("userId", ""));
+
+          if (UserConstants.getLocalStorage("isAdmin", "") == false) {
+            navigate("/storeHome");
+          } else {
+            navigate("/storeManager");
+          }
         } else {
           alert(
             "Couldn't create account. Invalid username, password, or email. Please check these values and try again."
@@ -86,11 +87,11 @@ function Login() {
     });
 
     const formData = new FormData();
-    const email = (document.getElementById("email_input") as HTMLInputElement)
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+    const password = (document.getElementById("password") as HTMLInputElement)
       .value;
-    const password = (
-      document.getElementById("password_input") as HTMLInputElement
-    ).value;
+
+    console.log(email + "email");
     formData.append("Email", email);
     formData.append("Password", password);
 
@@ -191,11 +192,11 @@ function Login() {
                 <form id="login_form">
                   <label id="email_label">Email</label>
                   <br></br>
-                  <input id="email_input"></input>
+                  <input id="email"></input>
                   <br></br>
                   <label id="password_label">Password</label>
                   <br></br>
-                  <input id="password_input"></input>
+                  <input id="password"></input>
                   <br></br>
                   <button
                     type="submit"

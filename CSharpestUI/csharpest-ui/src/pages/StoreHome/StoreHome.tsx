@@ -94,7 +94,7 @@ function StoreHome() {
 
       <div id="header">
         <h1 id="shop_header">
-          Welcome, {UserConstants.getLocalStorage("firstName", "")}{" "}
+          Welcome, {UserConstants.getLocalStorage("firstName", "")} {}
           {UserConstants.getLocalStorage("lastName", "")}!
         </h1>
         <h2 id="shop_subheader">Shop the CSharpest Store Now</h2>
