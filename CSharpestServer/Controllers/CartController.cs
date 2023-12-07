@@ -29,7 +29,7 @@ namespace CSharpestServer.Controllers
         // Decided although it does not follow our typical Controller -> Service format, it is far less code this way
         // Hence this endpoint is a little messier but it works fine
         [HttpGet("GetCartItems")]
-        public async Task<IActionResult> GetCartItems([FromForm] Guid UserID)
+        public async Task<IActionResult> GetCartItems(Guid UserID)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpDelete("RemoveFromCart")]
-        public async Task<IActionResult> RemoveItemFromCart([FromForm] Guid itemId, [FromForm] Guid cartId)
+        public async Task<IActionResult> RemoveItemFromCart(Guid itemId,  Guid cartId)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace CSharpestServer.Controllers
         }
 
         [HttpDelete("ClearCart")]
-        public async Task<IActionResult> ClearCart([FromForm] Guid cartId)
+        public async Task<IActionResult> ClearCart(Guid cartId)
         {
             try
             {

@@ -32,12 +32,13 @@ function Login() {
       .post("https://localhost:7150/api/Users/Login", formData)
       .then((res) => {
         if (res.status == 200) {
-          console.log(res.data);
           UserConstants.setLocalStorage("userId", res.data.id);
           UserConstants.setLocalStorage("cartId", res.data.cartId);
           UserConstants.setLocalStorage("isAdmin", res.data.isAdmin);
           UserConstants.setLocalStorage("firstName", res.data.firstName);
           UserConstants.setLocalStorage("lastName", res.data.lastName);
+
+          console.log(UserConstants.getLocalStorage("userId", ""));
 
           if (UserConstants.getLocalStorage("isAdmin", "") == false) {
             navigate("/storeHome");
