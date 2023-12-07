@@ -5,4 +5,180 @@
     color: #385170;
     line-height: 80%;
     font-size: 250%;
+    padding: 2%;
 }
+#header {
+    text-align: center;
+    font-family: Rockwell;
+    font-variant: small-caps;
+    background-color: #142d4c;
+    color: #ececec;
+}
+
+#shop_header {
+    line-height: 150%;
+    font-size: 300%;
+}
+
+#shop_subheader {
+    line-height: 150%;
+    font-size: 180%;
+    padding-bottom:30px;
+}
+
+#sort_buttons {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2% 0%;
+}
+
+#sort_by_price {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 12%;
+    margin-right: .5%;
+}
+
+#sort_by_alphabet {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 12%;
+    margin-right: .5%;
+}
+
+#sort_by_stock {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 12%;
+    margin-right: .5%;
+}
+
+#on_sale {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    height: 28%;
+    width: 12%;
+    margin-right: .5%;
+}
+
+#card_header {
+    font-family: Rockwell;
+    font-variant: small-caps;
+    color: #385170;
+    float:left;
+    margin-right: .5%;  
+    font-size:135%;
+    font-weight:bold;
+    text-align: center;
+}
+
+#card_subtitle {
+    font-family: 'Palatino Linotype';
+    color: #385170;
+    font-size:110%;
+    padding:5%;
+}
+
+#card_body {
+    font-family: 'Palatino Linotype';
+    color: #385170;
+    font-weight:bold;
+}
+
+/*Marker for bundle*/
+#bundle {
+    font-style:oblique;
+    font-weight:700;
+    color: #cf1020;
+    text-align:right;
+    margin-left: 5%;
+}
+
+/*Quantity label*/
+#quan {
+    font-family: Rockwell;
+    color: #385170;
+    font-weight: bold;
+    font-size:130%;
+    padding-left:15%;
+}
+
+/*User input for quantity*/
+#answer {
+    font-family: Rockwell;
+    color: #385170;
+    font-weight: bold;
+    padding-left: 15%;
+}
+
+/*Add to cart button*/
+#add {
+    background-color: #142d4c;
+    text-align: center;
+    margin-left: 30%;
+    margin-right: 30%;
+    color: #ececec;
+    font-family: 'Palatino Linotype';
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+/*For grouping of quantity and input correctly*/
+#rowone {
+    display:flex;
+  font-family: 'Palatino Linotype';
+
+}
+
+#rowtwo {
+  display:flex;
+  font-family: 'Palatino Linotype';
+}
+span:first-of-type {
+    flex:1;
+}
+
+input {
+    width: 50%;
+}
+
+#add:hover {
+    background-color: #385170;
+}
+
+#candy_card {
+    background-color: #d3d3d3;
+    border: 2px solid #385170;
+    border-radius: 5px;
+    height: 99%;
+    width: 100%;
+    margin-top: 2%;
+    padding-bottom: 5%;
+}
+
+#candy_pic {
+    border: 2px solid #385170;
+}
+
+#card_footer {
+    padding-bottom: 10%;
+}
+
+.col-3 {
+    padding-left: 15%;
+    padding-bottom: 5%;
+}
+
+
+
+
+
+

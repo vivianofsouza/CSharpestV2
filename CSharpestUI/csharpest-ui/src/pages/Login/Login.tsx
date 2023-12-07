@@ -169,7 +169,7 @@ function Login() {
                   <br></br>
                   <label id="password_label">Password</label>
                   <br></br>
-                  <input id="password_input"></input>
+                  <input id="password_input" type="password"></input>
                   <br></br>
                   <button
                     type="submit"
@@ -196,7 +196,7 @@ function Login() {
                   <br></br>
                   <label id="password_label">Password</label>
                   <br></br>
-                  <input id="password"></input>
+                  <input id="password" type="password"></input>
                   <br></br>
                   <button
                     type="submit"
