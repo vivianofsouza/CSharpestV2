@@ -13,9 +13,11 @@ function Checkout() {
 
   const getCartItems = () => {
     axios
-      .get(
-        "https://localhost:7150/Cart/GetCartItems?UserID=c4f9f3c1-9aa1-4d72-8a4c-4e03549e5bc1"
-      )
+      .get("https://localhost:7150/Cart/GetCartItems", {
+        params: {
+          userId: UserConstants.getLocalStorage("userId", ""),
+        },
+      })
       .then((response) => {
         setCartList(response.data);
       })
@@ -33,7 +35,7 @@ function Checkout() {
 
   useEffect(() => {
     getCartItems();
-    getCartTotal();
+    //getCartTotal();
   }, []);
 
   return (
@@ -44,24 +46,32 @@ function Checkout() {
 
       {cartList.map(
         (cartItem: {
-          item: {
-            name: string;
-            price: number;
-            bogo: boolean;
-          };
+          id: string;
+          name: string;
+          imageURL: string;
+          unitPrice: number;
           quantity: number;
           totalPrice: number;
         }) => (
           <>
-            <li>{cartItem.item.name}</li>
-            <li>{cartItem.item.price}</li>
-            <li>{cartItem.item.bogo}</li>
-            <li>{cartItem.quantity}</li>
-            <li>{cartItem.totalPrice}</li>
-            <br></br>
+            <div id={`itemId-${cartItem.id}`}>
+              <li>
+                <img src={cartItem.imageURL} width="200" height="200"></img>
+              </li>
+              <li>{cartItem.name}</li>
+              <li>{cartItem.unitPrice}</li>
+              <li>{cartItem.quantity}</li>
+              <li>{cartItem.totalPrice}</li>
+              <br></br>
+
+              {/* <button type="submit" onClick={() => removeFromCart(cartItem.id)}>
+                Remove from Cart
+              </button> */}
+            </div>
           </>
         )
       )}
+
       <h4>Subtotal: $</h4>
       <h4>Discounts: $</h4>
       <h4>Taxes: $</h4>

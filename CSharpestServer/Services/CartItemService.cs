@@ -88,7 +88,7 @@ namespace CSharpestServer.Services
 
         public Task<IEnumerable<CartItem>?> GetItemsByCart(Guid cartId)
         {
-            var items = _storeContext.cartItems.Where(item => item.CartId == cartId).ToList();
+            var items = _storeContext.cartItems.Where(item => item.CartId == cartId).Select(i => i).ToList();
             return Task.FromResult<IEnumerable<CartItem>?>(items);
         }
 
